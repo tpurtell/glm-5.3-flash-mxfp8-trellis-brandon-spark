@@ -67,3 +67,29 @@ must derive from this recipe's raw measurements, never source-project numbers.
 - This vLLM base lacks the Jovian `B12xWarmupUnit` extension. The adapter currently
   relies on vLLM's normal eager warmup before graph capture. Actual graph replay
   must pass before this can be treated as a serving recipe.
+
+## Added comparison requirement
+
+The README must lead with a concise differential against the pinned Mia README's
+published two-Spark decode and cold-prefill figures. Reproduce the sparkDash
+counting/code (400 tokens, T0, thinking off), prose and cold-prefill protocol;
+inspect sparkDash source for exact prompts, concurrency and aggregation before
+claiming a matched comparison. Preserve this block separately from the preferred
+weighted seven-category suite (natural and constrained JSON split one category)
+and orchid speed probe. Include both new two- and four-Spark measurements and
+relative percent changes; distinguish hardware scaling and configuration changes.
+
+## TP2 port status
+
+Runtime branch `67c20df` adds a parent-hash-bound TP2 view of adjacent TP4
+sidecars. It joins compressed words and native scale planes without decoding or
+requantizing weights. Gate/up planes, three coupled scale roles, replicated
+vectors and global sign slices retain their original order. Four CPU tests pass:
+physical-plane reconstruction, role ordering, replicated-value rejection, and
+TP2/TP4 sign equivalence. These are layout tests, not GPU numerical qualification.
+
+The ARM64 adapter now accepts TP2/TP4 with EP off. The pinned-base image builds
+with this branch. `scripts/check-native-p8.py` will compare native TP2 output
+against its two TP4 parent outputs and require exact eager/graph-replay equality
+at 1/8/32/128 token rows. This check is pending downloaded parent files and does
+not replace an independent numerical oracle or full-model serving tests.

@@ -57,10 +57,10 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
         self.use_global_sf = False
         parallel = moe_config.moe_parallel_config
         if (
-            parallel.tp_size != 4
+            parallel.tp_size not in (2, 4)
             or parallel.ep_size != 1
             or moe_config.hidden_dim != 4096
-            or moe_config.intermediate_size_per_partition != 512
+            or moe_config.intermediate_size_per_partition != 2048 // parallel.tp_size
             or moe_config.num_experts != 288
             or moe_config.experts_per_token != 8
             or moe_config.has_bias
@@ -70,10 +70,11 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
             or moe_config.swiglu_limit != 10.0
         ):
             raise ValueError(
-                "TrellisMX GLM adapter requires TP4, EP1 and GLM Flash shapes"
+                "TrellisMX GLM adapter requires TP2/TP4, EP1 and GLM Flash shapes"
             )
         self.layer_index = layer_index
         self.rank = parallel.tp_rank
+        self.world_size = parallel.tp_size
         self.overlay = load_overlay(directory)
         self.runtime = None
 
@@ -96,19 +97,29 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
         device = layer.w13_weight.device
         if device.type != "cuda" or torch.cuda.get_device_capability(device) not in ((12, 0), (12, 1)):
             raise ValueError("This TrellisMX runtime requires SM120 or SM121 CUDA")
-        sidecar = self.overlay.sidecar(self.layer_index, self.rank)
-        record = self.overlay.records[self.layer_index, self.rank]
+        if self.world_size == 4:
+            sidecar = self.overlay.sidecar(self.layer_index, self.rank)
+            record = self.overlay.records[self.layer_index, self.rank]
+            parent_hashes = None
+        else:
+            ranks = (2 * self.rank, 2 * self.rank + 1)
+            sidecar = tuple(self.overlay.sidecar(self.layer_index, rank, verify=False)
+                            for rank in ranks)
+            records = [self.overlay.records[self.layer_index, rank] for rank in ranks]
+            parent_hashes = tuple(record['sha256'] for record in records)
+            record = records[0]
         runtime = P8NativeTPMoE(
             sidecar,
             device=device,
             tp_rank=self.rank,
-            world_size=4,
+            world_size=self.world_size,
+            tp4_parent_sha256=parent_hashes,
             layer=self.layer_index,
             expected_design_sha256=record["source_design_sha256"],
             expected_transform_sha256=self.overlay.transform_hash,
             topk=8,
             hidden=4096,
-            intermediate=512,
+            intermediate=2048 // self.world_size,
             swiglu_limit=10.0,
             small_m_scheduler=True,
             fc1_tile_n=128,

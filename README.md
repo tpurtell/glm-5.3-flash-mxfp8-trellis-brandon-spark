@@ -5,6 +5,30 @@ A serving recipe for Brandon Music's
 on two and four NVIDIA DGX Sparks. **Port and qualification in progress; no
 Spark performance results or recommended TP/EP settings have been established.**
 
+## Comparison with Mia's two-Spark recipe
+
+Mia's published numbers below are the reference; TrellisMX measurements and
+percentage differences will be filled from fresh runs on this hardware.
+All rates are tokens/s. **Pending cells are unmeasured.**
+
+| Measurement | Mia 2× Spark | TrellisMX 2× | Δ vs Mia | TrellisMX 4× | Δ vs Mia |
+|---|---:|---:|---:|---:|---:|
+| Structured/code decode, C1 | 62.9 | Pending | — | Pending | — |
+| Structured/code decode, C4 aggregate | 146.5 | Pending | — | Pending | — |
+| Prose decode, C1, adaptive + FP8 dense | 32.1 | Pending | — | Pending | — |
+| Cold prefill, ~8K | 1,492.1 | Pending | — | Pending | — |
+| Cold prefill, ~32K | 1,428.2 | Pending | — | Pending | — |
+| Cold prefill, ~128K | 1,561.7 | Pending | — | Pending | — |
+| Cold prefill, ~256K | 1,516.8 | Pending | — | Pending | — |
+
+Source: [Mia's pinned README](https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks/blob/94bddea5db64137db41e4ef4c6c120e6e69e32d7/README.md).
+Decode uses sparkDash counting/code prompts, temperature 0, thinking off, a
+400-token cap and DFlash2 K7; prose is a separately tuned configuration.
+Prefill uses the September 7 E3 results, client prompt tokens / TTFT.
+The new recipe needs matching benchmark-style runs for this table, separately
+from the weighted seven-category decode suite and orchid speed probe. The 4×
+comparison will include the change in hardware count, not isolate quantization.
+
 The checkpoint contains compressed K4/K5 routed experts that reconstruct FP8
 operands. It also requires the pinned NVFP4 carrier model. Both identities are
 recorded in [sources.lock.json](sources.lock.json).

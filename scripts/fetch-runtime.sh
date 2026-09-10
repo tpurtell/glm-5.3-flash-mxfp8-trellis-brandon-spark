@@ -10,10 +10,11 @@ print(source['revision'])
 PY
 )
 if [[ ! -d "$destination/.git" ]]; then
-    git clone --no-checkout "${identity[0]}" "$destination"
+    git init "$destination"
+    git -C "$destination" remote add origin "${identity[0]}"
 elif [[ -n $(git -C "$destination" status --porcelain) ]]; then
     echo "Refusing to replace modified runtime checkout: $destination" >&2
     exit 1
 fi
-git -C "$destination" fetch origin "${identity[1]}"
+git -C "$destination" fetch --depth 1 origin "${identity[1]}"
 git -C "$destination" checkout --detach "${identity[1]}"
