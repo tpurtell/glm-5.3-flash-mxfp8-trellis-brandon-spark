@@ -73,6 +73,8 @@ def stream_request(base, body, endpoint, require_decode=True, timeout=2700):
             result['http_error_body'] = exc.read().decode('utf-8', errors='replace')
         except Exception as body_exc:
             result['http_error_read_error'] = repr(body_exc)
+        finally:
+            exc.close()
     except Exception as exc:
         result['error'] = repr(exc)
     result['end'] = time.perf_counter()
