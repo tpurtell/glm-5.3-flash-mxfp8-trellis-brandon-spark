@@ -40,7 +40,8 @@ def docker_command(config, node, rank, args):
         'NCCL_IB_MERGE_NICS': '0', 'NCCL_CROSS_NIC': '1', 'NCCL_DEBUG': 'WARN',
         'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1',
         'VLLM_CACHE_ROOT': '/cache/vllm', 'TRITON_CACHE_DIR': '/cache/triton',
-        'B12X_COMPILE_CACHE_DIR': '/cache/b12x', 'VLLM_ENGINE_READY_TIMEOUT_S': str(args.timeout),
+        'B12X_COMPILE_CACHE_DIR': '/cache/b12x',
+        'TRELLISMX_COMPILE_CACHE_DIR': '/cache/trellismx', 'VLLM_ENGINE_READY_TIMEOUT_S': str(args.timeout),
         'VLLM_USE_B12X_SPARSE_INDEXER': '1', 'VLLM_USE_B12X_KPOOL_INDEXER': '1',
     }
     for key, value in env.items():

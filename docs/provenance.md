@@ -31,3 +31,12 @@ base vLLM adapter: it admits SM121 and omits the unavailable Jovian warmup-provi
 interface. `overlay/install.py` inserts narrow ModelOpt hooks rather than
 replacing ARM64 vLLM with the x86 reference's Python tree. These changes are
 experimental until real loading, output and graph tests pass.
+
+The container preserves the pinned base image's public `b12x` package for
+attention, dense layers and its vLLM integration. TrellisMX uses the runtime
+branch exported as `trellismx_b12x`, including a separate Torch operator
+namespace and `TRELLISMX_COMPILE_CACHE_DIR`. The export changes package names
+and cache location, preserving kernel code and source attribution. Its manifest
+binds original and generated files by SHA256. Replacing the entire public B12X
+package failed the base attention API; that failure is retained in
+`results/bringup/attention-api-mismatch/`.

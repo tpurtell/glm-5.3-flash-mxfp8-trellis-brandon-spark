@@ -5,7 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import torch
-from b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE
+from trellismx_b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('checkpoint', type=Path)
