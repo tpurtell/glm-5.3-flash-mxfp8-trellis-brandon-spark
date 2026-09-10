@@ -1,0 +1,185 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Count from 1 to 200. Output only the numbers, separated by spaces. No other text."
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "start": 613079.399569679,
+  "events": [
+    {
+      "time": 613080.24233218,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 613080.242370932,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "1"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 613080.40462088,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 2 3 4 5"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 613080.550041732,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 6 7 8 9"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 613080.699473168,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 10 11 12 13"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 613080.888956234,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 14 15 16 "
+            },
+            "logprobs": null,
+            "finish_reason": "length",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 613080.888992731,
+      "data": {
+        "id": "chatcmpl-8ff4125fc0c614c1",
+        "object": "chat.completion.chunk",
+        "created": 1789028371,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 34,
+          "total_tokens": 66,
+          "completion_tokens": 32,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-32bd6f11"
+      }
+    }
+  ],
+  "first": 613080.242370932,
+  "last": 613080.888956234,
+  "usage": {
+    "prompt_tokens": 34,
+    "total_tokens": 66,
+    "completion_tokens": 32,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ",
+  "reasoning": "",
+  "decode_tokens": 31,
+  "decode_tps": 47.944176748134424,
+  "ttft_seconds": 0.8428012529620901,
+  "prefill_tps": 40.34165810801108,
+  "end": 613080.889114764
+}
