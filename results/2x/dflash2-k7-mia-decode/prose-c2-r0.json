@@ -1,0 +1,4742 @@
+{
+  "results": [
+    {
+      "request": {
+        "model": "glm53-trellismx",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Write a detailed step-by-step explanation of how a hash map works, including collision handling, resizing, and time complexity. Be thorough. (stream 1/2)"
+          }
+        ],
+        "temperature": 0,
+        "top_p": 1,
+        "max_tokens": 400,
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "start": 611606.365259345,
+      "events": [
+        {
+          "time": 611606.820304283,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "role": "assistant",
+                  "content": ""
+                },
+                "logprobs": null,
+                "finish_reason": null
+              }
+            ],
+            "prompt_token_ids": null,
+            "prompt_text": null
+          }
+        },
+        {
+          "time": 611606.820325564,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "#"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.047523735,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " How"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.279296054,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " a"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.51072194,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Hash Map Works: A Complete"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.741695382,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Guide\n\n##"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.975343445,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Overview"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.208548551,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\n\nA hash map (also"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.438647302,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " called a hash table or"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.665283775,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " dictionary) is a data structure that stores"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.894679816,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " key-value pairs and"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.129424238,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " provides,"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.366605029,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " on average, **O(1)**"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.597620709,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " time for"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.835142035,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " insertion"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.07002962,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", lookup, and deletion. It's"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.304861007,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " one of the most important"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.544807627,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " data structures in computer science, powering"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.781066858,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " everything"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.016248859,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " from database"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.25386632,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " indexes"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.488496119,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " to language run"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.724992036,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "times (JavaScript"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.960097896,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " objects, Python dicts"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.197743223,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", Java HashMap"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.43393869,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "s).\n\nThe core"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.666217499,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " idea: instead"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.897020505,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " of searching"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.131304685,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " through data"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.367470432,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.596332605,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " we **"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.832431147,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "compute** where"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.066260344,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " data"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.347610053,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " should live"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.602224003,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " using a mathematical"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.841275103,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " function called a"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.08020711,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " **hash function**.\n\n---\n\n## Part"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.314516803,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 1: The Core Components"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.552149868,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\n\n### 1.1 The"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.790145679,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Buck"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.031537301,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "ets Array\n\nAt"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.267098719,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " its"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.608510506,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " heart, a hash map is just"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.856488437,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " an array"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.093041045,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " of \""
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.323676693,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "buckets\" (also"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.564784783,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " called slots):\n\n```\nIndex"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.798194891,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ":   0    "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.032576626,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 1     2     3"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.276536252,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "     4     5     "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.51365417,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "6     7\n      "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.745694901,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " [  "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.978662347,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " ] "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.218469253,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "[   ] [   ] [   ]"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.454072414,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " [   ] [   ] [  "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.695977932,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " ] [   ]\n```\n\nEach"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.931629751,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " bucket can"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.169167095,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " hold zero"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.401702047,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " or more key-value pairs. The"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.637017159,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " array's length"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.875403254,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " is called"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.113089666,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " the **capacity**.\n\n### 1"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.346967658,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ".2 The Hash Function\n\nA hash"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.585274686,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " function takes a key of"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.821675915,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " any type and converts it into"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.051451033,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " an"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.290297865,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " integer,"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.530385719,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " which is"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.770444036,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " then mapped to a valid"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.006558816,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " array"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.247181355,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " index:\n\n"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.484552482,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "```\nindex"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.722780641,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " = hash(key) mod"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.958162735,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " capacity\n```\n\nFor"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.193266404,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " example, with capacity"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.428479684,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 8:\n- `"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.664482794,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "hash(\"apple\") ="
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.904189242,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 4"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.145028779,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "28"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.379067778,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "9"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.618718583,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "` \u2192 `4289"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.85869751,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " mod 8 = 1"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.093778409,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "` \u2192 bucket "
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.331315821,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1\n- `hash(\"banana"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.565421162,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\") = 77"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.803217745,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.042353327,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "`"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.283399664,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \u2192 `771 mod 8 ="
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.522397808,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 3` \u2192 bucket 3\n\n"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.763136898,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "A good hash function has"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.9991263,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " these"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.234135433,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " properties:\n"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.470144987,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1. **Deterministic**: The"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.708870858,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " same key always produces the same hash"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.944270683,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ".\n2. **Uniform"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.183228368,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " distribution**: Keys spread"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.420174565,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " evenly across buckets.\n"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.652307247,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3. **Fast to"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.894946964,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " compute**: Usually"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.132047404,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " O(1) with"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.376599825,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " respect to key length ("
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.610548454,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "or"
+                },
+                "logprobs": null,
+                "finish_reason": "length",
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.610580951,
+          "data": {
+            "id": "chatcmpl-8e374d0be0c33d8b",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [],
+            "usage": {
+              "prompt_tokens": 47,
+              "total_tokens": 447,
+              "completion_tokens": 400,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "created_cache_tokens": 0
+              }
+            },
+            "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3"
+          }
+        }
+      ],
+      "first": 611606.820325564,
+      "last": 611630.610548454,
+      "usage": {
+        "prompt_tokens": 47,
+        "total_tokens": 447,
+        "completion_tokens": 400,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0
+        }
+      },
+      "text": "# How a Hash Map Works: A Complete Guide\n\n## Overview\n\nA hash map (also called a hash table or dictionary) is a data structure that stores key-value pairs and provides, on average, **O(1)** time for insertion, lookup, and deletion. It's one of the most important data structures in computer science, powering everything from database indexes to language runtimes (JavaScript objects, Python dicts, Java HashMaps).\n\nThe core idea: instead of searching through data, we **compute** where data should live using a mathematical function called a **hash function**.\n\n---\n\n## Part 1: The Core Components\n\n### 1.1 The Buckets Array\n\nAt its heart, a hash map is just an array of \"buckets\" (also called slots):\n\n```\nIndex:   0     1     2     3     4     5     6     7\n       [   ] [   ] [   ] [   ] [   ] [   ] [   ] [   ]\n```\n\nEach bucket can hold zero or more key-value pairs. The array's length is called the **capacity**.\n\n### 1.2 The Hash Function\n\nA hash function takes a key of any type and converts it into an integer, which is then mapped to a valid array index:\n\n```\nindex = hash(key) mod capacity\n```\n\nFor example, with capacity 8:\n- `hash(\"apple\") = 4289` \u2192 `4289 mod 8 = 1` \u2192 bucket 1\n- `hash(\"banana\") = 771` \u2192 `771 mod 8 = 3` \u2192 bucket 3\n\nA good hash function has these properties:\n1. **Deterministic**: The same key always produces the same hash.\n2. **Uniform distribution**: Keys spread evenly across buckets.\n3. **Fast to compute**: Usually O(1) with respect to key length (or",
+      "reasoning": "",
+      "decode_tokens": 399,
+      "decode_tps": 16.77159570321255,
+      "ttft_seconds": 0.4550662189722061,
+      "prefill_tps": 103.28167207434618,
+      "end": 611630.610717291
+    },
+    {
+      "request": {
+        "model": "glm53-trellismx",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Write a detailed step-by-step explanation of how a hash map works, including collision handling, resizing, and time complexity. Be thorough. (stream 2/2)"
+          }
+        ],
+        "temperature": 0,
+        "top_p": 1,
+        "max_tokens": 400,
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "start": 611606.365686686,
+      "events": [
+        {
+          "time": 611606.820103109,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "role": "assistant",
+                  "content": ""
+                },
+                "logprobs": null,
+                "finish_reason": null
+              }
+            ],
+            "prompt_token_ids": null,
+            "prompt_text": null
+          }
+        },
+        {
+          "time": 611606.820126422,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "#"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.047362419,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Hash Maps: A Complete"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.279122577,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Deep"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.510506606,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Dive"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.74150992,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\n\n## Part"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611607.975167344,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 1: The"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.208379746,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Core Concept\n\nA hash"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.438356125,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " map ("
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.665060712,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "also called a hash table or"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611608.894522996,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " dictionary"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.129255994,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ") is a data structure that stores key"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.366415024,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "-value pairs and"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.597488353,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " provides near"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611609.834891612,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "-constant-time lookup"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.070296124,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", insertion, and deletion."
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.305060613,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " The fundamental"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.544521362,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " idea is elegant"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611610.780808323,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ": instead of searching"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.015990403,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " through data"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.253618121,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.488219455,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " we **"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.724741036,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "compute** where"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611611.959825905,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " data"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.197497776,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " should live"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.433680747,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ".\n\n### The Mental"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.665965044,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " Model\n\nThink"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611612.897235184,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " of a"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.131517635,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " hash"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.36765775,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " map as a wall"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.596536291,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " of numbered"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611613.832636401,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " mail"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.066064803,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "boxes (the"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.347415455,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \"buckets"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.60201979,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\" or \"slots"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611614.841048984,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"). When"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.080518431,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " you want"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.314418305,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " to store a letter ("
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.552047561,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "a"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611615.789953434,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " value)"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.031386448,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " addressed"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.266897177,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " to someone"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.608621197,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " (a key), you don"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611616.856592136,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "'t search every"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.092793966,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " mailbox \u2014"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.323443374,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " you run the"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.564435829,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " recipient"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611617.797990549,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "'s name"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.032677029,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " through a formula"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.276812628,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " that tells"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.513400499,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " you exactly which mailbox to"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.745878922,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " use. When"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611618.978391587,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " you want"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.218249599,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " to retrieve that"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.454257075,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " letter later"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.695597921,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", you run the same formula again"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611619.931495779,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " and go"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.168872894,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " straight to the right mailbox.\n\nForm"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.401916902,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "ally, the"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.637205164,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " process"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611620.875168495,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " is:\n\n```\nindex"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.112875195,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " = hash(key) mod"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.346840582,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " table"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.585155818,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "_size"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611621.821424516,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\n```\n\nEvery"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.051329702,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " operation"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.290186806,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \u2014"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.530152225,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " put"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611622.770224318,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", get, delete \u2014 follows this same"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.006282248,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " path.\n\n---\n\n"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.247363713,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "## Part 2: The Hash Function"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.484335596,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\n\nThe"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.722555451,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " hash function is the bridge between"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611623.957911511,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " arbitrary keys ("
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.193020493,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "strings, numbers"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.428231197,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", tuples"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.66420149,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ") and array"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611624.90389229,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " indices ("
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.144799333,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "which must be integers in"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.37883638,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " a bounded"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.619201637,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " range).\n\n### Properties"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611625.858464207,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " of a Good Hash Function\n\n1."
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.093512321,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " **Deterministic**:"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.331121367,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " The same key must always produce the same"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.565337464,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " hash. If"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611626.803126015,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " `"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.042270908,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "hash(\"apple"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.283660135,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\")` returns"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.522599286,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 42"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.7629531,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " today"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611627.998889509,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ", it must return 42 tomorrow"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.233872146,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ". (Note"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.469924357,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ": this is why Python"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.708604467,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " random"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611628.943999539,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "izes string"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.182967065,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " hashes per-process"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.419896797,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " for security \u2014 but within"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.652391057,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " a single"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611629.894723326,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " process, it"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.132148847,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "'s consistent"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.376247895,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ".)\n\n2. **Uniform"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.611075637,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " distribution**: Keys"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.758688678,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " should spread"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611630.905621108,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " evenly across the"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.056050757,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " table. If"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.205553963,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " many"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.35261383,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " keys map to the same few"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.499307831,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " indices, performance"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.648598738,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " degrades toward"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.794221429,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " linear search"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611631.942031014,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ".\n\n3. **A"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.090892788,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "valanche effect**: Small"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.235496137,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " changes in"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.383463481,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " the input"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.531049533,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " should produce drastically"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.677524883,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " different outputs. `\""
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.823998664,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cat"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611632.970145492,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"` and `\"cats"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611633.115932262,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"` should hash to wildly"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611633.264247133,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " different values,"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611633.414695341,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " not adjacent"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611633.567034675,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " ones.\n\n4. **Fast to"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611633.709719383,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " compute**: The"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611633.85970697,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " hash function runs"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611634.002055941,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " on *"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611634.153652054,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "every* operation, so it must"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611634.297621467,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " be O"
+                },
+                "logprobs": null,
+                "finish_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611634.446086733,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "(1)"
+                },
+                "logprobs": null,
+                "finish_reason": "length",
+                "stop_reason": null,
+                "token_ids": null
+              }
+            ]
+          }
+        },
+        {
+          "time": 611634.446145311,
+          "data": {
+            "id": "chatcmpl-a7dcafe424debb61",
+            "object": "chat.completion.chunk",
+            "created": 1789026898,
+            "model": "glm53-trellismx",
+            "choices": [],
+            "usage": {
+              "prompt_tokens": 47,
+              "total_tokens": 447,
+              "completion_tokens": 400,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "created_cache_tokens": 0
+              }
+            },
+            "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3"
+          }
+        }
+      ],
+      "first": 611606.820126422,
+      "last": 611634.446086733,
+      "usage": {
+        "prompt_tokens": 47,
+        "total_tokens": 447,
+        "completion_tokens": 400,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0
+        }
+      },
+      "text": "# Hash Maps: A Complete Deep Dive\n\n## Part 1: The Core Concept\n\nA hash map (also called a hash table or dictionary) is a data structure that stores key-value pairs and provides near-constant-time lookup, insertion, and deletion. The fundamental idea is elegant: instead of searching through data, we **compute** where data should live.\n\n### The Mental Model\n\nThink of a hash map as a wall of numbered mailboxes (the \"buckets\" or \"slots\"). When you want to store a letter (a value) addressed to someone (a key), you don't search every mailbox \u2014 you run the recipient's name through a formula that tells you exactly which mailbox to use. When you want to retrieve that letter later, you run the same formula again and go straight to the right mailbox.\n\nFormally, the process is:\n\n```\nindex = hash(key) mod table_size\n```\n\nEvery operation \u2014 put, get, delete \u2014 follows this same path.\n\n---\n\n## Part 2: The Hash Function\n\nThe hash function is the bridge between arbitrary keys (strings, numbers, tuples) and array indices (which must be integers in a bounded range).\n\n### Properties of a Good Hash Function\n\n1. **Deterministic**: The same key must always produce the same hash. If `hash(\"apple\")` returns 42 today, it must return 42 tomorrow. (Note: this is why Python randomizes string hashes per-process for security \u2014 but within a single process, it's consistent.)\n\n2. **Uniform distribution**: Keys should spread evenly across the table. If many keys map to the same few indices, performance degrades toward linear search.\n\n3. **Avalanche effect**: Small changes in the input should produce drastically different outputs. `\"cat\"` and `\"cats\"` should hash to wildly different values, not adjacent ones.\n\n4. **Fast to compute**: The hash function runs on *every* operation, so it must be O(1)",
+      "reasoning": "",
+      "decode_tokens": 399,
+      "decode_tps": 14.442936843016684,
+      "ttft_seconds": 0.4544397359713912,
+      "prefill_tps": 103.42405445583402,
+      "end": 611634.446289891
+    }
+  ],
+  "summary": {
+    "status": "passed",
+    "concurrency": 2,
+    "mean_stream_tps": 15.607266273114618,
+    "median_stream_tps": 15.607266273114618,
+    "median_ttft_seconds": 0.45475297747179866,
+    "aggregate_tps": 28.885873686033367
+  }
+}

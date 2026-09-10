@@ -1,0 +1,265 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Write a detailed step-by-step explanation of how a hash map works, including collision handling, resizing, and time complexity. Be thorough."
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "start": 611515.572809732,
+  "events": [
+    {
+      "time": 611516.004831581,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 611516.004861118,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "#"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611516.149114745,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " How a"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611516.299595663,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " Hash Map Works:"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611516.452359134,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " A Complete Guide\n\nA hash map"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611516.641628798,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " (also called a"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611516.82274907,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " hash table or"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611516.968884465,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " dictionary) is one"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611517.114742938,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " of the most important"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611517.260746774,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " data structures in"
+            },
+            "logprobs": null,
+            "finish_reason": "length",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611517.26080044,
+      "data": {
+        "id": "chatcmpl-bc81c910404116da",
+        "object": "chat.completion.chunk",
+        "created": 1789026807,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 40,
+          "total_tokens": 72,
+          "completion_tokens": 32,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3"
+      }
+    }
+  ],
+  "first": 611516.004861118,
+  "last": 611517.260746774,
+  "usage": {
+    "prompt_tokens": 40,
+    "total_tokens": 72,
+    "completion_tokens": 32,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "# How a Hash Map Works: A Complete Guide\n\nA hash map (also called a hash table or dictionary) is one of the most important data structures in",
+  "reasoning": "",
+  "decode_tokens": 31,
+  "decode_tps": 24.68377582951235,
+  "ttft_seconds": 0.4320513859856874,
+  "prefill_tps": 92.58158010243042,
+  "end": 611517.260949533
+}

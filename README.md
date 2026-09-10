@@ -8,28 +8,35 @@ speculation tuning are in progress.
 
 ## Comparison with Mia's two-Spark recipe (thinking off)
 
-Mia's published numbers below are the reference; TrellisMX measurements and
-percentage differences will be filled from fresh runs on this hardware.
+Mia's published numbers below are the reference. TrellisMX decode uses five-wave
+medians from the emu/kiwi DFlash2 K7 candidate; cold prefill is still pending.
 All rates are tokens/s. **Pending cells are unmeasured.** This comparison explicitly
 disables thinking to match Mia; the serving recipe defaults to **thinking on**.
 The weighted seven-category and orchid results remain separate.
 
 | Measurement | Mia 2× Spark | TrellisMX 2× | Δ vs Mia |
 |---|---:|---:|---:|
-| Structured/code decode, C1 | 62.9 | Pending | — |
-| Structured/code decode, C4 aggregate | 146.5 | Pending | — |
-| Prose decode, C1, adaptive + FP8 dense | 32.1 | Pending | — |
+| Structured decode, C1 | 62.9 | 53.52 | -14.9% |
+| Code decode, C1 | 62.9 | 52.59 | -16.4% |
+| Structured decode, C4 aggregate † | 146.5 | 89.81 | -38.7% |
+| Code decode, C4 aggregate † | 146.5 | 83.41 | -43.1% |
+| Prose decode, C1 (Mia: adaptive + FP8 dense) | 32.1 | 23.03 | -28.2% |
 | Cold prefill, ~8K | 1,492.1 | Pending | — |
 | Cold prefill, ~32K | 1,428.2 | Pending | — |
 | Cold prefill, ~128K | 1,561.7 | Pending | — |
 | Cold prefill, ~256K | 1,516.8 | Pending | — |
 
+† **Concurrent output quality is not qualified:** nine counting/code responses
+departed from the requested pattern; one code response stopped at 393 tokens.
+All timings are retained. [Full results and output audit](results/2x/dflash2-k7-mia-decode/README.md).
+TrellisMX prose uses fixed K7; Mia's prose configuration is separately tuned.
+
 Source: [Mia's pinned README](https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks/blob/94bddea5db64137db41e4ef4c6c120e6e69e32d7/README.md).
 Decode uses sparkDash counting/code prompts, temperature 0, thinking off, a
 400-token cap and DFlash2 K7; prose is a separately tuned configuration.
 Prefill uses the September 7 E3 results, client prompt tokens / TTFT.
-The new recipe needs matching benchmark-style runs for this table, separately
-from the weighted seven-category decode suite and orchid speed probe.
+Decode is measured separately from the weighted seven-category suite and orchid
+speed probe; matching cold-prefill measurements remain pending.
 
 The checkpoint contains compressed K4/K5 routed experts that reconstruct FP8
 operands. It also requires the pinned NVFP4 carrier model. Both identities are

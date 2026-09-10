@@ -1,0 +1,115 @@
+{
+  "timing_medians": {
+    "structured-c1": {
+      "aggregate_tps": 53.52207358761299,
+      "median_stream_tps": 53.52207358761299
+    },
+    "structured-c2": {
+      "aggregate_tps": 61.18592480165285,
+      "median_stream_tps": 31.6230950239213
+    },
+    "structured-c4": {
+      "aggregate_tps": 89.81447564223788,
+      "median_stream_tps": 41.67476694766281
+    },
+    "code-c1": {
+      "aggregate_tps": 52.59365085681583,
+      "median_stream_tps": 52.59365085681583
+    },
+    "code-c2": {
+      "aggregate_tps": 64.55991373881527,
+      "median_stream_tps": 32.28104002478197
+    },
+    "code-c4": {
+      "aggregate_tps": 83.41402488885285,
+      "median_stream_tps": 37.477910224465816
+    },
+    "prose-c1": {
+      "aggregate_tps": 23.033230618300276,
+      "median_stream_tps": 23.033230618300276
+    },
+    "prose-c2": {
+      "aggregate_tps": 28.38673438411897,
+      "median_stream_tps": 15.305745036057017
+    },
+    "prose-c4": {
+      "aggregate_tps": 37.65706421541527,
+      "median_stream_tps": 16.36649837419584
+    }
+  },
+  "responses": 105,
+  "errors": [],
+  "short_responses": [
+    {
+      "cell": "code-c4-r2",
+      "stream_index": 0,
+      "completion_tokens": 393
+    }
+  ],
+  "pattern_failures": [
+    {
+      "cell": "structured-c2-r0",
+      "stream_index": 0,
+      "normalized_offset": 222,
+      "expected": " 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 10",
+      "actual": " 65 66 67 68 69 70 71 72 73 74 75 76 77 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 24 25 26 27 28 29 30 31 32 33 34 3"
+    },
+    {
+      "cell": "structured-c2-r3",
+      "stream_index": 0,
+      "normalized_offset": 222,
+      "expected": " 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 10",
+      "actual": " 65 66 67 68 69 70 71 72 73 74 75 76 77 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 24 25 26 27 28 29 30 31 32 33 34 3"
+    },
+    {
+      "cell": "structured-c2-r4",
+      "stream_index": 0,
+      "normalized_offset": 222,
+      "expected": " 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 10",
+      "actual": " 65 66 67 68 69 70 71 72 73 74 75 76 77 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 24 25 26 27 28 29 30 31 32 33 34 3"
+    },
+    {
+      "cell": "structured-c4-r0",
+      "stream_index": 2,
+      "normalized_offset": 666,
+      "expected": "4 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200",
+      "actual": "4 185 186 187 188 189 190 191 192 193 19 4 195 196 197"
+    },
+    {
+      "cell": "code-c4-r0",
+      "stream_index": 1,
+      "normalized_offset": 598,
+      "expected": "x def clamp_07(x, lo=0, hi=1): if x < lo: return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo if x > h",
+      "actual": "x def clamp_07(x, lo=0, hi=1): if x < lo=0, hi=1): return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo"
+    },
+    {
+      "cell": "code-c4-r1",
+      "stream_index": 1,
+      "normalized_offset": 598,
+      "expected": "x def clamp_07(x, lo=0, hi=1): if x < lo: return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo if x > h",
+      "actual": "x def clamp_07(x, lo=0, hi=1): if x < lo=0, hi=1): return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo"
+    },
+    {
+      "cell": "code-c4-r2",
+      "stream_index": 0,
+      "normalized_offset": 613,
+      "expected": "x, lo=0, hi=1): if x < lo: return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo if x > hi: return hi re",
+      "actual": "x, lo=0, hi=1): if x < lo: return lo if source code. No comments, no docstrings, no markdown fences. Write functions clamp_00 through clamp_"
+    },
+    {
+      "cell": "code-c4-r2",
+      "stream_index": 1,
+      "normalized_offset": 598,
+      "expected": "x def clamp_07(x, lo=0, hi=1): if x < lo: return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo if x > h",
+      "actual": "x def clamp_07(x, lo=0, hi=1): if x < lo=0, hi=1): return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo"
+    },
+    {
+      "cell": "code-c4-r3",
+      "stream_index": 1,
+      "normalized_offset": 598,
+      "expected": "x def clamp_07(x, lo=0, hi=1): if x < lo: return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo if x > h",
+      "actual": "x def clamp_07(x, lo=0, hi=1): if x < lo=0, hi=1): return lo if x > hi: return hi return x def clamp_08(x, lo=0, hi=1): if x < lo: return lo"
+    }
+  ],
+  "quality_status": "not fully qualified; prose not scored"
+}
