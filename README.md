@@ -58,6 +58,17 @@ each destination before qualification. Downloads use Hugging Face's default back
 per-machine environment settings such as `HF_HUB_DISABLE_XET=1` or
 `HF_DOWNLOAD_WORKERS` are honored without imposing them on the recipe.
 
+Transfer a built Docker image directly over RDMA, bootstrapping through SSH:
+
+```bash
+./scripts/sync-image.sh glm53-trellismx-spark:dev ostrich dodo kiwi
+# Streams: docker save IMAGE | rdmapipe HOST -- docker load
+```
+
+The helper checks each destination for the source image ID. `rdmapipe` must be
+available on both hosts; set `RDMAPIPE_REMOTE_PATH` if it is outside the remote
+SSH command's PATH. Model files continue to use `rdmasync`.
+
 The recipe pins Z.ai’s current official chat template, with an explicit
 adaptation that honors an explicit `enable_thinking: false` for comparison
 requests. Ordinary requests keep thinking enabled. See the [template audit](docs/chat-template.md).
