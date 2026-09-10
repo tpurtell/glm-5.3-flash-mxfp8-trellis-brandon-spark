@@ -40,4 +40,5 @@ It complements the weighted seven-category and orchid suite.
 
 The README comparison is explicitly thinking-off. This is a benchmark request
 setting, not the serving default: ordinary recipe requests retain thinking on.
-Do not pool these measurements with thinking-on weighted decode or orchid runs.
+Keep these measurements separate from the weighted decode and orchid suites,
+which follow their own recorded benchmark protocols.
