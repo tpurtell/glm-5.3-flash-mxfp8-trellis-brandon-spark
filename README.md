@@ -35,6 +35,13 @@ The checkpoint contains compressed K4/K5 routed experts that reconstruct FP8
 operands. It also requires the pinned NVFP4 carrier model. Both identities are
 recorded in [sources.lock.json](sources.lock.json).
 
+For multi-Spark setups, we recommend
+[rdmasync](https://github.com/tpurtell/rdmasync) and
+[rdmapipe](https://github.com/tpurtell/rdmapipe): two great tools for moving large
+assets across the RDMA fabric. Use `rdmasync` to synchronize model files and
+`rdmapipe` to stream data into remote commands, including `docker load`. Both
+bootstrap through SSH; the recipe uses them in the examples below.
+
 Download on the head Spark, then distribute over RDMA:
 
 ```bash
