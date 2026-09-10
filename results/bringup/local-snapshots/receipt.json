@@ -1,0 +1,29 @@
+{
+  "created": "2026-09-10T04:58:09.201814+00:00",
+  "host": "emu",
+  "recipe_commit": "4a79bed68f2bafbbd2c62a328d1e6f86da7b92a1",
+  "sources": {
+    "target": {
+      "repo_id": "brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8",
+      "revision": "db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+    },
+    "carrier": {
+      "repo_id": "local-inference-lab/GLM-5.3-Flash-NVFP4",
+      "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+    }
+  },
+  "checks": {
+    "target": {
+      "status": "passed",
+      "sidecars": 168,
+      "transform_sha256": "093d219b18ba32471adcee746442b1481c7ba5659bbea62b94f1a665d4343a12"
+    },
+    "carrier": {
+      "status": "passed",
+      "verified": 59,
+      "missing": [],
+      "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+    }
+  },
+  "scope": "Pinned target sidecar hashes/metadata/transform and all carrier file hashes; full-model inference remains pending."
+}
