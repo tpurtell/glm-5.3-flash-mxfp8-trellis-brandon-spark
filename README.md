@@ -40,6 +40,11 @@ Prefill uses the September 7 E3 results, client prompt tokens / TTFT.
 Decode is measured separately from the weighted seven-category suite and orchid
 speed probe; matching cold-prefill measurements remain pending.
 
+The separate [five-replay MTP K2 weighted block](results/2x/mtp2-weighted/README.md)
+measured **24.05 tokens/s**, with **40/40 content checks passed**. Orchid median
+speed was **28.49 tokens/s**, but **0/5 probes followed the exact-repeat instruction**.
+These results do not replace the DFlash2 Mia-style measurements above.
+
 The checkpoint contains compressed K4/K5 routed experts that reconstruct FP8
 operands. It also requires the pinned NVFP4 carrier model. Both identities are
 recorded in [sources.lock.json](sources.lock.json).

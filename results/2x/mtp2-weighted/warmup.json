@@ -1,0 +1,185 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Say hello in one sentence."
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "start": 617291.731356047,
+  "events": [
+    {
+      "time": 617291.949244761,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 617291.949291177,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "Hello"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 617292.049363517,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "! It"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 617292.145951853,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "'s wonderful"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 617292.243281184,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " to meet"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 617292.342086317,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " you."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 154827,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 617292.342154797,
+      "data": {
+        "id": "chatcmpl-b5c070f594263b79",
+        "object": "chat.completion.chunk",
+        "created": 1789032583,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 19,
+          "total_tokens": 29,
+          "completion_tokens": 10,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-ba192f74"
+      }
+    }
+  ],
+  "first": 617291.949291177,
+  "last": 617292.342086317,
+  "usage": {
+    "prompt_tokens": 19,
+    "total_tokens": 29,
+    "completion_tokens": 10,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "Hello! It's wonderful to meet you.",
+  "reasoning": "",
+  "decode_tokens": 9,
+  "decode_tps": 22.912707115167052,
+  "ttft_seconds": 0.21793513000011444,
+  "prefill_tps": 87.18190591847227,
+  "end": 617292.34230179
+}

@@ -1,0 +1,1392 @@
+{
+  "created": "2026-09-10T09:29:43.529897+00:00",
+  "launch": {
+    "created": "2026-09-10T09:09:17.994126+00:00",
+    "source_commit": "3b59c20e1ea22ca9a712dc6a8dba8c4b3bfe2fed",
+    "sources": {
+      "target": {
+        "repo_id": "brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8",
+        "revision": "db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+      },
+      "carrier": {
+        "repo_id": "local-inference-lab/GLM-5.3-Flash-NVFP4",
+        "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+      },
+      "mia": {
+        "repository": "https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks",
+        "revision": "94bddea5db64137db41e4ef4c6c120e6e69e32d7"
+      },
+      "measurement_reference": {
+        "repository": "https://github.com/tpurtell/glmrt-5.3-1rtx-4spark",
+        "revision": "dc6d9b8e1600e001cb1d4228bd911f4df8091f99"
+      },
+      "sparkinfer": {
+        "repository": "https://github.com/tpurtell/sparkinfer-glmrt",
+        "branch": "trellismx-glm53-spark",
+        "revision": "3ac1597674bff576241b7c72929bc3a3d18d7616"
+      },
+      "chat_template": {
+        "repo_id": "zai-org/GLM-5.3-Flash",
+        "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+        "file": "chat_template.jinja",
+        "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+        "checked_date": "2026-09-10"
+      },
+      "draft": {
+        "repo_id": "incoai/GLM-5.3-Flash-DFlash2",
+        "revision": "bf582e4eacc1810f76656d1811693ff6c6737d2a"
+      },
+      "tool_eval": {
+        "repository": "https://github.com/SeraphimSerapis/tool-eval-bench.git",
+        "revision": "cf54b4bfe705f12f71e8866f10730572497c8105",
+        "version": "2.6.1.dev45+gcf54b4bfe",
+        "reference_date": "2026-09-08"
+      }
+    },
+    "plan": [
+      {
+        "host": "emu",
+        "name": "glm53-trellis-2x-r0",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r0",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.3",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r0:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "0",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "8192",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.85",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--speculative-config",
+          "{\"method\": \"mtp\", \"num_speculative_tokens\": 2}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+        "container_id": "1c40569ed0fd4289e96f8c52a8cc82771270a1d09f20b8736ab99ada2883d966"
+      },
+      {
+        "host": "kiwi",
+        "name": "glm53-trellis-2x-r1",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r1",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.4",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r1:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "1",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "8192",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.85",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--headless",
+          "--speculative-config",
+          "{\"method\": \"mtp\", \"num_speculative_tokens\": 2}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+        "container_id": "119f4e892c5a7d03a50c0b7716cf43792e9bb14e8ae09166f861a040db862e6c"
+      }
+    ],
+    "ready_seconds": 1038.6076193769695
+  },
+  "template": {
+    "repo_id": "zai-org/GLM-5.3-Flash",
+    "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+    "file": "chat_template.jinja",
+    "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+    "checked_date": "2026-09-10",
+    "serving_sha256": "74ec8ee7258eec437936bfc4669a7227c02e5f9a6f349d88d01770360bea1564",
+    "adaptation": "explicit enable_thinking=false closes initial think span"
+  },
+  "contract_sha256": "9beffec90fb1311fea416e1f326771e1efeb2422a79bc506984d62a74035d509",
+  "client_sha256": "dbd4b29a93f7216a9e77889a62d5c4d6c342659bd45b627e23afc26c4221f09b",
+  "runs": 5,
+  "samples": [
+    {
+      "case": "code",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 245,
+      "decode_tokens": 244,
+      "decode_seconds": 8.46990572300274,
+      "decode_tps": 28.807876732008943,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 157.0,
+          "vllm:spec_decode_num_draft_tokens_total": 176.0,
+          "vllm:spec_decode_num_drafts_total": 88.0
+        },
+        "draft_tokens": 176.0,
+        "accepted_tokens": 157.0,
+        "ratio": 0.8920454545454546
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "math",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 97,
+      "decode_tokens": 96,
+      "decode_seconds": 3.3104677840601653,
+      "decode_tps": 28.998922890063465,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 62.0,
+          "vllm:spec_decode_num_draft_tokens_total": 68.0,
+          "vllm:spec_decode_num_drafts_total": 34.0
+        },
+        "draft_tokens": 68.0,
+        "accepted_tokens": 62.0,
+        "ratio": 0.9117647058823529
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "fable",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 196,
+      "decode_tokens": 195,
+      "decode_seconds": 10.077855514944531,
+      "decode_tps": 19.349354603351177,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 92.0,
+          "vllm:spec_decode_num_draft_tokens_total": 208.0,
+          "vllm:spec_decode_num_drafts_total": 104.0
+        },
+        "draft_tokens": 208.0,
+        "accepted_tokens": 92.0,
+        "ratio": 0.4423076923076923
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "hello",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 11,
+      "decode_tokens": 10,
+      "decode_seconds": 0.38707415806129575,
+      "decode_tps": 25.83484273423501,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 5.0,
+          "vllm:spec_decode_num_draft_tokens_total": 10.0,
+          "vllm:spec_decode_num_drafts_total": 5.0
+        },
+        "draft_tokens": 10.0,
+        "accepted_tokens": 5.0,
+        "ratio": 0.5
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "topic",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 384,
+      "decode_tokens": 383,
+      "decode_seconds": 16.9106213710038,
+      "decode_tps": 22.64848769287213,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 208.0,
+          "vllm:spec_decode_num_draft_tokens_total": 352.0,
+          "vllm:spec_decode_num_drafts_total": 176.0
+        },
+        "draft_tokens": 352.0,
+        "accepted_tokens": 208.0,
+        "ratio": 0.5909090909090909
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json",
+      "repeat": 0,
+      "weight": 0.5,
+      "completion_tokens": 68,
+      "decode_tokens": 67,
+      "decode_seconds": 2.522852081921883,
+      "decode_tps": 26.557244667693748,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 41.0,
+          "vllm:spec_decode_num_draft_tokens_total": 54.0,
+          "vllm:spec_decode_num_drafts_total": 27.0
+        },
+        "draft_tokens": 54.0,
+        "accepted_tokens": 41.0,
+        "ratio": 0.7592592592592593
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json-schema",
+      "repeat": 0,
+      "weight": 0.5,
+      "completion_tokens": 52,
+      "decode_tokens": 51,
+      "decode_seconds": 2.055310914060101,
+      "decode_tps": 24.81376401551511,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 30.0,
+          "vllm:spec_decode_num_draft_tokens_total": 42.0,
+          "vllm:spec_decode_num_drafts_total": 21.0
+        },
+        "draft_tokens": 42.0,
+        "accepted_tokens": 30.0,
+        "ratio": 0.7142857142857143
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "multilingual",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 350,
+      "decode_tokens": 349,
+      "decode_seconds": 14.343158874078654,
+      "decode_tps": 24.332157446204008,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 199.0,
+          "vllm:spec_decode_num_draft_tokens_total": 302.0,
+          "vllm:spec_decode_num_drafts_total": 151.0
+        },
+        "draft_tokens": 302.0,
+        "accepted_tokens": 199.0,
+        "ratio": 0.6589403973509934
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "code",
+      "repeat": 1,
+      "weight": 1.0,
+      "completion_tokens": 245,
+      "decode_tokens": 244,
+      "decode_seconds": 8.511059885029681,
+      "decode_tps": 28.66857985915218,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 157.0,
+          "vllm:spec_decode_num_draft_tokens_total": 176.0,
+          "vllm:spec_decode_num_drafts_total": 88.0
+        },
+        "draft_tokens": 176.0,
+        "accepted_tokens": 157.0,
+        "ratio": 0.8920454545454546
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "math",
+      "repeat": 1,
+      "weight": 1.0,
+      "completion_tokens": 97,
+      "decode_tokens": 96,
+      "decode_seconds": 3.3064660930540413,
+      "decode_tps": 29.034019190963154,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 62.0,
+          "vllm:spec_decode_num_draft_tokens_total": 68.0,
+          "vllm:spec_decode_num_drafts_total": 34.0
+        },
+        "draft_tokens": 68.0,
+        "accepted_tokens": 62.0,
+        "ratio": 0.9117647058823529
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "fable",
+      "repeat": 1,
+      "weight": 1.0,
+      "completion_tokens": 196,
+      "decode_tokens": 195,
+      "decode_seconds": 10.029327086056583,
+      "decode_tps": 19.44297940697353,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 91.0,
+          "vllm:spec_decode_num_draft_tokens_total": 208.0,
+          "vllm:spec_decode_num_drafts_total": 104.0
+        },
+        "draft_tokens": 208.0,
+        "accepted_tokens": 91.0,
+        "ratio": 0.4375
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "hello",
+      "repeat": 1,
+      "weight": 1.0,
+      "completion_tokens": 11,
+      "decode_tokens": 10,
+      "decode_seconds": 0.3829637080198154,
+      "decode_tps": 26.112134885331166,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 5.0,
+          "vllm:spec_decode_num_draft_tokens_total": 10.0,
+          "vllm:spec_decode_num_drafts_total": 5.0
+        },
+        "draft_tokens": 10.0,
+        "accepted_tokens": 5.0,
+        "ratio": 0.5
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "topic",
+      "repeat": 1,
+      "weight": 1.0,
+      "completion_tokens": 384,
+      "decode_tokens": 383,
+      "decode_seconds": 16.548442188068293,
+      "decode_tps": 23.14417246332404,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 211.0,
+          "vllm:spec_decode_num_draft_tokens_total": 346.0,
+          "vllm:spec_decode_num_drafts_total": 173.0
+        },
+        "draft_tokens": 346.0,
+        "accepted_tokens": 211.0,
+        "ratio": 0.6098265895953757
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json",
+      "repeat": 1,
+      "weight": 0.5,
+      "completion_tokens": 68,
+      "decode_tokens": 67,
+      "decode_seconds": 2.524692021077499,
+      "decode_tps": 26.537890340939665,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 41.0,
+          "vllm:spec_decode_num_draft_tokens_total": 54.0,
+          "vllm:spec_decode_num_drafts_total": 27.0
+        },
+        "draft_tokens": 54.0,
+        "accepted_tokens": 41.0,
+        "ratio": 0.7592592592592593
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json-schema",
+      "repeat": 1,
+      "weight": 0.5,
+      "completion_tokens": 52,
+      "decode_tokens": 51,
+      "decode_seconds": 2.048917459906079,
+      "decode_tps": 24.89119303143515,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 30.0,
+          "vllm:spec_decode_num_draft_tokens_total": 42.0,
+          "vllm:spec_decode_num_drafts_total": 21.0
+        },
+        "draft_tokens": 42.0,
+        "accepted_tokens": 30.0,
+        "ratio": 0.7142857142857143
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "multilingual",
+      "repeat": 1,
+      "weight": 1.0,
+      "completion_tokens": 344,
+      "decode_tokens": 343,
+      "decode_seconds": 13.665881679975428,
+      "decode_tps": 25.099002613391335,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 199.0,
+          "vllm:spec_decode_num_draft_tokens_total": 290.0,
+          "vllm:spec_decode_num_drafts_total": 145.0
+        },
+        "draft_tokens": 290.0,
+        "accepted_tokens": 199.0,
+        "ratio": 0.6862068965517242
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "code",
+      "repeat": 2,
+      "weight": 1.0,
+      "completion_tokens": 245,
+      "decode_tokens": 244,
+      "decode_seconds": 8.439489097916521,
+      "decode_tps": 28.911702730943382,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 157.0,
+          "vllm:spec_decode_num_draft_tokens_total": 176.0,
+          "vllm:spec_decode_num_drafts_total": 88.0
+        },
+        "draft_tokens": 176.0,
+        "accepted_tokens": 157.0,
+        "ratio": 0.8920454545454546
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "math",
+      "repeat": 2,
+      "weight": 1.0,
+      "completion_tokens": 97,
+      "decode_tokens": 96,
+      "decode_seconds": 3.271872198092751,
+      "decode_tps": 29.3409993385318,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 62.0,
+          "vllm:spec_decode_num_draft_tokens_total": 68.0,
+          "vllm:spec_decode_num_drafts_total": 34.0
+        },
+        "draft_tokens": 68.0,
+        "accepted_tokens": 62.0,
+        "ratio": 0.9117647058823529
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "fable",
+      "repeat": 2,
+      "weight": 1.0,
+      "completion_tokens": 196,
+      "decode_tokens": 195,
+      "decode_seconds": 10.011022003018297,
+      "decode_tps": 19.478530757519863,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 92.0,
+          "vllm:spec_decode_num_draft_tokens_total": 208.0,
+          "vllm:spec_decode_num_drafts_total": 104.0
+        },
+        "draft_tokens": 208.0,
+        "accepted_tokens": 92.0,
+        "ratio": 0.4423076923076923
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "hello",
+      "repeat": 2,
+      "weight": 1.0,
+      "completion_tokens": 11,
+      "decode_tokens": 10,
+      "decode_seconds": 0.3835057489341125,
+      "decode_tps": 26.07522840998671,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 5.0,
+          "vllm:spec_decode_num_draft_tokens_total": 10.0,
+          "vllm:spec_decode_num_drafts_total": 5.0
+        },
+        "draft_tokens": 10.0,
+        "accepted_tokens": 5.0,
+        "ratio": 0.5
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "topic",
+      "repeat": 2,
+      "weight": 1.0,
+      "completion_tokens": 384,
+      "decode_tokens": 383,
+      "decode_seconds": 17.280190345016308,
+      "decode_tps": 22.164107706745202,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 205.0,
+          "vllm:spec_decode_num_draft_tokens_total": 360.0,
+          "vllm:spec_decode_num_drafts_total": 180.0
+        },
+        "draft_tokens": 360.0,
+        "accepted_tokens": 205.0,
+        "ratio": 0.5694444444444444
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json",
+      "repeat": 2,
+      "weight": 0.5,
+      "completion_tokens": 68,
+      "decode_tokens": 67,
+      "decode_seconds": 2.538433057954535,
+      "decode_tps": 26.39423552653718,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 41.0,
+          "vllm:spec_decode_num_draft_tokens_total": 54.0,
+          "vllm:spec_decode_num_drafts_total": 27.0
+        },
+        "draft_tokens": 54.0,
+        "accepted_tokens": 41.0,
+        "ratio": 0.7592592592592593
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json-schema",
+      "repeat": 2,
+      "weight": 0.5,
+      "completion_tokens": 52,
+      "decode_tokens": 51,
+      "decode_seconds": 2.054798914003186,
+      "decode_tps": 24.819946931274718,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 30.0,
+          "vllm:spec_decode_num_draft_tokens_total": 42.0,
+          "vllm:spec_decode_num_drafts_total": 21.0
+        },
+        "draft_tokens": 42.0,
+        "accepted_tokens": 30.0,
+        "ratio": 0.7142857142857143
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "multilingual",
+      "repeat": 2,
+      "weight": 1.0,
+      "completion_tokens": 369,
+      "decode_tokens": 368,
+      "decode_seconds": 15.2614525470417,
+      "decode_tps": 24.113038969631603,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 208.0,
+          "vllm:spec_decode_num_draft_tokens_total": 322.0,
+          "vllm:spec_decode_num_drafts_total": 161.0
+        },
+        "draft_tokens": 322.0,
+        "accepted_tokens": 208.0,
+        "ratio": 0.6459627329192547
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "code",
+      "repeat": 3,
+      "weight": 1.0,
+      "completion_tokens": 239,
+      "decode_tokens": 238,
+      "decode_seconds": 8.336989409988746,
+      "decode_tps": 28.547475388999118,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 152.0,
+          "vllm:spec_decode_num_draft_tokens_total": 174.0,
+          "vllm:spec_decode_num_drafts_total": 87.0
+        },
+        "draft_tokens": 174.0,
+        "accepted_tokens": 152.0,
+        "ratio": 0.8735632183908046
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "math",
+      "repeat": 3,
+      "weight": 1.0,
+      "completion_tokens": 97,
+      "decode_tokens": 96,
+      "decode_seconds": 3.2636909369612113,
+      "decode_tps": 29.41454992346322,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 62.0,
+          "vllm:spec_decode_num_draft_tokens_total": 68.0,
+          "vllm:spec_decode_num_drafts_total": 34.0
+        },
+        "draft_tokens": 68.0,
+        "accepted_tokens": 62.0,
+        "ratio": 0.9117647058823529
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "fable",
+      "repeat": 3,
+      "weight": 1.0,
+      "completion_tokens": 196,
+      "decode_tokens": 195,
+      "decode_seconds": 9.976643078029156,
+      "decode_tps": 19.545652628330917,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 91.0,
+          "vllm:spec_decode_num_draft_tokens_total": 208.0,
+          "vllm:spec_decode_num_drafts_total": 104.0
+        },
+        "draft_tokens": 208.0,
+        "accepted_tokens": 91.0,
+        "ratio": 0.4375
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "hello",
+      "repeat": 3,
+      "weight": 1.0,
+      "completion_tokens": 11,
+      "decode_tokens": 10,
+      "decode_seconds": 0.38169067399576306,
+      "decode_tps": 26.199225397136647,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 5.0,
+          "vllm:spec_decode_num_draft_tokens_total": 10.0,
+          "vllm:spec_decode_num_drafts_total": 5.0
+        },
+        "draft_tokens": 10.0,
+        "accepted_tokens": 5.0,
+        "ratio": 0.5
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "topic",
+      "repeat": 3,
+      "weight": 1.0,
+      "completion_tokens": 384,
+      "decode_tokens": 383,
+      "decode_seconds": 16.54879036208149,
+      "decode_tps": 23.143685527467557,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 210.0,
+          "vllm:spec_decode_num_draft_tokens_total": 346.0,
+          "vllm:spec_decode_num_drafts_total": 173.0
+        },
+        "draft_tokens": 346.0,
+        "accepted_tokens": 210.0,
+        "ratio": 0.6069364161849711
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json",
+      "repeat": 3,
+      "weight": 0.5,
+      "completion_tokens": 68,
+      "decode_tokens": 67,
+      "decode_seconds": 2.5288015559781343,
+      "decode_tps": 26.49476383056264,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 41.0,
+          "vllm:spec_decode_num_draft_tokens_total": 54.0,
+          "vllm:spec_decode_num_drafts_total": 27.0
+        },
+        "draft_tokens": 54.0,
+        "accepted_tokens": 41.0,
+        "ratio": 0.7592592592592593
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json-schema",
+      "repeat": 3,
+      "weight": 0.5,
+      "completion_tokens": 52,
+      "decode_tokens": 51,
+      "decode_seconds": 2.058829049929045,
+      "decode_tps": 24.771362149644066,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 30.0,
+          "vllm:spec_decode_num_draft_tokens_total": 42.0,
+          "vllm:spec_decode_num_drafts_total": 21.0
+        },
+        "draft_tokens": 42.0,
+        "accepted_tokens": 30.0,
+        "ratio": 0.7142857142857143
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "multilingual",
+      "repeat": 3,
+      "weight": 1.0,
+      "completion_tokens": 354,
+      "decode_tokens": 353,
+      "decode_seconds": 14.30128340201918,
+      "decode_tps": 24.68309941680901,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 204.0,
+          "vllm:spec_decode_num_draft_tokens_total": 300.0,
+          "vllm:spec_decode_num_drafts_total": 150.0
+        },
+        "draft_tokens": 300.0,
+        "accepted_tokens": 204.0,
+        "ratio": 0.68
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "code",
+      "repeat": 4,
+      "weight": 1.0,
+      "completion_tokens": 245,
+      "decode_tokens": 244,
+      "decode_seconds": 8.493212847970426,
+      "decode_tps": 28.728821986170672,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 157.0,
+          "vllm:spec_decode_num_draft_tokens_total": 176.0,
+          "vllm:spec_decode_num_drafts_total": 88.0
+        },
+        "draft_tokens": 176.0,
+        "accepted_tokens": 157.0,
+        "ratio": 0.8920454545454546
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "math",
+      "repeat": 4,
+      "weight": 1.0,
+      "completion_tokens": 97,
+      "decode_tokens": 96,
+      "decode_seconds": 3.311440604040399,
+      "decode_tps": 28.990403718208682,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 62.0,
+          "vllm:spec_decode_num_draft_tokens_total": 68.0,
+          "vllm:spec_decode_num_drafts_total": 34.0
+        },
+        "draft_tokens": 68.0,
+        "accepted_tokens": 62.0,
+        "ratio": 0.9117647058823529
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "fable",
+      "repeat": 4,
+      "weight": 1.0,
+      "completion_tokens": 196,
+      "decode_tokens": 195,
+      "decode_seconds": 10.077393332030624,
+      "decode_tps": 19.350242029374765,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 92.0,
+          "vllm:spec_decode_num_draft_tokens_total": 208.0,
+          "vllm:spec_decode_num_drafts_total": 104.0
+        },
+        "draft_tokens": 208.0,
+        "accepted_tokens": 92.0,
+        "ratio": 0.4423076923076923
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "hello",
+      "repeat": 4,
+      "weight": 1.0,
+      "completion_tokens": 11,
+      "decode_tokens": 10,
+      "decode_seconds": 0.38622019498143345,
+      "decode_tps": 25.891965593566965,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 5.0,
+          "vllm:spec_decode_num_draft_tokens_total": 10.0,
+          "vllm:spec_decode_num_drafts_total": 5.0
+        },
+        "draft_tokens": 10.0,
+        "accepted_tokens": 5.0,
+        "ratio": 0.5
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "topic",
+      "repeat": 4,
+      "weight": 1.0,
+      "completion_tokens": 384,
+      "decode_tokens": 383,
+      "decode_seconds": 16.760497280978598,
+      "decode_tps": 22.851350623985645,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 210.0,
+          "vllm:spec_decode_num_draft_tokens_total": 348.0,
+          "vllm:spec_decode_num_drafts_total": 174.0
+        },
+        "draft_tokens": 348.0,
+        "accepted_tokens": 210.0,
+        "ratio": 0.603448275862069
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json",
+      "repeat": 4,
+      "weight": 0.5,
+      "completion_tokens": 68,
+      "decode_tokens": 67,
+      "decode_seconds": 2.5381346839712933,
+      "decode_tps": 26.397338337920047,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 41.0,
+          "vllm:spec_decode_num_draft_tokens_total": 54.0,
+          "vllm:spec_decode_num_drafts_total": 27.0
+        },
+        "draft_tokens": 54.0,
+        "accepted_tokens": 41.0,
+        "ratio": 0.7592592592592593
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json-schema",
+      "repeat": 4,
+      "weight": 0.5,
+      "completion_tokens": 52,
+      "decode_tokens": 51,
+      "decode_seconds": 2.052303567994386,
+      "decode_tps": 24.850124901278498,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 30.0,
+          "vllm:spec_decode_num_draft_tokens_total": 42.0,
+          "vllm:spec_decode_num_drafts_total": 21.0
+        },
+        "draft_tokens": 42.0,
+        "accepted_tokens": 30.0,
+        "ratio": 0.7142857142857143
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "multilingual",
+      "repeat": 4,
+      "weight": 1.0,
+      "completion_tokens": 337,
+      "decode_tokens": 336,
+      "decode_seconds": 13.785464773070998,
+      "decode_tps": 24.373498139602372,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_accepted_tokens_total": 191.0,
+          "vllm:spec_decode_num_draft_tokens_total": 292.0,
+          "vllm:spec_decode_num_drafts_total": 146.0
+        },
+        "draft_tokens": 292.0,
+        "accepted_tokens": 191.0,
+        "ratio": 0.6541095890410958
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    }
+  ],
+  "weighted_decode_tps": 24.049645594382586,
+  "output_checks_passed": 40,
+  "output_checks_total": 40,
+  "orchid_speed_only": [
+    {
+      "decode_tps": 28.503277772696375,
+      "decode_tokens": 1499,
+      "error": null
+    },
+    {
+      "decode_tps": 27.103818593308937,
+      "decode_tokens": 1499,
+      "error": null
+    },
+    {
+      "decode_tps": 26.204206372706864,
+      "decode_tokens": 1499,
+      "error": null
+    },
+    {
+      "decode_tps": 28.491568818447703,
+      "decode_tokens": 1401,
+      "error": null
+    },
+    {
+      "decode_tps": 28.678111553664063,
+      "decode_tokens": 1499,
+      "error": null
+    }
+  ],
+  "status": "passed"
+}
