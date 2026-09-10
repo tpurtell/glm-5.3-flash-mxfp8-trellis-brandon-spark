@@ -111,3 +111,8 @@ process group and hung at teardown. The corrected test releases that graph first
 A fresh run reproduced all six exact checks and exited successfully on both
 ranks; complete receipts are in `results/bringup/roce-emu-dodo-clean/`. The original
 run and its teardown failure remain recorded separately.
+
+The default **emu + kiwi** pair and **emu + kiwi + dodo + ostrich** group now pass
+the same three sizes in eager execution and exact graph replay. Every rank exits
+cleanly. Their independent receipts are in `results/bringup/roce-default-2x/`
+and `results/bringup/roce-4x/`. These checks qualify transport only.

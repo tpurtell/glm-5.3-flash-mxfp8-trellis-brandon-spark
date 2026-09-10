@@ -11,7 +11,7 @@ Each node needs the identical image and local model files.
 
 ```bash
 ./scripts/fetch-runtime.sh
-docker build -t glm53-trellismx-spark:dev .
+./build.sh
 ./scripts/download.sh
 python3 scripts/verify-target.py ~/models/glm53-trellismx/target
 ./scripts/sync-models.sh ostrich dodo kiwi
@@ -39,9 +39,9 @@ workers then the head. It retains exited containers and a launch receipt under
 start operation only; it is not yet a qualified cold/warm startup result.
 
 DFlash2 requires the same pinned draft files locally on each participating host;
-`draft_path` currently refers to the existing `incoai/GLM-5.3-Flash-DFlash2`
-revision `bf582e4eacc1810f76656d1811693ff6c6737d2a`. Distribute those files with
-`rdmasync` before testing speculation. The correct draft policy and TP setting
+`scripts/download.sh` includes `incoai/GLM-5.3-Flash-DFlash2`
+revision `bf582e4eacc1810f76656d1811693ff6c6737d2a` under `MODEL_ROOT/draft`.
+The model synchronization script distributes that directory over RDMA too. The correct draft policy and TP setting
 must be qualified for this target.
 
 Additional switches: `--eager`, `--max-model-len`, `--batch-tokens`, `--max-seqs`,
