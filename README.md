@@ -47,6 +47,10 @@ host; transfers fail if RDMA cannot be negotiated.
 The recipe pins Z.ai’s current official chat template, with an explicit
 thinking-off serving adaptation. See the [template audit](docs/chat-template.md).
 
+The [launch options](docs/launch.md) cover both node counts. The separate
+[Mia comparison protocol](docs/mia-comparison-protocol.md) records matching
+prompts and timing definitions.
+
 See the [qualification plan](docs/qualification.md) for the measurement matrix
 and [provenance](docs/provenance.md) for source attribution. Results will be
 committed and pushed separately as each complete block finishes.
