@@ -14,6 +14,11 @@ reuse of earlier suffixes. The base is primed with a short extra suffix so its
 last aligned cache block can be reused. This token-ID transport differs from the
 GLMRT reference's chat/text fitting and is recorded as a protocol difference.
 
+For the verified MTP block-drop policy, also set `--cache-drop-blocks 1`.
+Expected reuse then subtracts one block from the aligned base, clamped at zero;
+the recomputed base total includes that block. The default remains zero dropped
+blocks. See the [measured policy and source evidence](../results/2x/mtp2-retained-prefill/README.md).
+
 Set `--cache-block-size` to the actual engine block size in its startup log
 (the current NVFP4 bring-up reports 6144). Every measured request must report
 **exactly** `floor(base / block_size) * block_size` cached tokens and
