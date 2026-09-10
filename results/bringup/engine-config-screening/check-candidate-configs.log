@@ -1,0 +1,136 @@
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+WARNING 09-10 04:09:44 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+INFO 09-10 04:09:58 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+INFO 09-10 04:09:58 [model.py:1972] Using max model len 8192
+INFO 09-10 04:10:00 [registry.py:141] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+INFO 09-10 04:10:00 [model.py:882] Disabled mm_prefix attention mode because multimodal inputs are configuration-disabled. Attention backends without mm_prefix support may now be selected.
+INFO 09-10 04:10:00 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 09-10 04:10:00 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+INFO 09-10 04:10:00 [scheduler.py:242] Chunked prefill is enabled with max_num_batched_tokens=1024.
+INFO 09-10 04:10:00 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-10 04:10:00 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+WARNING 09-10 04:10:00 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:00 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:00 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-10 04:10:00 [vllm.py:1336] Auto-enabling VLLM_USE_BREAKABLE_CUDAGRAPH=1. Set VLLM_USE_BREAKABLE_CUDAGRAPH=0 to opt out.
+INFO 09-10 04:10:00 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+INFO 09-10 04:10:00 [compilation.py:329] Enabled custom fusions: norm_quant, act_quant
+{"candidate": "2ep", "status": "config_created", "tp_size": 2, "nnodes": 2, "ep": true, "speculation": "None"}
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+INFO 09-10 04:10:00 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+INFO 09-10 04:10:00 [model.py:1972] Using max model len 8192
+INFO 09-10 04:10:00 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 09-10 04:10:00 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+INFO 09-10 04:10:00 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-10 04:10:00 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+WARNING 09-10 04:10:00 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:00 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:00 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-10 04:10:00 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+{"candidate": "4tp", "status": "config_created", "tp_size": 4, "nnodes": 4, "ep": false, "speculation": "None"}
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+INFO 09-10 04:10:00 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+INFO 09-10 04:10:00 [model.py:1972] Using max model len 8192
+INFO 09-10 04:10:00 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 09-10 04:10:00 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+INFO 09-10 04:10:00 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-10 04:10:00 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+WARNING 09-10 04:10:00 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:00 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:00 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-10 04:10:00 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+{"candidate": "4ep", "status": "config_created", "tp_size": 4, "nnodes": 4, "ep": true, "speculation": "None"}
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+WARNING 09-10 04:10:00 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+INFO 09-10 04:10:00 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+INFO 09-10 04:10:00 [model.py:1972] Using max model len 8192
+INFO 09-10 04:10:00 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 09-10 04:10:00 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+INFO 09-10 04:10:13 [model.py:679] Resolved architecture: Glm5NextMTPModel
+INFO 09-10 04:10:13 [model.py:1972] Using max model len 1048576
+WARNING 09-10 04:10:13 [speculative.py:975] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+INFO 09-10 04:10:13 [speculative.py:1256] Overriding draft model max model len from 1048576 to 8192
+INFO 09-10 04:10:13 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-10 04:10:13 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+WARNING 09-10 04:10:13 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:13 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:13 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-10 04:10:13 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+WARNING 09-10 04:10:13 [vllm.py:1866] max_num_scheduled_tokens is set to 1024 based on the speculative decoding settings. This may lead to suboptimal performance. Consider increasing max_num_batched_tokens to accommodate the additional draft token slots, or decrease num_speculative_tokens.
+{"candidate": "2mtp", "status": "config_created", "tp_size": 2, "nnodes": 2, "ep": false, "speculation": "SpeculativeConfig(method='mtp', model='/models/carrier', num_spec_tokens=3)"}
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+WARNING 09-10 04:10:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+INFO 09-10 04:10:13 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+INFO 09-10 04:10:13 [model.py:1972] Using max model len 8192
+INFO 09-10 04:10:13 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 09-10 04:10:13 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+INFO 09-10 04:10:25 [model.py:679] Resolved architecture: DFlash2DraftModel
+INFO 09-10 04:10:25 [model.py:1972] Using max model len 1048576
+INFO 09-10 04:10:25 [speculative.py:1256] Overriding draft model max model len from 1048576 to 8192
+INFO 09-10 04:10:25 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-10 04:10:25 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+WARNING 09-10 04:10:25 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:25 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:25 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-10 04:10:25 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+{"candidate": "2dflash", "status": "config_created", "tp_size": 2, "nnodes": 2, "ep": false, "speculation": "SpeculativeConfig(method='dflash', model='/draft', num_spec_tokens=3)"}
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+WARNING 09-10 04:10:25 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+INFO 09-10 04:10:25 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+INFO 09-10 04:10:25 [model.py:1972] Using max model len 8192
+INFO 09-10 04:10:25 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 09-10 04:10:25 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+INFO 09-10 04:10:25 [model.py:679] Resolved architecture: DFlash2DraftModel
+INFO 09-10 04:10:25 [model.py:1972] Using max model len 1048576
+INFO 09-10 04:10:25 [speculative.py:1256] Overriding draft model max model len from 1048576 to 8192
+INFO 09-10 04:10:25 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-10 04:10:25 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+WARNING 09-10 04:10:25 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:25 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+WARNING 09-10 04:10:25 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-10 04:10:25 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+{"candidate": "4dflash", "status": "config_created", "tp_size": 4, "nnodes": 4, "ep": false, "speculation": "SpeculativeConfig(method='dflash', model='/draft', num_spec_tokens=3)"}

@@ -1,0 +1,58 @@
+{
+  "image_id": "sha256:8a89d7d0a0be1f899262787515ed634cfabd5a1000edcae91decb7dc845d46ce",
+  "recipe_revision": "c8af48d",
+  "host": "emu",
+  "scope": "Actual installed vLLM AsyncEngineArgs parsing and create_engine_config for TP2 eager plus TP4, EP2, EP4, MTP2, DFlash2 on 2 and 4 nodes. No model weights loaded, no inference or performance claim.",
+  "command": "docker run --rm --gpus all --entrypoint python3 -e HF_HUB_OFFLINE=1 -e TRANSFORMERS_OFFLINE=1 -e VLLM_TRELLISMX_CHECKPOINT=/models/target -v /home/tj/models/glm53-trellismx:/models:ro -v /home/tj/models/glm53-trellismx/draft:/draft:ro -v /tmp/glm-trellis-work/check-candidate-configs.py:/check.py:ro -v /tmp/glm-trellis-work/candidate-config-plans.json:/plans.json:ro glm53-trellismx-spark:dev /check.py",
+  "exit_code": 0,
+  "candidates": [
+    {
+      "candidate": "2ep",
+      "status": "config_created",
+      "tp_size": 2,
+      "nnodes": 2,
+      "ep": true,
+      "speculation": "None"
+    },
+    {
+      "candidate": "4tp",
+      "status": "config_created",
+      "tp_size": 4,
+      "nnodes": 4,
+      "ep": false,
+      "speculation": "None"
+    },
+    {
+      "candidate": "4ep",
+      "status": "config_created",
+      "tp_size": 4,
+      "nnodes": 4,
+      "ep": true,
+      "speculation": "None"
+    },
+    {
+      "candidate": "2mtp",
+      "status": "config_created",
+      "tp_size": 2,
+      "nnodes": 2,
+      "ep": false,
+      "speculation": "SpeculativeConfig(method='mtp', model='/models/carrier', num_spec_tokens=3)"
+    },
+    {
+      "candidate": "2dflash",
+      "status": "config_created",
+      "tp_size": 2,
+      "nnodes": 2,
+      "ep": false,
+      "speculation": "SpeculativeConfig(method='dflash', model='/draft', num_spec_tokens=3)"
+    },
+    {
+      "candidate": "4dflash",
+      "status": "config_created",
+      "tp_size": 4,
+      "nnodes": 4,
+      "ep": false,
+      "speculation": "SpeculativeConfig(method='dflash', model='/draft', num_spec_tokens=3)"
+    }
+  ]
+}
