@@ -1,0 +1,68 @@
+{
+  "scope": "NCCL RoCE all-reduce correctness; no model or throughput measurement",
+  "hosts": [
+    "emu",
+    "dodo"
+  ],
+  "image": "ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark@sha256:bf64997c14affabe5dc5ece52bca5ac7000f4c268728d6c8f8467a34ea2c8c20",
+  "image_id": "sha256:577bfb7b59883dc825e2bacf6d3bce79f3bd56072508b3da50e9c281297be5ac",
+  "script_sha256": "b2413ec6ed86196b374ede1fa74c2068c8149d267c64df1c91180a57a4a2102a",
+  "command": "docker run --rm --gpus all --network host --ipc host --device /dev/infiniband --cap-add IPC_LOCK --ulimit memlock=-1 -e NCCL_NET=IB -e NCCL_DEBUG=INFO -e NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0 -e NCCL_SOCKET_IFNAME=enp1s0f0np0 -e NCCL_IB_GID_INDEX=3 -e NCCL_IB_MERGE_NICS=0 --entrypoint python3 -v CHECK_SCRIPT:/check.py:ro IMAGE /check.py --rank RANK --world-size 2 --master 10.55.0.3:29661",
+  "gpu": "NVIDIA GB10",
+  "sizes_elements": [
+    1,
+    4096,
+    1048576
+  ],
+  "dtype": "float32",
+  "results": [
+    {
+      "host": "emu",
+      "rank": 0,
+      "world_size": 2,
+      "elements": 1,
+      "eager_exact": true,
+      "graph_replay_exact": true
+    },
+    {
+      "host": "emu",
+      "rank": 0,
+      "world_size": 2,
+      "elements": 4096,
+      "eager_exact": true,
+      "graph_replay_exact": true
+    },
+    {
+      "host": "emu",
+      "rank": 0,
+      "world_size": 2,
+      "elements": 1048576,
+      "eager_exact": true,
+      "graph_replay_exact": true
+    },
+    {
+      "host": "dodo",
+      "rank": 1,
+      "world_size": 2,
+      "elements": 1,
+      "eager_exact": true,
+      "graph_replay_exact": true
+    },
+    {
+      "host": "dodo",
+      "rank": 1,
+      "world_size": 2,
+      "elements": 4096,
+      "eager_exact": true,
+      "graph_replay_exact": true
+    },
+    {
+      "host": "dodo",
+      "rank": 1,
+      "world_size": 2,
+      "elements": 1048576,
+      "eager_exact": true,
+      "graph_replay_exact": true
+    }
+  ]
+}

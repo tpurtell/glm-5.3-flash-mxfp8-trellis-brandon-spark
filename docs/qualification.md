@@ -93,3 +93,15 @@ with this branch. `scripts/check-native-p8.py` will compare native TP2 output
 against its two TP4 parent outputs and require exact eager/graph-replay equality
 at 1/8/32/128 token rows. This check is pending downloaded parent files and does
 not replace an independent numerical oracle or full-model serving tests.
+
+## Distributed transport bring-up
+
+The published bring-up image passed NCCL/RoCE all-reduce on **emu + dodo** at
+1/4,096/1,048,576 FP32 elements, including three exact CUDA graph replays per
+size. Both ranks passed. NCCL logs selected NET/IB over both configured NICs.
+This is transport correctness on that named pair, not a model performance result
+or qualification of the default emu + kiwi pair. Raw logs and command receipt:
+`results/bringup/roce-emu-dodo/`.
+
+Bring-up image published (qualification pending):
+`ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark@sha256:bf64997c14affabe5dc5ece52bca5ac7000f4c268728d6c8f8467a34ea2c8c20`.
