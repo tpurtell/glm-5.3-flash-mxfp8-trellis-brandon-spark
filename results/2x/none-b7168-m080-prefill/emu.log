@@ -1,0 +1,306 @@
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:345] 
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:345]        █     █     █▄   ▄█
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:345]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.1.dev20051+g487ecf187
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:345]   █▄█▀ █     █     █     █  model   /models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:345]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:345] 
+(APIServer pid=1) INFO 09-10 12:12:13 [api_utils.py:273] non-default args: {'model_tag': '/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc', 'chat_template': '/opt/trellismx/data/serving_chat_template.jinja', 'enable_auto_tool_choice': True, 'tool_call_parser': 'glm47', 'enable_prompt_tokens_details': True, 'host': '0.0.0.0', 'model': '/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc', 'max_model_len': 9000, 'served_model_name': ['glm53-trellismx'], 'attention_backend': 'B12X_MLA_SPARSE', 'reasoning_parser': 'glm45', 'distributed_executor_backend': 'mp', 'master_addr': '10.55.0.3', 'master_port': 29553, 'nnodes': 2, 'tensor_parallel_size': 2, 'disable_custom_all_reduce': True, 'block_size': 256, 'gpu_memory_utilization': 0.8, 'kv_cache_dtype': 'nvfp4_ds_mla', 'enable_prefix_caching': True, 'language_model_only': True, 'max_num_batched_tokens': 7168, 'max_num_seqs': 4, 'enable_flashinfer_autotune': False}
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_MHC
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_BLOCK_M
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_TRELLISMX_CHECKPOINT
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_NVFP4_MLA_DYNAMIC_SCALE
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_B12X_GLM_H64_QUERY_PROJ
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_CAPACITY
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MIN_M
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_PREFILL_TRELLIS
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_BLOCK_M
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_USE_B12X_KPOOL_INDEXER
+(APIServer pid=1) WARNING 09-10 12:12:13 [envs.py:2239] Unknown vLLM environment variable detected: VLLM_EXL3_TRELLIS_MAX_M
+(APIServer pid=1) INFO 09-10 12:12:13 [model.py:679] Resolved architecture: Glm5NextForConditionalGeneration
+(APIServer pid=1) INFO 09-10 12:12:13 [model.py:1972] Using max model len 9000
+(APIServer pid=1) INFO 09-10 12:12:16 [registry.py:141] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(APIServer pid=1) INFO 09-10 12:12:16 [model.py:882] Disabled mm_prefix attention mode because multimodal inputs are configuration-disabled. Attention backends without mm_prefix support may now be selected.
+(APIServer pid=1) INFO 09-10 12:12:16 [cache.py:289] Using nvfp4_ds_mla data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+(APIServer pid=1) INFO 09-10 12:12:16 [arg_utils.py:2168] Inferred data_parallel_rank 0 from node_rank 0
+(APIServer pid=1) INFO 09-10 12:12:16 [scheduler.py:242] Chunked prefill is enabled with max_num_batched_tokens=7168.
+(APIServer pid=1) INFO 09-10 12:12:16 [config.py:605] Mamba cache mode is set to 'align' for Glm5NextForConditionalGeneration by default when prefix caching is enabled
+(APIServer pid=1) WARNING 09-10 12:12:16 [modelopt.py:386] Detected ModelOpt fp8 checkpoint (quant_algo=FP8). Please note that the format is experimental and could change.
+(APIServer pid=1) WARNING 09-10 12:12:16 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+(APIServer pid=1) WARNING 09-10 12:12:16 [modelopt.py:1019] Detected ModelOpt NVFP4 checkpoint (quant_algo=W4A16_NVFP4). Please note that the format is experimental and could change in future.
+(APIServer pid=1) WARNING 09-10 12:12:16 [modelopt.py:1683] Detected ModelOpt MXFP8 checkpoint. Please note that the format is experimental and could change in future.
+(APIServer pid=1) INFO 09-10 12:12:16 [vllm.py:1336] Auto-enabling VLLM_USE_BREAKABLE_CUDAGRAPH=1. Set VLLM_USE_BREAKABLE_CUDAGRAPH=0 to opt out.
+(APIServer pid=1) INFO 09-10 12:12:16 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(APIServer pid=1) INFO 09-10 12:12:16 [compilation.py:329] Enabled custom fusions: norm_quant, act_quant
+(EngineCore pid=191) INFO 09-10 12:12:28 [core.py:122] Initializing a V1 LLM engine (v0.1.dev20051+g487ecf187) with config: model='/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc', speculative_config=None, tokenizer='/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=9000, download_dir=None, load_format=auto, tensor_parallel_size=2, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=modelopt_mixed, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=nvfp4_ds_mla, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='glm45', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=glm53-trellismx, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [7168], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 8, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native']), enable_flashinfer_autotune=False, enable_cutedsl_warmup=True, enable_jit_warmup=True, enable_bf16x3_router_gemm=False, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=191) INFO 09-10 12:12:28 [multiproc_executor.py:149] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=10.55.0.3, mq_connect_ip=10.55.0.3 (local), world_size=2, local_world_size=1
+INFO 09-10 12:12:42 [registry.py:141] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(Worker pid=315) INFO 09-10 12:12:42 [parallel_state.py:1640] world_size=2 rank=0 local_rank=0 distributed_init_method=tcp://10.55.0.3:29553 backend=nccl
+(Worker pid=315) INFO 09-10 12:12:45 [pynccl.py:113] vLLM is using nccl==2.30.7
+NCCL version 2.30.7+cuda13.3
+(Worker pid=315) WARNING 09-10 12:12:47 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.1 not supported, communicator is not available.
+(Worker pid=315) INFO 09-10 12:12:47 [cuda_communicator.py:290] Using ['PYNCCL'] all-reduce backends (in dispatch order) for group 'tp:0' out of potential backends: ['NCCL_SYMM_MEM', 'QUICK_REDUCE', 'FLASHINFER', 'AITER_CUSTOM', 'CUSTOM', 'SYMM_MEM', 'PYNCCL'].
+(Worker pid=315) INFO 09-10 12:12:48 [cuda_communicator.py:290] Using ['PYNCCL'] all-reduce backends (in dispatch order) for group 'ep:0' out of potential backends: ['NCCL_SYMM_MEM', 'QUICK_REDUCE', 'FLASHINFER', 'AITER_CUSTOM', 'CUSTOM', 'SYMM_MEM', 'PYNCCL'].
+(Worker pid=315) INFO 09-10 12:12:48 [parallel_state.py:1984] rank 0 in world size 2 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
+(Worker pid=315) INFO 09-10 12:12:48 [gpu_worker.py:386] Using V2 Model Runner
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [model_runner.py:353] Loading model from scratch...
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [cuda.py:592] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [mm_encoder_attention.py:375] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [kernel.py:306] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [compilation.py:329] Enabled custom fusions: norm_quant, act_quant
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [sparse_attn_indexer_kpool.py:1108] Using B12x fused paged score+top-k for GLM kpool decode.
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [cuda.py:473] Using AttentionBackendEnum.B12X_MLA_SPARSE backend.
+(Worker_TP0 pid=315) INFO 09-10 12:12:49 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) WARNING 09-10 12:12:50 [mla_attention.py:553] Sparse MLA impl has no dense-MHA prefill path; using the top-k MQA path only.
+(Worker_TP0 pid=315) INFO 09-10 12:12:50 [deep_gemm.py:191] deep_gemm not found in site-packages, trying vendored vllm.third_party.deep_gemm
+(Worker_TP0 pid=315) INFO 09-10 12:12:50 [deep_gemm.py:136] DeepGEMM E8M0 enabled on current platform.
+(Worker_TP0 pid=315) INFO 09-10 12:12:51 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:51 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:51 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:51 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:52 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:52 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:52 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:53 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:53 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:53 [b12x_mla_sparse.py:1528] B12X GLM MLA KV format: KV_FP8_ROPE=1 kv_gmem_stride=368 kv_cache_dtype=nvfp4_ds_mla
+(Worker_TP0 pid=315) INFO 09-10 12:12:54 [weight_utils.py:858] Filesystem type for checkpoints: EXT4. Checkpoint size: 184.46 GiB. Available RAM: 19.02 GiB.
+(Worker_TP0 pid=315) INFO 09-10 12:12:54 [weight_utils.py:888] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre) and the checkpoint size (184.46 GiB) exceeds 90% of available RAM (19.02 GiB).
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:   0% Completed | 0/44 [00:00<?, ?it/s]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:   2% Completed | 1/44 [00:02<01:31,  2.13s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:   5% Completed | 2/44 [00:19<07:51, 11.24s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:   7% Completed | 3/44 [00:33<08:28, 12.41s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:   9% Completed | 4/44 [00:51<09:50, 14.76s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  11% Completed | 5/44 [01:13<11:11, 17.22s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  14% Completed | 6/44 [01:35<11:53, 18.79s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  16% Completed | 7/44 [01:52<11:14, 18.22s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  18% Completed | 8/44 [02:09<10:44, 17.91s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  20% Completed | 9/44 [02:30<10:59, 18.84s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  23% Completed | 10/44 [02:52<11:08, 19.66s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  25% Completed | 11/44 [03:11<10:42, 19.47s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  27% Completed | 12/44 [03:26<09:45, 18.29s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  30% Completed | 13/44 [03:44<09:19, 18.05s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  32% Completed | 14/44 [04:05<09:29, 18.99s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  34% Completed | 15/44 [04:28<09:48, 20.29s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  36% Completed | 16/44 [04:45<08:55, 19.13s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  39% Completed | 17/44 [05:02<08:20, 18.55s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  41% Completed | 18/44 [05:24<08:27, 19.53s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  43% Completed | 19/44 [05:43<08:10, 19.63s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  45% Completed | 20/44 [06:02<07:47, 19.47s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  48% Completed | 21/44 [06:16<06:46, 17.68s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  50% Completed | 22/44 [06:35<06:36, 18.02s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  52% Completed | 23/44 [06:57<06:47, 19.40s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  55% Completed | 24/44 [07:20<06:48, 20.44s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  57% Completed | 25/44 [07:38<06:11, 19.58s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  59% Completed | 26/44 [07:52<05:25, 18.07s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  61% Completed | 27/44 [07:58<04:03, 14.34s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  64% Completed | 28/44 [08:18<04:16, 16.04s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  66% Completed | 29/44 [08:37<04:12, 16.82s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  68% Completed | 30/44 [08:53<03:52, 16.62s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  70% Completed | 31/44 [09:13<03:49, 17.64s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  73% Completed | 32/44 [09:35<03:46, 18.86s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  75% Completed | 33/44 [09:57<03:38, 19.83s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  77% Completed | 34/44 [10:02<02:35, 15.56s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  80% Completed | 35/44 [10:16<02:15, 15.02s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  82% Completed | 36/44 [10:30<01:58, 14.85s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  84% Completed | 37/44 [10:44<01:40, 14.37s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  86% Completed | 38/44 [10:55<01:21, 13.56s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  89% Completed | 39/44 [11:00<00:54, 10.88s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  91% Completed | 40/44 [11:02<00:32,  8.24s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  95% Completed | 42/44 [11:02<00:08,  4.48s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards:  98% Completed | 43/44 [11:03<00:03,  3.42s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards: 100% Completed | 44/44 [11:03<00:00,  2.57s/it]
+(Worker_TP0 pid=315) Loading safetensors checkpoint shards: 100% Completed | 44/44 [11:03<00:00, 15.07s/it]
+(Worker_TP0 pid=315) 
+(Worker_TP0 pid=315) INFO 09-10 12:23:57 [default_loader.py:430] Loading weights took 663.16 seconds
+(Worker_TP0 pid=315) INFO 09-10 12:24:06 [trellismx.py:185] TrellisMX layer=3 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:09 [trellismx.py:185] TrellisMX layer=4 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:11 [trellismx.py:185] TrellisMX layer=5 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:14 [trellismx.py:185] TrellisMX layer=6 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:17 [trellismx.py:185] TrellisMX layer=7 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:19 [trellismx.py:185] TrellisMX layer=8 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:22 [trellismx.py:185] TrellisMX layer=9 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:24 [trellismx.py:185] TrellisMX layer=10 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:27 [trellismx.py:185] TrellisMX layer=11 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:29 [trellismx.py:185] TrellisMX layer=12 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:32 [trellismx.py:185] TrellisMX layer=13 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:35 [trellismx.py:185] TrellisMX layer=14 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:38 [trellismx.py:185] TrellisMX layer=15 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:40 [trellismx.py:185] TrellisMX layer=16 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:43 [trellismx.py:185] TrellisMX layer=17 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:46 [trellismx.py:185] TrellisMX layer=18 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:49 [trellismx.py:185] TrellisMX layer=19 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:52 [trellismx.py:185] TrellisMX layer=20 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:55 [trellismx.py:185] TrellisMX layer=21 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:24:58 [trellismx.py:185] TrellisMX layer=22 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:01 [trellismx.py:185] TrellisMX layer=23 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:04 [trellismx.py:185] TrellisMX layer=24 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:08 [trellismx.py:185] TrellisMX layer=25 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:10 [trellismx.py:185] TrellisMX layer=26 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:13 [trellismx.py:185] TrellisMX layer=27 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:16 [trellismx.py:185] TrellisMX layer=28 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:19 [trellismx.py:185] TrellisMX layer=29 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:22 [trellismx.py:185] TrellisMX layer=30 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:25 [trellismx.py:185] TrellisMX layer=31 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:27 [trellismx.py:185] TrellisMX layer=32 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:31 [trellismx.py:185] TrellisMX layer=33 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:34 [trellismx.py:185] TrellisMX layer=34 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:37 [trellismx.py:185] TrellisMX layer=35 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:40 [trellismx.py:185] TrellisMX layer=36 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:43 [trellismx.py:185] TrellisMX layer=37 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:47 [trellismx.py:185] TrellisMX layer=38 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:49 [trellismx.py:185] TrellisMX layer=39 tp_rank=0 ep_rank=0 ep_size=1 K4 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:53 [trellismx.py:185] TrellisMX layer=40 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:56 [trellismx.py:185] TrellisMX layer=41 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:25:59 [trellismx.py:185] TrellisMX layer=42 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:26:02 [trellismx.py:185] TrellisMX layer=43 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:26:06 [trellismx.py:185] TrellisMX layer=44 tp_rank=0 ep_rank=0 ep_size=1 K5 E4M3/UE8M0-32 coupled-h512-h128 released_carrier_bytes=2038438656
+(Worker_TP0 pid=315) INFO 09-10 12:26:07 [model_runner.py:374] Model loading took 96.23 GiB and 798.119095 seconds
+(Worker_TP0 pid=315) INFO 09-10 12:26:07 [topk_topp_sampler.py:62] Using FlashInfer for top-p & top-k sampling.
+(Worker_TP0 pid=315) INFO 09-10 12:26:07 [interface.py:926] Setting attention block size to 6144 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP0 pid=315) INFO 09-10 12:26:07 [interface.py:950] Padding mamba page size by 4.15% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=191) INFO 09-10 12:26:07 [torch_utils.py:263] Reducing Torch threads from 20 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(Worker_TP0 pid=315) 2026-09-10 12:26:09  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_pre_big_fuse_with_norm_tilelang` with `out_idx=None`
+(Worker_TP0 pid=315) 2026-09-10 12:26:13  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_pre_big_fuse_with_norm_tilelang`
+(Worker_TP0 pid=315) 2026-09-10 12:26:14  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_post_tilelang` with `out_idx=None`
+[12:26:14] : Warning: T.vectorized loop over `i_hci` with extent 4 is lowered as a serial loop because TileLang could not find a valid vectorization plan. Scalar accumulator updates inside the loop are a common cause; move reductions to T.unroll or T.serial if this is intended.
+(Worker_TP0 pid=315) 2026-09-10 12:26:15  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_post_tilelang`
+(Worker_TP0 pid=315) INFO 09-10 12:26:20 [gpu_worker.py:515] GLM53 memory snapshots: before=torch_peak=96.23GiB, torch_allocated=96.23GiB, free_memory=14.65GiB, total_memory=121.63GiB, cuda_memory=106.98GiB, torch_memory=96.24GiB, non_torch_memory=10.74GiB, timestamp=1789043167.803951, auto_measure=False; after=torch_peak=99.9GiB, torch_allocated=96.3GiB, free_memory=13.6GiB, total_memory=121.63GiB, cuda_memory=108.02GiB, torch_memory=96.31GiB, non_torch_memory=11.71GiB, timestamp=1789043180.8480089, auto_measure=False
+(Worker_TP0 pid=315) INFO 09-10 12:26:20 [indexer.py:736] DSA indexer decode path: use_flattening=False supports_varlen=False (next_n=1, use_fp4_indexer_cache=False)
+(Worker_TP0 pid=315) INFO 09-10 12:26:20 [breakable_cudagraph.py:288] Breakable CUDA graph enabled
+(Worker_TP0 pid=315) 2026-09-10 12:26:21  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_pre_big_fuse_with_norm_tilelang` with `out_idx=None`
+(Worker_TP0 pid=315) 2026-09-10 12:26:25  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_pre_big_fuse_with_norm_tilelang`
+(Worker_TP0 pid=315) 2026-09-10 12:26:26  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_fused_tilelang` with `out_idx=None`
+(Worker_TP0 pid=315) 2026-09-10 12:26:27  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_fused_tilelang`
+(Worker_TP0 pid=315) 2026-09-10 12:26:27  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_pre_big_fuse_with_norm_tilelang` with `out_idx=None`
+(Worker_TP0 pid=315) 2026-09-10 12:26:31  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_pre_big_fuse_with_norm_tilelang`
+(Worker_TP0 pid=315) 2026-09-10 12:26:32  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_fused_tilelang` with `out_idx=None`
+(Worker_TP0 pid=315) 2026-09-10 12:26:33  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_fused_tilelang`
+(Worker_TP0 pid=315) 2026-09-10 12:26:33  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:129): TileLang begins to compile kernel `mhc_pre_big_fuse_with_norm_tilelang` with `out_idx=None`
+(Worker_TP0 pid=315) 2026-09-10 12:26:37  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang completes to compile kernel `mhc_pre_big_fuse_with_norm_tilelang`
+(Worker_TP0 pid=315) INFO 09-10 12:26:39 [mhc.py:438] Using B12x fused GLM H4096 mHC post+pre for decode M=1.
+(Worker_TP0 pid=315) Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:00<?, ?it/s]                                                                              Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:00<?, ?it/s]                                                                              Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:04<?, ?it/s]                                                                              Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:05<?, ?it/s]                                                                              Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:05<?, ?it/s]                                                                              Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:06<?, ?it/s]                                                                              Profiling CUDA graph memory (PIECEWISE):   0%|          | 0/4 [00:10<?, ?it/s]Profiling CUDA graph memory (PIECEWISE):  25%|██▌       | 1/4 [00:11<00:34, 11.38s/it]                                                                                      Profiling CUDA graph memory (PIECEWISE):  25%|██▌       | 1/4 [00:11<00:34, 11.38s/it]                                                                                      Profiling CUDA graph memory (PIECEWISE):  25%|██▌       | 1/4 [00:12<00:34, 11.38s/it]                                                                                      Profiling CUDA graph memory (PIECEWISE):  25%|██▌       | 1/4 [00:12<00:34, 11.38s/it]                                                                                      Profiling CUDA graph memory (PIECEWISE):  25%|██▌       | 1/4 [00:16<00:34, 11.38s/it]Profiling CUDA graph memory (PIECEWISE):  50%|█████     | 2/4 [00:17<00:16,  8.30s/it]Profiling CUDA graph memory (PIECEWISE):  75%|███████▌  | 3/4 [00:18<00:04,  4.75s/it]Profiling CUDA graph memory (PIECEWISE): 100%|██████████| 4/4 [00:19<00:00,  3.31s/it]Profiling CUDA graph memory (PIECEWISE): 100%|██████████| 4/4 [00:19<00:00,  4.78s/it]
+(Worker_TP0 pid=315) Profiling CUDA graph memory (FULL):   0%|          | 0/3 [00:00<?, ?it/s]Profiling CUDA graph memory (FULL):  33%|███▎      | 1/3 [00:00<00:00,  4.50it/s]Profiling CUDA graph memory (FULL):  67%|██████▋   | 2/3 [00:00<00:00,  5.32it/s]Profiling CUDA graph memory (FULL): 100%|██████████| 3/3 [00:00<00:00,  5.16it/s]Profiling CUDA graph memory (FULL): 100%|██████████| 3/3 [00:00<00:00,  5.11it/s]
+(Worker_TP0 pid=315) INFO 09-10 12:26:41 [model_runner.py:957] Estimated CUDA graph memory: 1.19 GiB total
+(Worker_TP0 pid=315) INFO 09-10 12:26:41 [gpu_worker.py:574] GLM53 memory accounting: Memory profiling takes 13.04 seconds. Total non KV cache memory: 100.35GiB; torch peak memory increase: 3.67GiB; total consumed (from mem_get_info): 96.74GiB; weights memory: 96.23GiB.
+(Worker_TP0 pid=315) INFO 09-10 12:26:41 [gpu_worker.py:575] Available KV cache memory: -4.23 GiB
+(Worker_TP0 pid=315) INFO 09-10 12:26:41 [gpu_worker.py:590] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8000 is equivalent to --gpu-memory-utilization=0.7902 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8098. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355] EngineCore failed to start.
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355] Traceback (most recent call last):
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1324, in run_engine_core
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     return func(*args, **kwargs)
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1082, in __init__
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     super().__init__(
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 144, in __init__
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     kv_cache_config = self._initialize_kv_caches(vllm_config)
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     return func(*args, **kwargs)
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 305, in _initialize_kv_caches
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     kv_cache_configs = get_kv_cache_configs(
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]                        ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/core/kv_cache_utils.py", line 2532, in get_kv_cache_configs
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     _check_enough_kv_cache_memory(
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/core/kv_cache_utils.py", line 759, in _check_enough_kv_cache_memory
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355]     raise ValueError(
+(EngineCore pid=191) ERROR 09-10 12:26:41 [core.py:1355] ValueError: No available memory for the cache blocks. Try increasing `gpu_memory_utilization` when initializing the engine (this flag also controls CPU memory reservation on the CPU backend, despite its name). See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+(EngineCore pid=191) ERROR 09-10 12:26:48 [multiproc_executor.py:310] Worker proc VllmWorker-0 died unexpectedly (exit code: None), shutting down executor.
+(EngineCore pid=191) INFO 09-10 12:26:48 [multiproc_executor.py:455] [shutdown] Executor: waiting for worker exit count=1
+(EngineCore pid=191) Process EngineCore:
+(EngineCore pid=191) Traceback (most recent call last):
+(EngineCore pid=191)   File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=191)     self.run()
+(EngineCore pid=191)   File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+(EngineCore pid=191)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1359, in run_engine_core
+(EngineCore pid=191)     raise e
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1324, in run_engine_core
+(EngineCore pid=191)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=191)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=191)     return func(*args, **kwargs)
+(EngineCore pid=191)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1082, in __init__
+(EngineCore pid=191)     super().__init__(
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 144, in __init__
+(EngineCore pid=191)     kv_cache_config = self._initialize_kv_caches(vllm_config)
+(EngineCore pid=191)                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=191)     return func(*args, **kwargs)
+(EngineCore pid=191)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 305, in _initialize_kv_caches
+(EngineCore pid=191)     kv_cache_configs = get_kv_cache_configs(
+(EngineCore pid=191)                        ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/core/kv_cache_utils.py", line 2532, in get_kv_cache_configs
+(EngineCore pid=191)     _check_enough_kv_cache_memory(
+(EngineCore pid=191)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/core/kv_cache_utils.py", line 759, in _check_enough_kv_cache_memory
+(EngineCore pid=191)     raise ValueError(
+(EngineCore pid=191) ValueError: No available memory for the cache blocks. Try increasing `gpu_memory_utilization` when initializing the engine (this flag also controls CPU memory reservation on the CPU backend, despite its name). See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+(EngineCore pid=191) INFO 09-10 12:26:48 [multiproc_executor.py:462] [shutdown] Executor: all workers exited gracefully
+(APIServer pid=1) INFO 09-10 12:26:53 [utils.py:615] [shutdown] Process manager: send sigterm to process EngineCore
+(APIServer pid=1) Traceback (most recent call last):
+(APIServer pid=1)   File "/usr/local/bin/vllm", line 10, in <module>
+(APIServer pid=1)     sys.exit(main())
+(APIServer pid=1)              ^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/main.py", line 97, in main
+(APIServer pid=1)     args.dispatch_function(args)
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/serve.py", line 152, in cmd
+(APIServer pid=1)     uvloop.run(run_server(args))
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 96, in run
+(APIServer pid=1)     return __asyncio.run(
+(APIServer pid=1)            ^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+(APIServer pid=1)     return runner.run(main)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+(APIServer pid=1)     return self._loop.run_until_complete(task)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=1)     return await main
+(APIServer pid=1)            ^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 764, in run_server
+(APIServer pid=1)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 778, in run_server_worker
+(APIServer pid=1)     async with build_async_engine_client(
+(APIServer pid=1)   File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+(APIServer pid=1)     return await anext(self.gen)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 132, in build_async_engine_client
+(APIServer pid=1)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=1)   File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+(APIServer pid=1)     return await anext(self.gen)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 168, in build_async_engine_client_from_engine_args
+(APIServer pid=1)     async_llm = AsyncLLM.from_vllm_config(
+(APIServer pid=1)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 220, in from_vllm_config
+(APIServer pid=1)     return cls(
+(APIServer pid=1)            ^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 149, in __init__
+(APIServer pid=1)     self.engine_core = EngineCoreClient.make_async_mp_client(
+(APIServer pid=1)                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=1)     return func(*args, **kwargs)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 139, in make_async_mp_client
+(APIServer pid=1)     return AsyncMPClient(*client_args)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=1)     return func(*args, **kwargs)
+(APIServer pid=1)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 990, in __init__
+(APIServer pid=1)     super().__init__(
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 609, in __init__
+(APIServer pid=1)     with launch_core_engines(
+(APIServer pid=1)   File "/usr/lib/python3.12/contextlib.py", line 144, in __exit__
+(APIServer pid=1)     next(self.gen)
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1206, in launch_core_engines
+(APIServer pid=1)     wait_for_engine_startup(
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1286, in wait_for_engine_startup
+(APIServer pid=1)     raise RuntimeError(
+(APIServer pid=1) RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}

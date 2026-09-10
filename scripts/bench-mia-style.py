@@ -106,9 +106,14 @@ def main():
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--launch-receipt',type=Path,required=True)
     parser.add_argument('--runs',type=int,default=5)
+    parser.add_argument('--prefill-sizes',type=int,nargs='+',
+                        choices=[8192,16384,32768,65536,131072,262144],
+                        help='Run only the specified prefill sizes that fit the configured memory/context limit')
     args = parser.parse_args()
     if args.runs < 1:
         parser.error('--runs must be positive')
+    if args.prefill_sizes and (args.block != 'prefill' or len(set(args.prefill_sizes)) != len(args.prefill_sizes)):
+        parser.error('--prefill-sizes requires a prefill block and distinct sizes')
     args.out.mkdir(parents=True,exist_ok=False)
     base = args.base_url.rstrip('/')
     with urllib.request.urlopen(base+'/v1/models',timeout=30) as response:
@@ -122,6 +127,8 @@ def main():
                'benchmark_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                'sparkdash_revision':'f035ca243855b3a88c270a9a84a358c2cb1fbcc3',
                'models':models,'runs':args.runs,'cells':[]}
+    if args.block == 'prefill':
+        receipt['prefill_sizes']=args.prefill_sizes or [8192,16384,32768,65536,131072,262144]
     def save(name,value):
         (args.out/(name+'.json')).write_text(json.dumps(value,indent=2)+'\n')
     def metrics(label):
@@ -152,7 +159,7 @@ def main():
         save('warmup',warmup)
         if 'error' in warmup:
             raise RuntimeError(warmup['error'])
-        for tokens in (8192,16384,32768,65536,131072,262144):
+        for tokens in (args.prefill_sizes or (8192,16384,32768,65536,131072,262144)):
             for repeat in range(args.runs):
                 cell=f'prefill-{tokens}-r{repeat}'
                 metrics(cell+'-before')

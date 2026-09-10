@@ -9,8 +9,8 @@ speculation tuning are in progress.
 ## Comparison with Mia's two-Spark recipe (thinking off)
 
 Mia's published numbers below are the reference. TrellisMX decode uses five-wave
-medians from the emu/kiwi DFlash2 K7 candidate; cold prefill uses five-replay
-medians from MTP K2 at 165K configured context. All rates are tokens/s. This comparison explicitly
+medians from the earlier emu/kiwi fixed-K7 candidate. The corrected no-spec
+prefill launch uses batch 7168 and memory utilization 0.80; it could not start. All rates are tokens/s. This comparison explicitly
 disables thinking to match Mia; the serving recipe defaults to **thinking on**.
 The weighted seven-category and orchid results remain separate.
 
@@ -21,12 +21,17 @@ The weighted seven-category and orchid results remain separate.
 | Structured decode, C4 aggregate † | 146.5 | 89.81 | -38.7% |
 | Code decode, C4 aggregate † | 146.5 | 83.41 | -43.1% |
 | Prose decode, C1 (Mia: adaptive + FP8 dense) | 32.1 | 23.03 | -28.2% |
-| Cold prefill, ~8K | 1,492.1 | 1,390.03 | -6.8% |
-| Cold prefill, ~16K | 1,553.7 | 1,477.22 | -4.9% |
-| Cold prefill, ~32K | 1,428.2 | 1,517.88 | +6.3% |
-| Cold prefill, ~64K | 1,587.0 | 1,548.45 | -2.4% |
-| Cold prefill, ~128K | 1,561.7 | 1,546.42 | -1.0% |
-| Cold prefill, ~256K | 1,516.8 | Rejected: 165K configured limit | — |
+| Cold prefill, ~8K (no spec) | 1,492.1 | null | — |
+| Cold prefill, ~16K (no spec) | 1,553.7 | null | — |
+| Cold prefill, ~32K (no spec) | 1,428.2 | null | — |
+| Cold prefill, ~64K (no spec) | 1,587.0 | null | — |
+| Cold prefill, ~128K (no spec) | 1,561.7 | null | — |
+| Cold prefill, ~256K (no spec) | 1,516.8 | null | — |
+
+**No-spec prefill:** `null` means no measurement: the batch-7168, memory-0.80
+launch failed before readiness, reporting **−4.23 GiB available KV memory**
+even with a 9000-token context. Shorter input cannot resolve this allocation
+failure. [Launch evidence](results/2x/none-b7168-m080-prefill/README.md).
 
 † **Output quality is not qualified:** nine counting/code responses
 departed from the requested pattern; one code response stopped at 393 tokens.
@@ -40,7 +45,7 @@ Decode uses sparkDash counting/code prompts, temperature 0, thinking off, a
 400-token cap and DFlash2 K7; prose is a separately tuned configuration.
 Prefill uses the September 7 E3 results, client prompt tokens / TTFT.
 Decode is measured separately from the weighted seven-category suite and orchid
-speed probe. [Cold-prefill receipts and audit](results/2x/mtp2-mia-prefill/README.md)
+speed probe. Historical MTP/batch-1024 results are in the [cold-prefill receipts and audit](results/2x/mtp2-mia-prefill/README.md)
 verify zero cached tokens in all 25 supported samples. All five 256K rejections
 are retained; they establish this launch's configured limit, not the hardware's
 maximum capacity. Prefill settings differ: TrellisMX uses MTP K2, batch 1024 and

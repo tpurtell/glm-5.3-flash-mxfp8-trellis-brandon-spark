@@ -1,3 +1,20 @@
+# Current user-requested experiment
+
+First run cold-prefill measurements with speculation
+disabled (no DFlash2, no MTP), using Mia-matched batch size 7168, followed by
+README table results labeled "(no spec)". Do not run a batch-1024 control.
+GPU memory utilization must not exceed 0.80. Test only prompt sizes that fit;
+use null for sizes that cannot fit. Never raise the memory limit to complete rows.
+After prefill, the user authorizes DFlash2 decode tests with the same EMA adaptive
+drafting algorithm and settings as Mia, to compare the expert format's Spark
+performance. Verify the actual adaptive policy and report matching settings and
+measured deltas; fixed-K DFlash2 is not an acceptable substitute.
+After each of these two corrected experiments, separately update the README,
+commit, and push its results before proceeding to publication of the next block.
+Only emu and kiwi remain authorized hosts. Earlier tool-evaluation and concurrency
+automation was canceled; do not restart that queue or the broader qualification
+campaign as part of this experiment.
+
 # Active scope and host availability
 
 The latest user instruction restricts this recipe and its full qualification to
