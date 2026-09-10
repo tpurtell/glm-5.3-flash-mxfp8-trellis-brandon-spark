@@ -1,0 +1,10 @@
+{
+  "host": "emu",
+  "image": "sha256:e6ac69446438288201f6821abc692427225db894215c8c91c602e9a666378ed3",
+  "base_runtime_revision": "669cc12a6ac0922234ea4ea1a08cccf36fc80563",
+  "tested_runtime_revision": "669cc12a6ac0922234ea4ea1a08cccf36fc80563",
+  "runtime_file_sha256": "f238de47e449e81a7e37155a5369571d75d1b8a24195355d605d0d40f978d644",
+  "command": "docker run --rm --gpus all --name trellismx-native-bringup --entrypoint python3 -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro -v /home/tj/Developer/glmflash-mxfp8-spark/scripts/check-native-p8.py:/check.py:ro glm53-trellismx-spark:gridcap-669cc12 /check.py /checkpoint --tp2",
+  "exit_code": 0,
+  "scope": "K5 layer3 TP2 rank0 joined from TP4 ranks0/1; finite/nonzero and exact graph replay; sum-of-TP4 comparison at 1/8/32/128 tokens passes cosine>=.999 and relativeL2<=.02."
+}

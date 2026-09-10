@@ -162,3 +162,8 @@ graph replay at 1/8/32/128 tokens (relative L2 0.00233–0.00236). Receipt:
 `results/bringup/native-tp2-k5-layer3-rank1/`. Both stored bitrates now have
 TP2 partition-equivalence evidence; distributed full-model serving is still
 unqualified.
+
+The queued K5 layer 3 TP2 rank-0 check completed on emu after its parent
+files arrived. Both TP2 ranks now pass against their respective TP4 parents
+at 1/8/32/128 tokens; rank-0 receipt:
+`results/bringup/native-tp2-k5-layer3-rank0/`.
