@@ -1,0 +1,852 @@
+{
+  "created": "2026-09-10T10:29:00.771809+00:00",
+  "run_id": "84f61ced347c496fab3f47720ab9f7f6",
+  "launch": {
+    "created": "2026-09-10T09:41:13.630293+00:00",
+    "source_commit": "733874305ace91bdd6acd76e9397f93516f28fbb",
+    "sources": {
+      "target": {
+        "repo_id": "brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8",
+        "revision": "db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+      },
+      "carrier": {
+        "repo_id": "local-inference-lab/GLM-5.3-Flash-NVFP4",
+        "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+      },
+      "mia": {
+        "repository": "https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks",
+        "revision": "94bddea5db64137db41e4ef4c6c120e6e69e32d7"
+      },
+      "measurement_reference": {
+        "repository": "https://github.com/tpurtell/glmrt-5.3-1rtx-4spark",
+        "revision": "dc6d9b8e1600e001cb1d4228bd911f4df8091f99"
+      },
+      "sparkinfer": {
+        "repository": "https://github.com/tpurtell/sparkinfer-glmrt",
+        "branch": "trellismx-glm53-spark",
+        "revision": "3ac1597674bff576241b7c72929bc3a3d18d7616"
+      },
+      "chat_template": {
+        "repo_id": "zai-org/GLM-5.3-Flash",
+        "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+        "file": "chat_template.jinja",
+        "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+        "checked_date": "2026-09-10"
+      },
+      "draft": {
+        "repo_id": "incoai/GLM-5.3-Flash-DFlash2",
+        "revision": "bf582e4eacc1810f76656d1811693ff6c6737d2a"
+      },
+      "tool_eval": {
+        "repository": "https://github.com/SeraphimSerapis/tool-eval-bench.git",
+        "revision": "cf54b4bfe705f12f71e8866f10730572497c8105",
+        "version": "2.6.1.dev45+gcf54b4bfe",
+        "reference_date": "2026-09-08"
+      }
+    },
+    "plan": [
+      {
+        "host": "emu",
+        "name": "glm53-trellis-2x-r0",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r0",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.3",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r0:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "0",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "165000",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.895",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--speculative-config",
+          "{\"method\": \"mtp\", \"num_speculative_tokens\": 2}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+        "container_id": "f3628a6449a04c152a07bffc6bab493f103a3688faebd3f21ddd8a57da955eed"
+      },
+      {
+        "host": "kiwi",
+        "name": "glm53-trellis-2x-r1",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r1",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.4",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r1:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "1",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "165000",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.895",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--headless",
+          "--speculative-config",
+          "{\"method\": \"mtp\", \"num_speculative_tokens\": 2}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+        "container_id": "8dc7c5d5876abd2414b4c533104e191d02946f0b9b6238ea8efcaeb5095c6aba"
+      }
+    ],
+    "ready_seconds": 1023.435947486083
+  },
+  "models": {
+    "object": "list",
+    "data": [
+      {
+        "id": "glm53-trellismx",
+        "object": "model",
+        "created": 1789036140,
+        "owned_by": "vllm",
+        "root": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+        "parent": null,
+        "max_model_len": 165000,
+        "permission": [
+          {
+            "id": "modelperm-88a4de1f5cab36a6",
+            "object": "model_permission",
+            "created": 1789036140,
+            "allow_create_engine": false,
+            "allow_sampling": true,
+            "allow_logprobs": true,
+            "allow_search_indices": false,
+            "allow_view": true,
+            "allow_fine_tuning": false,
+            "organization": "*",
+            "group": null,
+            "is_blocking": false
+          }
+        ]
+      }
+    ]
+  },
+  "runs": 2,
+  "tokenizer_sha256": "19e773648cb4e65de8660ea6365e10acca112d42a854923df93db4a6f333a82d",
+  "template": {
+    "repo_id": "zai-org/GLM-5.3-Flash",
+    "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+    "file": "chat_template.jinja",
+    "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+    "checked_date": "2026-09-10",
+    "serving_sha256": "74ec8ee7258eec437936bfc4669a7227c02e5f9a6f349d88d01770360bea1564",
+    "adaptation": "explicit enable_thinking=false closes initial think span"
+  },
+  "corpus_sha256": "e1e097453bf16112e5d4f73b7ce0646fc64693dc0088b139cfa3d2d46cccc7c6",
+  "bases": [
+    0,
+    32768,
+    65536,
+    131072,
+    262144
+  ],
+  "cache_block_size": 6144,
+  "source_sha256": {
+    "scripts/bench-retained-decode.py": "35209ff092d02a30fe6df1671eb16f1ef3dc1c8807f2e636baa05467f79af18e",
+    "scripts/bench-retained-prefill.py": "8f3c09372925849fb46cde9aaa9aaba7de45244205ab501aa667dc0a92c882ce",
+    "scripts/bench-mia-style.py": "8ba2cbf2e469291cdea6c5c0dd9b997dcd6507411acb7b96a3df508e60a78e46",
+    "data/retained-decode-prompts.json": "2129127403f6e76af9e97742286a15c7c296d4e0dfc77770a54cd7bf59038e0d",
+    "scripts/decode_contract.py": "9beffec90fb1311fea416e1f326771e1efeb2422a79bc506984d62a74035d509"
+  },
+  "samples": [
+    {
+      "cell": "base-0-code-r0",
+      "base": 0,
+      "workload": "code",
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "prompt_tokens": 84,
+      "recomputed_base_tokens": 0,
+      "completion_tokens": 192,
+      "decode_tokens": 191,
+      "decode_seconds": 6.623319592908956,
+      "decode_tps": 28.837503206773835,
+      "ttft_seconds": 0.4169942610897124,
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-0-code-r1",
+      "base": 0,
+      "workload": "code",
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "prompt_tokens": 84,
+      "recomputed_base_tokens": 0,
+      "completion_tokens": 192,
+      "decode_tokens": 191,
+      "decode_seconds": 6.50508284708485,
+      "decode_tps": 29.361655260946236,
+      "ttft_seconds": 0.410440431907773,
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-0-writing-r0",
+      "base": 0,
+      "workload": "writing",
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "prompt_tokens": 92,
+      "recomputed_base_tokens": 0,
+      "completion_tokens": 192,
+      "decode_tokens": 191,
+      "decode_seconds": 10.038023020955734,
+      "decode_tps": 19.027651122263975,
+      "ttft_seconds": 0.37371585704386234
+    },
+    {
+      "cell": "base-0-writing-r1",
+      "base": 0,
+      "workload": "writing",
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "prompt_tokens": 92,
+      "recomputed_base_tokens": 0,
+      "completion_tokens": 192,
+      "decode_tokens": 191,
+      "decode_seconds": 10.316809403011575,
+      "decode_tps": 18.51347568214697,
+      "ttft_seconds": 0.42104404408019036
+    },
+    {
+      "cell": "base-0-math-r0",
+      "base": 0,
+      "workload": "math",
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "prompt_tokens": 91,
+      "recomputed_base_tokens": 0,
+      "completion_tokens": 192,
+      "decode_tokens": 191,
+      "decode_seconds": 7.673589391983114,
+      "decode_tps": 24.890568186974512,
+      "ttft_seconds": 0.46769090299494565
+    },
+    {
+      "cell": "base-0-math-r1",
+      "base": 0,
+      "workload": "math",
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "prompt_tokens": 91,
+      "recomputed_base_tokens": 0,
+      "completion_tokens": 192,
+      "decode_tokens": 191,
+      "decode_seconds": 7.465477257035673,
+      "decode_tps": 25.584432638917534,
+      "ttft_seconds": 0.37156396999489516
+    },
+    {
+      "cell": "base-32768-code-r0",
+      "base": 32768,
+      "workload": "code",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=30720, total=32842; got {'prompt_tokens': 32842, 'total_tokens': 33034, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 24576}}\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-32768-code-r1",
+      "base": 32768,
+      "workload": "code",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=30720, total=32842; got {'prompt_tokens': 32842, 'total_tokens': 33034, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 24576}}\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-32768-writing-r0",
+      "base": 32768,
+      "workload": "writing",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=30720, total=32850; got {'prompt_tokens': 32850, 'total_tokens': 33042, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-writing-r1",
+      "base": 32768,
+      "workload": "writing",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=30720, total=32850; got {'prompt_tokens': 32850, 'total_tokens': 33042, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-math-r0",
+      "base": 32768,
+      "workload": "math",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=30720, total=32849; got {'prompt_tokens': 32849, 'total_tokens': 33041, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-math-r1",
+      "base": 32768,
+      "workload": "math",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=30720, total=32849; got {'prompt_tokens': 32849, 'total_tokens': 33041, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-65536-code-r0",
+      "base": 65536,
+      "workload": "code",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=61440, total=65610; got {'prompt_tokens': 65610, 'total_tokens': 65802, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 55296}}\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-65536-code-r1",
+      "base": 65536,
+      "workload": "code",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=61440, total=65610; got {'prompt_tokens': 65610, 'total_tokens': 65802, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 55296}}\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-65536-writing-r0",
+      "base": 65536,
+      "workload": "writing",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=61440, total=65618; got {'prompt_tokens': 65618, 'total_tokens': 65810, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-writing-r1",
+      "base": 65536,
+      "workload": "writing",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=61440, total=65618; got {'prompt_tokens': 65618, 'total_tokens': 65810, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-math-r0",
+      "base": 65536,
+      "workload": "math",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=61440, total=65617; got {'prompt_tokens': 65617, 'total_tokens': 65809, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-math-r1",
+      "base": 65536,
+      "workload": "math",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=61440, total=65617; got {'prompt_tokens': 65617, 'total_tokens': 65809, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-131072-code-r0",
+      "base": 131072,
+      "workload": "code",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=129024, total=131146; got {'prompt_tokens': 131146, 'total_tokens': 131338, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 122880}}\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-131072-code-r1",
+      "base": 131072,
+      "workload": "code",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=129024, total=131146; got {'prompt_tokens': 131146, 'total_tokens': 131338, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 122880}}\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is not exactly one Python code block"
+        ]
+      }
+    },
+    {
+      "cell": "base-131072-writing-r0",
+      "base": 131072,
+      "workload": "writing",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=129024, total=131154; got {'prompt_tokens': 131154, 'total_tokens': 131346, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-writing-r1",
+      "base": 131072,
+      "workload": "writing",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=129024, total=131154; got {'prompt_tokens': 131154, 'total_tokens': 131346, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-math-r0",
+      "base": 131072,
+      "workload": "math",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=129024, total=131153; got {'prompt_tokens': 131153, 'total_tokens': 131345, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-math-r1",
+      "base": 131072,
+      "workload": "math",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Expected cached=129024, total=131153; got {'prompt_tokens': 131153, 'total_tokens': 131345, 'completion_tokens': 192, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-262144-code-r0",
+      "base": 262144,
+      "workload": "code",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is empty"
+        ]
+      }
+    },
+    {
+      "cell": "base-262144-code-r1",
+      "base": 262144,
+      "workload": "code",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")",
+      "output_check": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": false,
+        "quality_contract_issues": [
+          "response is empty"
+        ]
+      }
+    },
+    {
+      "cell": "base-262144-writing-r0",
+      "base": 262144,
+      "workload": "writing",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-writing-r1",
+      "base": 262144,
+      "workload": "writing",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-math-r0",
+      "base": 262144,
+      "workload": "math",
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-math-r1",
+      "base": 262144,
+      "workload": "math",
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    }
+  ],
+  "medians": [
+    {
+      "base": 0,
+      "workload": "code",
+      "status": "passed",
+      "decode_tps": 29.099579233860034
+    },
+    {
+      "base": 0,
+      "workload": "writing",
+      "status": "passed",
+      "decode_tps": 18.770563402205475
+    },
+    {
+      "base": 0,
+      "workload": "math",
+      "status": "passed",
+      "decode_tps": 25.237500412946023
+    },
+    {
+      "base": 32768,
+      "workload": "code",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 32768,
+      "workload": "writing",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 32768,
+      "workload": "math",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 65536,
+      "workload": "code",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 65536,
+      "workload": "writing",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 65536,
+      "workload": "math",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 131072,
+      "workload": "code",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 131072,
+      "workload": "writing",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 131072,
+      "workload": "math",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 262144,
+      "workload": "code",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 262144,
+      "workload": "writing",
+      "status": "failed",
+      "decode_tps": null
+    },
+    {
+      "base": 262144,
+      "workload": "math",
+      "status": "failed",
+      "decode_tps": null
+    }
+  ],
+  "status": "failed"
+}
