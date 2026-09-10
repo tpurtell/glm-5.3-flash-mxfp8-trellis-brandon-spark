@@ -26,8 +26,10 @@ The weighted seven-category and orchid results remain separate.
 | Cold prefill, ~128K | 1,561.7 | Pending | — |
 | Cold prefill, ~256K | 1,516.8 | Pending | — |
 
-† **Concurrent output quality is not qualified:** nine counting/code responses
+† **Output quality is not qualified:** nine counting/code responses
 departed from the requested pattern; one code response stopped at 393 tokens.
+Follow-up eager tests also reproduce failures, including one serial code request
+([controls](results/bringup/emu-kiwi-dflash2-k7-eager-serial-suffix/README.md)).
 All timings are retained. [Full results and output audit](results/2x/dflash2-k7-mia-decode/README.md).
 TrellisMX prose uses fixed K7; Mia's prose configuration is separately tuned.
 
