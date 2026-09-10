@@ -13,3 +13,13 @@
   tpurtell/sparkinfer-glmrt, never on its main branch.
 
 Exact starting revisions are in `sources.lock.json`.
+
+`overlay/trellismx_manifest.py` comes from the pinned release's
+`runtime/vllm/vllm/utils/trellismx.py`; only its regex import uses Python's standard
+library so the checkpoint can be verified without installing vLLM. Bundled
+licenses are retained in `licenses/`.
+
+The runtime branch applies both `runtime/b12x/b12x` and the selected September 9
+`runtime-reference-20260909/b12x/b12x` overlay, in that order. The reference
+source manifest is retained in that branch. Use `scripts/fetch-runtime.sh` to
+check out the exact revision named by this recipe.
