@@ -43,11 +43,15 @@ def maybe_trellismx_method(config, layer, prefix):
         raise ValueError(f"Unrecognized TrellisMX routed-expert prefix: {prefix}")
     if getattr(config, "quant_method", None) != "NVFP4":
         raise ValueError("TrellisMX requires the pinned ModelOpt NVFP4 carrier")
-    return TrellisMXMoEMethod(config, layer.moe_config, directory, index)
+    return ModelOptTrellisMXMoEMethod(config, layer.moe_config, directory, index)
 
 
-class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
-    """Keep the carrier's weight-loader ABI; execute routed weights using P8."""
+class ModelOptTrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
+    """Keep the carrier's weight-loader ABI; execute routed weights using P8.
+
+    RoutedExperts dispatches ModelOpt scalar/input-scale loading by class-name
+    family, so the ModelOpt prefix is part of the pinned loader contract.
+    """
 
     def __init__(self, config, moe_config, directory, layer_index):
         # Do not select or compile an NVFP4 expert backend we never execute.

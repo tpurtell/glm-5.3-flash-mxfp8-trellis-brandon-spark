@@ -15,7 +15,7 @@ COPY licenses /opt/trellismx/licenses
 COPY data /opt/trellismx/data
 COPY container/entrypoint.sh /opt/trellismx/entrypoint.sh
 RUN python3 /opt/trellismx/overlay/install.py \
-    && python3 -c 'from trellismx_b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE; from b12x.attention.sparse_mla import run_decode, run_extend; from vllm.model_executor.layers.quantization.trellismx import TrellisMXMoEMethod'
+    && python3 -c 'from trellismx_b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE; from b12x.attention.sparse_mla import run_decode, run_extend; from vllm.model_executor.layers.quantization.trellismx import ModelOptTrellisMXMoEMethod'
 ENTRYPOINT ["/bin/bash", "/opt/trellismx/entrypoint.sh"]
 ARG RECIPE_REVISION=unknown
 ARG RUNTIME_REVISION=unknown
