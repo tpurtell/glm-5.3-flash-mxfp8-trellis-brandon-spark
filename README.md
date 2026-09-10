@@ -54,12 +54,8 @@ cache independently; Docker mounts include the blobs referenced by snapshots.
 The example starts on
 emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
 host; transfers fail if RDMA cannot be negotiated. Repeat the verification on
-each destination before qualification. Downloads default to Xet high-performance mode with adaptive concurrency and
-eight file workers (`HF_XET_HIGH_PERFORMANCE`, `HF_DOWNLOAD_WORKERS`). An explicit
-`HF_XET_FIXED_DOWNLOAD_CONCURRENCY` selects fixed concurrency and disables the
-high-performance preset and adaptive controller to avoid conflicting settings.
-The older `HF_XET_NUM_CONCURRENT_RANGE_GETS` setting is not used by the installed
-Xet 1.5 client. See [Xet’s current controls](https://github.com/huggingface/hub-docs/blob/main/docs/hub/xet/using-xet-storage.md#environment-variables).
+each destination before qualification. Downloads use plain HTTP with Xet disabled (`HF_HUB_DISABLE_XET=1`) and
+eight file workers (`HF_DOWNLOAD_WORKERS`).
 
 The recipe pins Z.ai’s current official chat template, with an explicit
 adaptation that honors an explicit `enable_thinking: false` for comparison
