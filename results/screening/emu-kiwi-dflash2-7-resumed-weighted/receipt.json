@@ -1,0 +1,576 @@
+{
+  "created": "2026-09-10T07:44:24.651471+00:00",
+  "launch": {
+    "created": "2026-09-10T07:28:09.062093+00:00",
+    "source_commit": "2b7809766abd74ddecf0b601f958fcc74293d84a",
+    "sources": {
+      "target": {
+        "repo_id": "brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8",
+        "revision": "db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+      },
+      "carrier": {
+        "repo_id": "local-inference-lab/GLM-5.3-Flash-NVFP4",
+        "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+      },
+      "mia": {
+        "repository": "https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks",
+        "revision": "94bddea5db64137db41e4ef4c6c120e6e69e32d7"
+      },
+      "measurement_reference": {
+        "repository": "https://github.com/tpurtell/glmrt-5.3-1rtx-4spark",
+        "revision": "dc6d9b8e1600e001cb1d4228bd911f4df8091f99"
+      },
+      "sparkinfer": {
+        "repository": "https://github.com/tpurtell/sparkinfer-glmrt",
+        "branch": "trellismx-glm53-spark",
+        "revision": "373854b7e47dcc527eaa458514882bc80cd9790f"
+      },
+      "chat_template": {
+        "repo_id": "zai-org/GLM-5.3-Flash",
+        "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+        "file": "chat_template.jinja",
+        "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+        "checked_date": "2026-09-10"
+      },
+      "draft": {
+        "repo_id": "incoai/GLM-5.3-Flash-DFlash2",
+        "revision": "bf582e4eacc1810f76656d1811693ff6c6737d2a"
+      },
+      "tool_eval": {
+        "repository": "https://github.com/SeraphimSerapis/tool-eval-bench.git",
+        "revision": "cf54b4bfe705f12f71e8866f10730572497c8105",
+        "version": "2.6.1.dev45+gcf54b4bfe",
+        "reference_date": "2026-09-08"
+      }
+    },
+    "plan": [
+      {
+        "host": "emu",
+        "name": "glm53-trellis-2x-r0",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r0",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.3",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2:/models/draft:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r0:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "0",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "8192",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.85",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--speculative-config",
+          "{\"method\": \"dflash\", \"num_speculative_tokens\": 7, \"model\": \"/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a\", \"draft_tensor_parallel_size\": 2, \"kv_cache_dtype\": \"bfloat16\", \"draft_sample_method\": \"probabilistic\", \"rejection_sample_method\": \"standard\"}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:7bc894f9453b04b4244044133586e0a012cc9c74178a2f4b507e2c7c606f3cc1",
+        "container_id": "6ff0ef06a0d6ee572c8b67d2a064d3f9620e9dabec92120d9c576154921a16a9"
+      },
+      {
+        "host": "kiwi",
+        "name": "glm53-trellis-2x-r1",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r1",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.4",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2:/models/draft:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r1:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "1",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "8192",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.85",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--headless",
+          "--speculative-config",
+          "{\"method\": \"dflash\", \"num_speculative_tokens\": 7, \"model\": \"/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a\", \"draft_tensor_parallel_size\": 2, \"kv_cache_dtype\": \"bfloat16\", \"draft_sample_method\": \"probabilistic\", \"rejection_sample_method\": \"standard\"}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:7bc894f9453b04b4244044133586e0a012cc9c74178a2f4b507e2c7c606f3cc1",
+        "container_id": "4ca55112ab8551056cab1d98ad2ead9b468dbd1b4dbaf528fe1f04d5479f525e"
+      }
+    ],
+    "ready_seconds": 969.0843302060384
+  },
+  "template": {
+    "repo_id": "zai-org/GLM-5.3-Flash",
+    "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+    "file": "chat_template.jinja",
+    "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+    "checked_date": "2026-09-10",
+    "serving_sha256": "74ec8ee7258eec437936bfc4669a7227c02e5f9a6f349d88d01770360bea1564",
+    "adaptation": "explicit enable_thinking=false closes initial think span"
+  },
+  "contract_sha256": "9beffec90fb1311fea416e1f326771e1efeb2422a79bc506984d62a74035d509",
+  "client_sha256": "dbd4b29a93f7216a9e77889a62d5c4d6c342659bd45b627e23afc26c4221f09b",
+  "runs": 1,
+  "samples": [
+    {
+      "case": "code",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 240,
+      "decode_tokens": 239,
+      "decode_seconds": 5.959303652052768,
+      "decode_tps": 40.105356926672634,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 41.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 199.0,
+          "vllm:spec_decode_num_draft_tokens_total": 287.0
+        },
+        "draft_tokens": 287.0,
+        "accepted_tokens": 199.0,
+        "ratio": 0.6933797909407665
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "math",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 96,
+      "decode_tokens": 95,
+      "decode_seconds": 2.547474096994847,
+      "decode_tps": 37.29184140167222,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 18.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 78.0,
+          "vllm:spec_decode_num_draft_tokens_total": 126.0
+        },
+        "draft_tokens": 126.0,
+        "accepted_tokens": 78.0,
+        "ratio": 0.6190476190476191
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "fable",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 211,
+      "decode_tokens": 210,
+      "decode_seconds": 16.449811005964875,
+      "decode_tps": 12.766104116567162,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 112.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 99.0,
+          "vllm:spec_decode_num_draft_tokens_total": 784.0
+        },
+        "draft_tokens": 784.0,
+        "accepted_tokens": 99.0,
+        "ratio": 0.12627551020408162
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "hello",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 11,
+      "decode_tokens": 10,
+      "decode_seconds": 0.28593962895683944,
+      "decode_tps": 34.97241720737292,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 3.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 8.0,
+          "vllm:spec_decode_num_draft_tokens_total": 21.0
+        },
+        "draft_tokens": 21.0,
+        "accepted_tokens": 8.0,
+        "ratio": 0.38095238095238093
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "topic",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 384,
+      "decode_tokens": 383,
+      "decode_seconds": 19.182349837967195,
+      "decode_tps": 19.96627124597304,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 131.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 252.0,
+          "vllm:spec_decode_num_draft_tokens_total": 917.0
+        },
+        "draft_tokens": 917.0,
+        "accepted_tokens": 252.0,
+        "ratio": 0.2748091603053435
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json",
+      "repeat": 0,
+      "weight": 0.5,
+      "completion_tokens": 63,
+      "decode_tokens": 62,
+      "decode_seconds": 2.0043663510587066,
+      "decode_tps": 30.93246899063716,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 12.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 51.0,
+          "vllm:spec_decode_num_draft_tokens_total": 84.0
+        },
+        "draft_tokens": 84.0,
+        "accepted_tokens": 51.0,
+        "ratio": 0.6071428571428571
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "structured-json-schema",
+      "repeat": 0,
+      "weight": 0.5,
+      "completion_tokens": 51,
+      "decode_tokens": 50,
+      "decode_seconds": 1.6224477819632739,
+      "decode_tps": 30.817632811267767,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 12.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 39.0,
+          "vllm:spec_decode_num_draft_tokens_total": 61.0
+        },
+        "draft_tokens": 61.0,
+        "accepted_tokens": 39.0,
+        "ratio": 0.639344262295082
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    },
+    {
+      "case": "multilingual",
+      "repeat": 0,
+      "weight": 1.0,
+      "completion_tokens": 364,
+      "decode_tokens": 363,
+      "decode_seconds": 22.764431926072575,
+      "decode_tps": 15.945928331479626,
+      "acceptance": {
+        "deltas": {
+          "vllm:spec_decode_num_drafts_total": 157.0,
+          "vllm:spec_decode_num_accepted_tokens_total": 207.0,
+          "vllm:spec_decode_num_draft_tokens_total": 1099.0
+        },
+        "draft_tokens": 1099.0,
+        "accepted_tokens": 207.0,
+        "ratio": 0.18835304822565968
+      },
+      "quality": {
+        "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+        "quality_contract_passed": true,
+        "quality_contract_issues": []
+      },
+      "error": null
+    }
+  ],
+  "weighted_decode_tps": 19.6514000424705,
+  "output_checks_passed": 8,
+  "output_checks_total": 8,
+  "orchid_speed_only": [
+    {
+      "decode_tps": 52.735882890410515,
+      "decode_tokens": 200,
+      "error": null
+    }
+  ],
+  "status": "passed"
+}

@@ -1,0 +1,145 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Say hello in one sentence."
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "start": 610972.85319757,
+  "events": [
+    {
+      "time": 610973.07845067,
+      "data": {
+        "id": "chatcmpl-aa8f1f19c9eef381",
+        "object": "chat.completion.chunk",
+        "created": 1789026264,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 610973.078502926,
+      "data": {
+        "id": "chatcmpl-aa8f1f19c9eef381",
+        "object": "chat.completion.chunk",
+        "created": 1789026264,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "Hello"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 610973.219959896,
+      "data": {
+        "id": "chatcmpl-aa8f1f19c9eef381",
+        "object": "chat.completion.chunk",
+        "created": 1789026264,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "! It"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 610973.367089749,
+      "data": {
+        "id": "chatcmpl-aa8f1f19c9eef381",
+        "object": "chat.completion.chunk",
+        "created": 1789026264,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "'s a pleasure to meet you."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 154827,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 610973.367131157,
+      "data": {
+        "id": "chatcmpl-aa8f1f19c9eef381",
+        "object": "chat.completion.chunk",
+        "created": 1789026264,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 19,
+          "total_tokens": 30,
+          "completion_tokens": 11,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3"
+      }
+    }
+  ],
+  "first": 610973.078502926,
+  "last": 610973.367089749,
+  "usage": {
+    "prompt_tokens": 19,
+    "total_tokens": 30,
+    "completion_tokens": 11,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "Hello! It's a pleasure to meet you.",
+  "reasoning": "",
+  "decode_tokens": 10,
+  "decode_tps": 34.651616795253105,
+  "ttft_seconds": 0.22530535608530045,
+  "prefill_tps": 84.32999698776186,
+  "end": 610973.36731063
+}

@@ -1,0 +1,178 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "start": 611000.128728735,
+  "events": [
+    {
+      "time": 611000.574059059,
+      "data": {
+        "id": "chatcmpl-babef8825d98c0c4",
+        "object": "chat.completion.chunk",
+        "created": 1789026291,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 611000.574104707,
+      "data": {
+        "id": "chatcmpl-babef8825d98c0c4",
+        "object": "chat.completion.chunk",
+        "created": 1789026291,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "Hi"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611000.716267199,
+      "data": {
+        "id": "chatcmpl-babef8825d98c0c4",
+        "object": "chat.completion.chunk",
+        "created": 1789026291,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " there"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611000.860044336,
+      "data": {
+        "id": "chatcmpl-babef8825d98c0c4",
+        "object": "chat.completion.chunk",
+        "created": 1789026291,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "! How can I help you today?"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611001.000984631,
+      "data": {
+        "id": "chatcmpl-babef8825d98c0c4",
+        "object": "chat.completion.chunk",
+        "created": 1789026291,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {},
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 154827,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611001.001017768,
+      "data": {
+        "id": "chatcmpl-babef8825d98c0c4",
+        "object": "chat.completion.chunk",
+        "created": 1789026291,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 14,
+          "total_tokens": 25,
+          "completion_tokens": 11,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3"
+      }
+    }
+  ],
+  "first": 611000.574104707,
+  "last": 611000.860044336,
+  "usage": {
+    "prompt_tokens": 14,
+    "total_tokens": 25,
+    "completion_tokens": 11,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "Hi there! How can I help you today?",
+  "reasoning": "",
+  "decode_tokens": 10,
+  "decode_tps": 34.97241720737292,
+  "ttft_seconds": 0.4453759719617665,
+  "prefill_tps": 31.434116075758656,
+  "end": 611001.001103736,
+  "quality": {
+    "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+    "quality_contract_passed": true,
+    "quality_contract_issues": []
+  },
+  "acceptance": {
+    "deltas": {
+      "vllm:spec_decode_num_drafts_total": 3.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 8.0,
+      "vllm:spec_decode_num_draft_tokens_total": 21.0
+    },
+    "draft_tokens": 21.0,
+    "accepted_tokens": 8.0,
+    "ratio": 0.38095238095238093
+  }
+}

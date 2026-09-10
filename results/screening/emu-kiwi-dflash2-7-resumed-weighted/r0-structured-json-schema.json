@@ -1,0 +1,393 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Return only a JSON object describing a file edit with keys path, operation, line_start, line_end, and rationale. Use path src/cache.rs, operation replace, lines 41 through 47, and a one-sentence rationale about removing a redundant copy."
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 128,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "file_edit",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "operation": {
+              "type": "string"
+            },
+            "line_start": {
+              "type": "integer"
+            },
+            "line_end": {
+              "type": "integer"
+            },
+            "rationale": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "operation",
+            "line_start",
+            "line_end",
+            "rationale"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "start": 611023.087139193,
+  "events": [
+    {
+      "time": 611023.920044743,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 611023.920110904,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "{\""
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.063250886,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "path\": \"src"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.214278768,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "/cache.rs\", \"operation\": \"replace"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.365660923,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "\", \"line_start\": "
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.517495016,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "41, \"line_end\": 47"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.666673659,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": ", \"rationale\": \"Remove"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.811168175,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " a redundant copy of the cached"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611024.959513967,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " value"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611025.107894048,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " to eliminate"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611025.250583405,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " unnecessary"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611025.39777969,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " allocation and improve"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611025.542558686,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " performance.\"}"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611025.687966164,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {},
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": 154827,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 611025.688029253,
+      "data": {
+        "id": "chatcmpl-a67342b4ef5a9052",
+        "object": "chat.completion.chunk",
+        "created": 1789026314,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 65,
+          "total_tokens": 116,
+          "completion_tokens": 51,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3"
+      }
+    }
+  ],
+  "first": 611023.920110904,
+  "last": 611025.542558686,
+  "usage": {
+    "prompt_tokens": 65,
+    "total_tokens": 116,
+    "completion_tokens": 51,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "{\"path\": \"src/cache.rs\", \"operation\": \"replace\", \"line_start\": 41, \"line_end\": 47, \"rationale\": \"Remove a redundant copy of the cached value to eliminate unnecessary allocation and improve performance.\"}",
+  "reasoning": "",
+  "decode_tokens": 50,
+  "decode_tps": 30.817632811267767,
+  "ttft_seconds": 0.8329717110609636,
+  "prefill_tps": 78.03386253923188,
+  "end": 611025.688141461,
+  "quality": {
+    "quality_contract_version": "glmrt-semantic-decode-contract-v3",
+    "quality_contract_passed": true,
+    "quality_contract_issues": []
+  },
+  "acceptance": {
+    "deltas": {
+      "vllm:spec_decode_num_drafts_total": 12.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 39.0,
+      "vllm:spec_decode_num_draft_tokens_total": 61.0
+    },
+    "draft_tokens": 61.0,
+    "accepted_tokens": 39.0,
+    "ratio": 0.639344262295082
+  }
+}
