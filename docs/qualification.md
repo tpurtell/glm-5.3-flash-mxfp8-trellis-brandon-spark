@@ -90,11 +90,12 @@ reports the measured deltas and the differing MTP/batch/context settings.
 | MTP K2 five-replay cold prefill | [25 supported samples and five configured-limit rejections](../results/2x/mtp2-mia-prefill/README.md) |
 | MTP K2 retained prefill | [Full 60-cell matrix, cache-policy accounting and failures](../results/2x/mtp2-retained-prefill/README.md) |
 | MTP K2 retained decode | [30 cells, capped outputs and cache-policy accounting](../results/2x/mtp2-retained-decode/README.md) |
+| MTP K2 needle retrieval | [Nine exact-key passes and six configured-limit rejections](../results/2x/mtp2-needle/README.md) |
 | Historical target-only output audit | [Failures without speculation or graphs](../results/bringup/historical-target-only-output-audit/README.md) |
 | Eager NVFP4 control | [Concurrent](../results/bringup/emu-kiwi-dflash2-k7-eager-concurrency/README.md), [serial](../results/bringup/emu-kiwi-dflash2-k7-eager-serial-suffix/README.md) |
 | Eager FP8 control | [Concurrent](../results/bringup/emu-kiwi-dflash2-k7-eager-fp8kv-concurrency/README.md), [serial](../results/bringup/emu-kiwi-dflash2-k7-eager-fp8kv-serial-suffix/README.md) |
 
 Remaining speculation/TP2/EP2 and larger-context tuning, DFlash2 five-replay
 weighted/orchid, further context tuning, concurrency suite, tool evaluation,
-needle retrieval, startup measurements and final package qualification remain
+startup measurements and final package qualification remain
 pending. No completed timing block substitutes for those remaining deliverables.
