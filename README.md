@@ -44,6 +44,9 @@ Download on the head Spark, then distribute over RDMA:
 emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
 host; transfers fail if RDMA cannot be negotiated.
 
+The recipe pins Z.ai’s current official chat template, with an explicit
+thinking-off serving adaptation. See the [template audit](docs/chat-template.md).
+
 See the [qualification plan](docs/qualification.md) for the measurement matrix
 and [provenance](docs/provenance.md) for source attribution. Results will be
 committed and pushed separately as each complete block finishes.

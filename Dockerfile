@@ -6,6 +6,8 @@ COPY .work/sparkinfer/b12x /opt/b12x/b12x
 COPY .work/sparkinfer/third_party/trellismx /opt/trellismx/licenses/runtime
 COPY overlay /opt/trellismx/overlay
 COPY licenses /opt/trellismx/licenses
+COPY data /opt/trellismx/data
+COPY container/entrypoint.sh /opt/trellismx/entrypoint.sh
 RUN python3 /opt/trellismx/overlay/install.py \
     && python3 -c 'from b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE; from vllm.model_executor.layers.quantization.trellismx import TrellisMXMoEMethod'
-ENTRYPOINT ["vllm", "serve"]
+ENTRYPOINT ["/bin/bash", "/opt/trellismx/entrypoint.sh"]
