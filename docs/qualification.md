@@ -141,3 +141,10 @@ The K5 shard (layer 3, TP4 rank 3) passes the same nine independent oracle
 cases, with relative L2 error 0.00164–0.00168. Results are retained separately
 in `results/bringup/oracle-k5-layer3-rank3/`. Both stored bitrates now have
 single-shard numerical evidence on GB10; TP2 and full-model checks remain.
+
+K5 also passes eager and exact graph replay at 1/8/32/128 tokens in the
+corrected image, without a runtime-file override; see
+`results/bringup/native-k5-layer3-rank3/`. All four hosts now have image
+`sha256:e6ac69446438288201f6821abc692427225db894215c8c91c602e9a666378ed3`
+as `glm53-trellismx-spark:dev`. The updated published bring-up image is
+`ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark@sha256:3fb7c3bb7870c58a897e1e16400db02f199439b82bf176b7d0c0d4caaa2cdf17`.

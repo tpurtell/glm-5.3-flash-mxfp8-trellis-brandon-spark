@@ -1,0 +1,10 @@
+{
+  "host": "dodo",
+  "image": "sha256:e6ac69446438288201f6821abc692427225db894215c8c91c602e9a666378ed3",
+  "base_runtime_revision": "669cc12a6ac0922234ea4ea1a08cccf36fc80563",
+  "tested_runtime_revision": "669cc12a6ac0922234ea4ea1a08cccf36fc80563",
+  "runtime_file_sha256": "f238de47e449e81a7e37155a5369571d75d1b8a24195355d605d0d40f978d644",
+  "command": "docker run --rm --gpus all --name trellismx-native-shard --entrypoint python3 -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro -v /tmp/check-native-p8.py:/check.py:ro glm53-trellismx-spark:dev /check.py /checkpoint --layer 3 --rank 3",
+  "exit_code": 0,
+  "scope": "K5 TP4 layer3 rank3; finite/nonzero and exact graph replay at 1/8/32/128 tokens."
+}
