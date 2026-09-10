@@ -1,0 +1,41 @@
+{
+  "image_id": "sha256:8a89d7d0a0be1f899262787515ed634cfabd5a1000edcae91decb7dc845d46ce",
+  "runtime_revision": "58d3ef0099c40b776a0630b54e703ccb4b5da846",
+  "test_revision": "49fa98f3a1669f463261c3e0b0e36c546f7b7820",
+  "test_sha256": "d061a27cf7d8e5473bdb8c45ed5a3829ea702d16f63bc352d74a56a7bf440254",
+  "scope": "Single-layer numerical correctness at the initial serving prefill batch size, including owned/mixed/remote routes, exact static and mutated CUDA graph replay. No throughput or full-model qualification claim.",
+  "runs": [
+    {
+      "host": "emu",
+      "ep_size": 4,
+      "layer": 3,
+      "bits": 5,
+      "command": "docker run --rm --gpus all --name trellismx-ep-prefill --entrypoint python3 -e B12X_COMPILE_CACHE_DIR=/cache -v /tmp/check-ep-prefill.py:/check.py:ro -v /tmp/trellismx-ep-cache:/cache -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro glm53-trellismx-spark:dev /check.py /checkpoint --ep-size 4 --layer 3 --tokens 1024",
+      "exit_code": 0
+    },
+    {
+      "host": "kiwi",
+      "ep_size": 2,
+      "layer": 3,
+      "bits": 5,
+      "command": "docker run --rm --gpus all --name trellismx-ep-prefill --entrypoint python3 -e B12X_COMPILE_CACHE_DIR=/cache -v /tmp/check-ep-prefill.py:/check.py:ro -v /tmp/trellismx-ep-cache:/cache -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro glm53-trellismx-spark:dev /check.py /checkpoint --ep-size 2 --layer 3 --tokens 1024",
+      "exit_code": 0
+    },
+    {
+      "host": "dodo",
+      "ep_size": 2,
+      "layer": 10,
+      "bits": 4,
+      "command": "docker run --rm --gpus all --name trellismx-ep-prefill --entrypoint python3 -e B12X_COMPILE_CACHE_DIR=/cache -v /tmp/check-ep-prefill.py:/check.py:ro -v /tmp/trellismx-ep-cache:/cache -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro glm53-trellismx-spark:dev /check.py /checkpoint --ep-size 2 --layer 10 --tokens 1024",
+      "exit_code": 0
+    },
+    {
+      "host": "ostrich",
+      "ep_size": 4,
+      "layer": 10,
+      "bits": 4,
+      "command": "docker run --rm --gpus all --name trellismx-ep-prefill --entrypoint python3 -e B12X_COMPILE_CACHE_DIR=/cache -v /tmp/check-ep-prefill.py:/check.py:ro -v /tmp/trellismx-ep-cache:/cache -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro glm53-trellismx-spark:dev /check.py /checkpoint --ep-size 4 --layer 10 --tokens 1024",
+      "exit_code": 0
+    }
+  ]
+}

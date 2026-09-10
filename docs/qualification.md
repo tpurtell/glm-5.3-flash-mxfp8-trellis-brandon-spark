@@ -190,3 +190,7 @@ The adapter now accepts TP2/TP4 or EP2/EP4 with dense TP unchanged. It validates
 contiguous static placement and maps global routes to local slots, preserving
 negative padding. DP, PCP, SP, all-to-all dispatch and EPLB remain unsupported.
 Full-model output and distributed EP must pass before performance selection.
+
+The same K4/K5 EP2/EP4 checks also pass at **1,024 tokens**, matching the
+initial launcher prefill batch size. Each checks owned, mixed and remote routes
+and mutable graph replay. Evidence: `results/bringup/ep-prefill-1024/`.
