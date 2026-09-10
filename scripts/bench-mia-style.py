@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 import statistics
 import time
+import urllib.error
 import urllib.request
 import uuid
 
@@ -63,6 +64,15 @@ def stream_request(base, body, endpoint, require_decode=True, timeout=2700):
                       prefill_tps=usage['prompt_tokens']/(first-result['start']))
         if reasoning or '<think>' in text or '</think>' in text:
             raise ValueError('Thinking-off request generated reasoning; comparison cell invalid')
+    except urllib.error.HTTPError as exc:
+        result['error'] = repr(exc)
+        result['http_status'] = exc.code
+        # Preserve server diagnostics so context-limit rejections can be
+        # distinguished from other HTTP failures in the raw benchmark receipt.
+        try:
+            result['http_error_body'] = exc.read().decode('utf-8', errors='replace')
+        except Exception as body_exc:
+            result['http_error_read_error'] = repr(body_exc)
     except Exception as exc:
         result['error'] = repr(exc)
     result['end'] = time.perf_counter()

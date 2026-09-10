@@ -14,6 +14,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         body=json.loads(self.rfile.read(int(self.headers['Content-Length'])))
         prompt=body['messages'][0]['content'] if 'messages' in body else 'completion'
+        if prompt=='context-limit':
+            self.send_response(400);self.send_header('Content-Type','application/json');self.end_headers()
+            self.wfile.write(b'{"error":{"message":"maximum context length exceeded"}}')
+            return
         self.send_response(200);self.send_header('Content-Type','text/event-stream');self.end_headers()
         chunks=['OK'] if prompt=='single' else ['a','b','c']
         for text in chunks:
@@ -45,6 +49,12 @@ class BenchTests(unittest.TestCase):
         self.assertAlmostEqual(result['decode_tps']*(result['last']-result['first']),18)
     def test_missing_usage_fails(self):
         self.assertIn('error',mia.stream(self.base,'test','missing',400))
+    def test_http_failure_preserves_server_diagnostic(self):
+        result=mia.stream(self.base,'test','context-limit',400)
+        self.assertIn('error',result)
+        self.assertEqual(result['http_status'],400)
+        self.assertEqual(json.loads(result['http_error_body'])['error']['message'],'maximum context length exceeded')
+        self.assertNotIn('decode_tps',result)
     def test_single_content_prefill_is_valid(self):
         result=mia.stream(self.base,'test','single',8,False)
         self.assertNotIn('error',result);self.assertIsNone(result['decode_tps'])
