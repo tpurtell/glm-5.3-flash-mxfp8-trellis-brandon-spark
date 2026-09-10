@@ -1,0 +1,14 @@
+{
+  "host": "dodo",
+  "image": "sha256:577bfb7b59883dc825e2bacf6d3bce79f3bd56072508b3da50e9c281297be5ac",
+  "base_runtime_revision": "67c20df994808cf3ea4e1fc3b531d6834c777023",
+  "tested_runtime_revision": "669cc12a6ac0922234ea4ea1a08cccf36fc80563",
+  "override": "Only p8_native_kernel.py mounted from tested runtime revision",
+  "runtime_file_sha256": "f238de47e449e81a7e37155a5369571d75d1b8a24195355d605d0d40f978d644",
+  "command": "docker run --rm --gpus all --name trellismx-native-oracle --entrypoint python3 -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro -v /tmp/check_trellismx_oracle.py:/check.py:ro -v /tmp/p8_native_kernel.py:/opt/b12x/b12x/moe/_shared/trellismx/p8_native_kernel.py:ro glm53-trellismx-spark:dev /check.py /checkpoint --layer 4 --rank 2",
+  "exit_code": 0,
+  "scope": "K4 TP4 rank2 layer4; three independent single-expert oracles at 1/8/32 tokens; nine cases pass cosine>=.999 and relativeL2<=.02. Not full MoE routing/model quality qualification.",
+  "oracle_revision": "91a51d6f17e1503e5ef9bdf7c7015cafdc906754",
+  "oracle_file": "tests/check_trellismx_oracle.py",
+  "oracle_sha256": "48543cf3b242903607d4e40c9216c732a8f5ebf1e768346aff6642aa595d0d25"
+}

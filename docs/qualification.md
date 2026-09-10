@@ -128,3 +128,11 @@ bound, not a performance optimum. Both failure and successful rerun, including
 the exact runtime override identity, are in `results/bringup/native-layer4-rank2/`.
 K5, TP2 partition equivalence, independent numerical accuracy and full serving
 remain unqualified.
+
+The K4 shard also passes nine independent numerical comparisons: experts
+0/137/287 at 1/8/32 tokens, including two input amplitudes. NumPy reconstructs
+the L16 ring windows and MCG alpha2 weights; Torch implements the K32 MXFP8
+activation quantization and coupled transforms. Relative L2 error is
+0.00161–0.00259 against the 0.02 gate. Raw results and source identity are in
+`results/bringup/oracle-k4-layer4-rank2/`. This checks three isolated experts,
+not all routing combinations or full-model quality.
