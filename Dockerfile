@@ -6,6 +6,7 @@ FROM ${BASE}
 # dependencies coexist under a private package and use a separate compile cache.
 COPY .work/sparkinfer/b12x /opt/trellismx/source/b12x
 COPY .work/sparkinfer/scripts/export_trellismx_runtime.py /opt/trellismx/export_runtime.py
+COPY .work/sparkinfer/scripts/patch_glm_mtp_modelopt.py /opt/trellismx/patch_glm_mtp_modelopt.py
 RUN python3 /opt/trellismx/export_runtime.py /opt/trellismx/source/b12x /opt/trellismx/runtime \
     && python3 -c 'import site; from pathlib import Path; (Path(site.getsitepackages()[0])/"trellismx-runtime.pth").write_text("/opt/trellismx/runtime\n")' \
     && rm -rf /opt/trellismx/source
@@ -15,6 +16,7 @@ COPY licenses /opt/trellismx/licenses
 COPY data /opt/trellismx/data
 COPY container/entrypoint.sh /opt/trellismx/entrypoint.sh
 RUN python3 /opt/trellismx/overlay/install.py \
+    && python3 /opt/trellismx/patch_glm_mtp_modelopt.py /usr/local/lib/python3.12/dist-packages/vllm/models/glm5next/nvidia/mtp.py \
     && python3 -c 'from trellismx_b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE; from b12x.attention.sparse_mla import run_decode, run_extend; from vllm.model_executor.layers.quantization.trellismx import ModelOptTrellisMXMoEMethod'
 ENTRYPOINT ["/bin/bash", "/opt/trellismx/entrypoint.sh"]
 ARG RECIPE_REVISION=unknown
