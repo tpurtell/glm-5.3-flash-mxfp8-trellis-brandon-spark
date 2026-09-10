@@ -1,0 +1,124 @@
+{
+  "created": "2026-09-10T05:32:02.984572+00:00",
+  "host": "emu",
+  "image_id": "sha256:00c98d6ffb05cde7af4a4fc44ff76913b324a3b3511b8bc4e469e98d4e51d6a7",
+  "image_labels": {
+    "ai.vllm.build.commit": "unknown",
+    "ai.vllm.build.pipeline": "local",
+    "ai.vllm.build.url": "",
+    "ai.vllm.image.tag": "local/vllm-openai:dev",
+    "io.tpurtell.b12x.commit": "c90cd0080274b90da4721f8ab7536bca29cae720",
+    "io.tpurtell.b12x.source": "https://github.com/tpurtell/sparkinfer-glmrt",
+    "io.tpurtell.dflash2-vllm.commit": "b389ac29465b33f9e9c534df221ea3c129e9793f",
+    "io.tpurtell.exl3-source.digest": "sha256:86c8c1054f9c24454949e37031ce6165c007963aa0c0ef30fa884f6d4170af32",
+    "io.tpurtell.exl3-vllm.commit": "30038602b71395f481ef4a6edfe4fcf8551d9c15",
+    "io.tpurtell.glm-base.digest": "sha256:905c02933be6021301db2dc284e24e3727467aa3a0f63b41d609885778a07bce",
+    "io.tpurtell.replayssm.mixed-graph-fix": "c51c3856f7f8ba50af3b3a60ff48e7d6a1fa303c",
+    "io.tpurtell.trellismx.runtime-revision": "373854b7e47dcc527eaa458514882bc80cd9790f",
+    "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+    "org.opencontainers.image.description": "Experimental ARM64 TrellisMX port; qualification pending",
+    "org.opencontainers.image.licenses": "LicenseRef-SHAPLEYMCG AND Apache-2.0 AND MIT",
+    "org.opencontainers.image.ref.name": "ubuntu",
+    "org.opencontainers.image.revision": "38b927409ac62c6bc3f800b32b4bc4e1ea151354",
+    "org.opencontainers.image.source": "https://github.com/tpurtell/glm-5.3-flash-mxfp8-trellis-brandon-spark",
+    "org.opencontainers.image.title": "GLM-5.3 Flash TrellisMX on DGX Sparks",
+    "org.opencontainers.image.url": "",
+    "org.opencontainers.image.version": "local/vllm-openai:dev"
+  },
+  "sources": {
+    "target": {
+      "repo_id": "brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8",
+      "revision": "db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+    },
+    "carrier": {
+      "repo_id": "local-inference-lab/GLM-5.3-Flash-NVFP4",
+      "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+    },
+    "mia": {
+      "repository": "https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks",
+      "revision": "94bddea5db64137db41e4ef4c6c120e6e69e32d7"
+    },
+    "measurement_reference": {
+      "repository": "https://github.com/tpurtell/glmrt-5.3-1rtx-4spark",
+      "revision": "dc6d9b8e1600e001cb1d4228bd911f4df8091f99"
+    },
+    "sparkinfer": {
+      "repository": "https://github.com/tpurtell/sparkinfer-glmrt",
+      "branch": "trellismx-glm53-spark",
+      "revision": "373854b7e47dcc527eaa458514882bc80cd9790f"
+    },
+    "chat_template": {
+      "repo_id": "zai-org/GLM-5.3-Flash",
+      "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+      "file": "chat_template.jinja",
+      "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+      "checked_date": "2026-09-10"
+    },
+    "draft": {
+      "repo_id": "incoai/GLM-5.3-Flash-DFlash2",
+      "revision": "bf582e4eacc1810f76656d1811693ff6c6737d2a"
+    },
+    "tool_eval": {
+      "repository": "https://github.com/SeraphimSerapis/tool-eval-bench.git",
+      "revision": "cf54b4bfe705f12f71e8866f10730572497c8105",
+      "version": "2.6.1.dev45+gcf54b4bfe",
+      "reference_date": "2026-09-08"
+    }
+  },
+  "test_sha256": "3f6b6e69ac21f03558398115e18488797bc89163fe298ed4a6baef37bdc4c18b",
+  "tokens": [
+    1,
+    32,
+    1024
+  ],
+  "checks": {
+    "k4-tp2": {
+      "summary": {
+        "status": "passed",
+        "scope": "native layer and graph replay only"
+      },
+      "comparisons": [
+        {
+          "tokens": 1,
+          "tp2_vs_tp4_pair_cosine": 0.9999972581863403,
+          "relative_l2": 0.0023378804326057434
+        },
+        {
+          "tokens": 32,
+          "tp2_vs_tp4_pair_cosine": 0.9999972581863403,
+          "relative_l2": 0.0023610510397702456
+        },
+        {
+          "tokens": 1024,
+          "tp2_vs_tp4_pair_cosine": 0.9999972581863403,
+          "relative_l2": 0.0023603185545653105
+        }
+      ]
+    },
+    "k5-base-first-tp2": {
+      "summary": {
+        "status": "passed",
+        "scope": "native layer and graph replay only"
+      },
+      "comparisons": [
+        {
+          "tokens": 1,
+          "tp2_vs_tp4_pair_cosine": 0.9999971985816956,
+          "relative_l2": 0.0023326685186475515
+        },
+        {
+          "tokens": 32,
+          "tp2_vs_tp4_pair_cosine": 0.9999972581863403,
+          "relative_l2": 0.002350960625335574
+        },
+        {
+          "tokens": 1024,
+          "tp2_vs_tp4_pair_cosine": 0.9999971985816956,
+          "relative_l2": 0.002352936891838908
+        }
+      ]
+    }
+  },
+  "source_tree_unchanged_from": "58d3ef0099c40b776a0630b54e703ccb4b5da846",
+  "scope": "Native K4/K5 TP2-vs-parent numerical checks and graph replay in isolated package; K5 loads base attention and MoE modules first. No full-model or performance qualification."
+}
