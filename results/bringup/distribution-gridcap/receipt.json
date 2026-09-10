@@ -1,0 +1,21 @@
+{
+  "registry": "ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark:bringup-75d9983",
+  "manifest_digest": "sha256:3fb7c3bb7870c58a897e1e16400db02f199439b82bf176b7d0c0d4caaa2cdf17",
+  "image_id": "sha256:e6ac69446438288201f6821abc692427225db894215c8c91c602e9a666378ed3",
+  "runtime_revision": "669cc12",
+  "recipe_revision": "75d9983",
+  "verified_hosts": [
+    "emu",
+    "kiwi",
+    "dodo",
+    "ostrich"
+  ],
+  "local_tag": "glm53-trellismx-spark:dev",
+  "transport": {
+    "emu": "local build",
+    "dodo": "registry pull",
+    "kiwi": "RDMA archive and docker load",
+    "ostrich": "RDMA archive and docker load"
+  },
+  "note": "Redundant registry pulls on kiwi and ostrich explicitly stopped after successful image identity checks."
+}
