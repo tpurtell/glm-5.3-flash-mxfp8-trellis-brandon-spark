@@ -14,11 +14,19 @@ reuse of earlier suffixes. The base is primed with a short extra suffix so its
 last aligned cache block can be reused. This token-ID transport differs from the
 GLMRT reference's chat/text fitting and is recorded as a protocol difference.
 
-Every measured request must report **exactly** the planned cached base and
+Set `--cache-block-size` to the actual engine block size in its startup log
+(the current NVFP4 bring-up reports 6144). Every measured request must report
+**exactly** `floor(base / block_size) * block_size` cached tokens and
 `base + suffix` prompt tokens. The launcher enables
 `--enable-prompt-tokens-details`. Missing details, cache eviction, excess suffix
 reuse, or token-count disagreement invalidate the cell. Failed repeats cannot
 contribute a survivor-only median.
+
+Nominal base lengths remain unchanged. Receipts report the actual cached base
+and any recomputed tail separately: a 32K base with 6144-token blocks expects
+30,720 cached tokens and recomputes 2,048 base tokens. Fresh-suffix throughput
+includes that cost in its denominator; `computed_tokens_per_second` separately
+counts all processed input tokens. Do not label either as fully cached 32K.
 
 Primary throughput is fresh suffix tokens divided by the delta of vLLM's
 `request_prefill_time_seconds_sum`. The histogram count must increase by exactly
@@ -35,6 +43,7 @@ python3 scripts/bench-retained-prefill.py \
   --tokenizer /home/tj/models/glm53-trellismx/carrier/tokenizer.json \
   --corpus-root /path/to/pinned/measurement-reference/python \
   --launch-receipt .work/launches/ACTUAL_LAUNCH.json \
+  --cache-block-size 6144 \
   --out results/2x/retained-prefill
 ```
 

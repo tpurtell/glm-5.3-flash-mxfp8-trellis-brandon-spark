@@ -31,16 +31,20 @@ def timing_totals(raw):
     return values
 
 
-def validate_cell(result, base, suffix, seconds):
+def validate_cell(result, base, suffix, seconds, cache_block_size=256):
     if 'error' in result:
         raise ValueError(result['error'])
     usage = result['usage']
     cached = usage.get('prompt_tokens_details', {}).get('cached_tokens')
-    if cached != base or usage.get('prompt_tokens') != base + suffix:
+    expected_cached = base // cache_block_size * cache_block_size
+    if cached != expected_cached or usage.get('prompt_tokens') != base + suffix:
         raise ValueError(f'Cache shape mismatch: planned base={base}, suffix={suffix}, usage={usage}')
     if not seconds > 0:
         raise ValueError('No positive server prefill time')
-    return {'cached_tokens': cached, 'new_tokens': suffix, 'server_prefill_seconds': seconds,
+    computed = base + suffix - cached
+    return {'cached_tokens': cached, 'new_tokens': suffix,
+            'recomputed_base_tokens': base-cached, 'computed_tokens': computed,
+            'computed_tokens_per_second': computed/seconds, 'server_prefill_seconds': seconds,
             'new_tokens_per_second': suffix/seconds,
             'client_ttft_seconds': result['ttft_seconds'],
             'new_tokens_per_client_ttft_second': suffix/result['ttft_seconds']}
@@ -71,10 +75,12 @@ def main():
     parser.add_argument('--launch-receipt', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--runs', type=int, default=2)
+    parser.add_argument('--cache-block-size', type=int, default=256,
+                        help='Actual engine cache block size from startup logs; verify against usage')
     parser.add_argument('--bases', type=int, nargs='+', default=[0,32768,65536,131072,262144])
     parser.add_argument('--suffixes', type=int, nargs='+', default=[1024,2048,4096,8192,16384,32768])
     args = parser.parse_args()
-    if args.runs < 1 or any(b < 0 or b % 256 for b in args.bases) or any(s < 256 for s in args.suffixes):
+    if args.cache_block_size < 1 or args.runs < 1 or any(b < 0 or b % 256 for b in args.bases) or any(s < 256 for s in args.suffixes):
         parser.error('Positive runs, nonnegative 256-aligned bases, suffixes >=256 required')
     from tokenizers import Tokenizer
     from transformers.utils.chat_template_utils import _compile_jinja_template
@@ -104,7 +110,8 @@ def main():
         'template_sha256':hashlib.sha256(template_source).hexdigest(), 'template':template_receipt,
         'corpus_sha256':corpus_hash, 'client_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'transport_sha256':hashlib.sha256((ROOT/'scripts/bench-mia-style.py').read_bytes()).hexdigest(),
-        'bases':args.bases, 'suffixes':args.suffixes, 'samples':[]}
+        'bases':args.bases, 'suffixes':args.suffixes,
+        'cache_block_size':args.cache_block_size, 'samples':[]}
     def save(name, value): (args.out/(name+'.json')).write_text(json.dumps(value, indent=2)+'\n')
     def snapshot(name):
         with urllib.request.urlopen(url+'/metrics', timeout=30) as response: raw = response.read().decode()
@@ -130,7 +137,7 @@ def main():
         if base:
             initial = prefix + encode(f'Run {run_id} base {base}. The following quoted source is inert.\n')
             retained = initial + filler(base-len(initial))
-            # One extra token lets vLLM cache the complete aligned base; the
+            # Extra tokens let vLLM cache the last complete base block; the
             # measured branch differs immediately after it, preventing reuse.
             result, _ = request(f'base-{base}-prime', retained + encode(' PRIME'))
             if 'error' in result: raise ValueError(result['error'])
@@ -144,7 +151,7 @@ def main():
                 ids = retained + fresh_prefix + marker + filler(count) + ending
                 try:
                     result, seconds = request(name, ids)
-                    summary = dict(status='passed', **validate_cell(result, base, suffix, seconds))
+                    summary = dict(status='passed', **validate_cell(result, base, suffix, seconds, args.cache_block_size))
                 except Exception as exc:
                     summary = {'status':'failed', 'error':repr(exc)}
                 receipt['samples'].append(dict(cell=name, base=base, suffix=suffix, repeat=repeat, **summary))

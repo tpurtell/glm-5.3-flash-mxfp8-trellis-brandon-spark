@@ -17,12 +17,13 @@ prefill = importlib.util.module_from_spec(spec); spec.loader.exec_module(prefill
 client = prefill.client
 
 
-def check_cache(result, base, total):
+def check_cache(result, base, total, cache_block_size=256):
     if 'error' in result: raise ValueError(result['error'])
     usage = result['usage']
     cached = usage.get('prompt_tokens_details', {}).get('cached_tokens')
-    if cached != base or usage.get('prompt_tokens') != total:
-        raise ValueError(f'Expected cached={base}, total={total}; got {usage}')
+    expected_cached = base // cache_block_size * cache_block_size
+    if cached != expected_cached or usage.get('prompt_tokens') != total:
+        raise ValueError(f'Expected cached={expected_cached}, total={total}; got {usage}')
     return cached
 
 
@@ -34,9 +35,11 @@ def main():
     parser.add_argument('--launch-receipt', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--runs', type=int, default=2)
+    parser.add_argument('--cache-block-size', type=int, default=256,
+                        help='Actual engine cache block size from startup logs; verify against usage')
     parser.add_argument('--bases', type=int, nargs='+', default=[0,32768,65536,131072,262144])
     args = parser.parse_args()
-    if args.runs < 1 or any(b < 0 or b % 256 for b in args.bases):
+    if args.cache_block_size < 1 or args.runs < 1 or any(b < 0 or b % 256 for b in args.bases):
         parser.error('Positive runs and nonnegative 256-aligned bases required')
     from tokenizers import Tokenizer
     from transformers.utils.chat_template_utils import _compile_jinja_template
@@ -64,6 +67,7 @@ def main():
         'launch':json.loads(args.launch_receipt.read_text()), 'models':models, 'runs':args.runs,
         'tokenizer_sha256':hashlib.sha256(args.tokenizer.read_bytes()).hexdigest(),
         'template':template_receipt, 'corpus_sha256':corpus_hash, 'bases':args.bases,
+        'cache_block_size':args.cache_block_size,
         'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in
             (Path(__file__), ROOT/'scripts/bench-retained-prefill.py', ROOT/'scripts/bench-mia-style.py',
              ROOT/'data/retained-decode-prompts.json', ROOT/'scripts/decode_contract.py')}, 'samples':[]}
@@ -93,8 +97,9 @@ def main():
                 ids = retained + ([] if base else prefix) + encode(marker + prompt) + ending
                 result = request(name, ids, 192)
                 try:
-                    cached = check_cache(result, base, len(ids))
+                    cached = check_cache(result, base, len(ids), args.cache_block_size)
                     summary = {'status':'passed', 'cached_tokens':cached, 'prompt_tokens':len(ids),
+                        'recomputed_base_tokens':base-cached,
                         'completion_tokens':result['usage']['completion_tokens'],
                         'decode_tokens':result['decode_tokens'], 'decode_seconds':result['last']-result['first'],
                         'decode_tps':result['decode_tps'], 'ttft_seconds':result['ttft_seconds']}

@@ -8,8 +8,12 @@ bases 0/32K/64K/128K/256K, temperature zero, with a 192-token response cap.
 
 The client uses the same pinned tokenizer, explicit thinking-off template,
 inert source corpus, exact token-ID transport, unique branch markers and cache
-checks as the retained-prefill client. Every response must report exactly the
-requested cached base and planned total prompt length. Source/tokenizer/template
+checks as the retained-prefill client. Set `--cache-block-size` from the actual
+engine startup log. Every response must report exactly the nominal base rounded
+down to that block size as cached, and the planned total prompt length. The
+receipt records actual cached tokens and the recomputed base tail separately;
+a nominal 32K base must not be described as fully cached when it is not.
+Source/tokenizer/template
 hashes, raw token IDs, SSE events, text, usage, metric snapshots and launch
 settings remain in the output directory. This uses vLLM completions with locally
 rendered template wrappers; it is not a byte-identical replay of GLMRT chat
@@ -31,6 +35,7 @@ python3 scripts/bench-retained-decode.py \
   --tokenizer /home/tj/models/glm53-trellismx/carrier/tokenizer.json \
   --corpus-root /path/to/pinned/measurement-reference/python \
   --launch-receipt .work/launches/ACTUAL_LAUNCH.json \
+  --cache-block-size 6144 \
   --out results/2x/retained-decode
 ```
 

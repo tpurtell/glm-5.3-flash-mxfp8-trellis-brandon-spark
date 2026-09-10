@@ -12,6 +12,15 @@ class RetainedTests(unittest.TestCase):
         self.assertEqual(bench.validate_cell(self.result(),32768,1024,1)['new_tokens_per_second'],1024)
     def test_cache_eviction_rejected(self):
         with self.assertRaises(ValueError): bench.validate_cell(self.result(cached=32512),32768,1024,1)
+    def test_hybrid_block_accounts_for_recomputed_tail(self):
+        cell=bench.validate_cell(self.result(cached=30720),32768,1024,2,6144)
+        self.assertEqual(cell['recomputed_base_tokens'],2048)
+        self.assertEqual(cell['computed_tokens'],3072)
+        self.assertEqual(cell['new_tokens_per_second'],512)
+        self.assertEqual(cell['computed_tokens_per_second'],1536)
+    def test_hybrid_cache_loss_is_not_hidden_by_rounding(self):
+        with self.assertRaises(ValueError):
+            bench.validate_cell(self.result(cached=24576),32768,1024,2,6144)
     def test_excess_reuse_rejected(self):
         with self.assertRaises(ValueError): bench.validate_cell(self.result(cached=33024),32768,1024,1)
     def test_missing_cache_detail_rejected(self):
