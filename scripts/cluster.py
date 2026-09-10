@@ -44,6 +44,10 @@ def docker_command(config, node, rank, args):
         'TRELLISMX_COMPILE_CACHE_DIR': '/cache/trellismx', 'VLLM_ENGINE_READY_TIMEOUT_S': str(args.timeout),
         'VLLM_USE_B12X_SPARSE_INDEXER': '1', 'VLLM_USE_B12X_KPOOL_INDEXER': '1',
     }
+    if args.kv_cache == 'nvfp4_ds_mla':
+        # The ARM64 base provides the NVFP4 writer through B12X, selected by
+        # this cache ABI. Match its launcher and use per-token dynamic scales.
+        env.update(KV_FP8_ROPE='1', VLLM_NVFP4_MLA_DYNAMIC_SCALE='1')
     for key, value in env.items():
         command += ['-e', f'{key}={value}']
     for component in ('target', 'carrier') + (('draft',) if args.speculation == 'dflash2' else ()):
