@@ -54,7 +54,8 @@ def docker_command(config, node, rank, args):
                 '--max-num-seqs', str(args.max_seqs),
                 '--gpu-memory-utilization', str(args.memory_utilization),
                 '--no-enable-flashinfer-autotune', '--language-model-only',
-                '--enable-prefix-caching', '--enable-auto-tool-choice',
+                '--enable-prefix-caching', '--enable-prompt-tokens-details',
+                '--enable-auto-tool-choice',
                 '--tool-call-parser', 'glm47', '--reasoning-parser', 'glm45']
     if rank:
         command += ['--headless']

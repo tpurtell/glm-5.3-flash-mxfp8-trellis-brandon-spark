@@ -22,12 +22,16 @@ def stream(base, model, prompt, max_tokens, require_decode=True, response_format
                 chat_template_kwargs={'enable_thinking':False})
     if response_format is not None:
         body['response_format'] = response_format
+    return stream_request(base, body, '/v1/chat/completions', require_decode)
+
+
+def stream_request(base, body, endpoint, require_decode=True):
     result = {'request':body, 'start':time.perf_counter(), 'events':[]}
     first = last = None
     text = reasoning = ''
     usage = {}
     try:
-        request = urllib.request.Request(base+'/v1/chat/completions',
+        request = urllib.request.Request(base+endpoint,
             data=json.dumps(body).encode(), headers={'Content-Type':'application/json'})
         with urllib.request.urlopen(request, timeout=2700) as response:
             for line in response:
@@ -43,7 +47,7 @@ def stream(base, model, prompt, max_tokens, require_decode=True, response_format
                     usage = event['usage']
                 for choice in event.get('choices',[]):
                     delta = choice.get('delta',{})
-                    content = delta.get('content') or ''
+                    content = delta.get('content') or choice.get('text') or ''
                     thought = delta.get('reasoning_content') or delta.get('reasoning') or ''
                     if content or thought:
                         first = now if first is None else first

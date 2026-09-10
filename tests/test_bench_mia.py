@@ -13,11 +13,11 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args):pass
     def do_POST(self):
         body=json.loads(self.rfile.read(int(self.headers['Content-Length'])))
-        prompt=body['messages'][0]['content']
+        prompt=body['messages'][0]['content'] if 'messages' in body else 'completion'
         self.send_response(200);self.send_header('Content-Type','text/event-stream');self.end_headers()
         chunks=['OK'] if prompt=='single' else ['a','b','c']
         for text in chunks:
-            data={'choices':[{'delta':{'content':text}}]}
+            data={'choices':[{'delta':{'content':text}}] if 'messages' in body else [{'text':text}]}
             self.wfile.write(('data: '+json.dumps(data)+'\n\n').encode());self.wfile.flush();time.sleep(.005)
         if prompt!='missing':
             self.wfile.write(('data: '+json.dumps({'choices':[],'usage':{'prompt_tokens':100,'completion_tokens':19}})+'\n\n').encode())
@@ -32,6 +32,11 @@ class BenchTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.server.shutdown();cls.server.server_close();cls.thread.join()
+    def test_completions_usage(self):
+        result=mia.stream_request(self.base,{'prompt':[1,2,3]},'/v1/completions')
+        self.assertNotIn('error',result)
+        self.assertEqual(result['text'],'abc')
+        self.assertEqual(result['decode_tokens'],18)
     def test_usage_not_chunk_count(self):
         result=mia.stream(self.base,'test','multiple',400)
         self.assertNotIn('error',result)
