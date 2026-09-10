@@ -1,0 +1,58 @@
+{
+  "created": "2026-09-10T07:44:18.479432+00:00",
+  "request": {
+    "model": "glm53-trellismx",
+    "temperature": 0,
+    "max_tokens": 512,
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is 17 multiplied by 23? Give the result."
+      }
+    ]
+  },
+  "response": {
+    "id": "chatcmpl-86176b1079ecb3b6",
+    "object": "chat.completion",
+    "created": 1789026258,
+    "model": "glm53-trellismx",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**17 \u00d7 23 = 391**",
+          "refusal": null,
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "reasoning": "The user is asking for 17 \u00d7 23.\n\nLet me calculate: 17 \u00d7 23 = 17 \u00d7 20 + 17 \u00d7 3 = 340 + 51 = 391.\n\nLet me verify: 23 \u00d7 17 = 23 \u00d7 10 + 23 \u00d7 7 = 230 + 161 = 391. Yes, 391."
+        },
+        "logprobs": null,
+        "finish_reason": "stop",
+        "stop_reason": 154827,
+        "token_ids": null,
+        "routed_experts": null
+      }
+    ],
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-76aa2ce3",
+    "usage": {
+      "prompt_tokens": 25,
+      "total_tokens": 118,
+      "completion_tokens": 93,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "created_cache_tokens": 0,
+        "multimodal_tokens": null
+      }
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null,
+    "ec_transfer_params": null,
+    "metrics": null
+  },
+  "elapsed_seconds": 2.733359209029004
+}
