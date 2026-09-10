@@ -1,12 +1,12 @@
 # Two-Spark launch options (bring-up)
 
-Basic TP2 eager and CUDA-graph serving pass. Optimal TP2/EP2 and speculation
-settings remain to be measured.
+Earlier bring-up passed basic TP2 eager and CUDA-graph serving. Fresh
+kiwi/dodo qualification and optimal TP2/EP2/speculation settings are pending.
 Defaults use a short context and target-only decoding for initial correctness.
 
 Edit `cluster.example.json` for host names, CX7 addresses, local model paths and
-image. Rank zero is the first host. The supplied inventory contains only emu
-and kiwi; all qualification now runs sequentially on this pair.
+image. Rank zero is the first host. The supplied inventory contains only kiwi
+and dodo; all qualification now runs sequentially on this pair.
 Each node needs the identical image and local model files. A null `model_root`
 resolves pinned snapshots in that host's HF cache, including Mia's default cache
 location. Set it only to override with a target/carrier/draft directory layout.
@@ -17,8 +17,8 @@ Thinking is enabled by default; only comparison requests explicitly disable it.
 ./build.sh
 ./scripts/download.sh
 python3 scripts/verify-target.py "$(python3 scripts/model_paths.py target)"
-./scripts/sync-models.sh kiwi
-./scripts/sync-image.sh glm53-trellismx-spark:dev kiwi
+./scripts/sync-models.sh dodo
+./scripts/sync-image.sh glm53-trellismx-spark:dev dodo
 
 # Inspect without changing any host:
 python3 scripts/cluster.py plan --nodes 2

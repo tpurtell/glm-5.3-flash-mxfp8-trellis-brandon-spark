@@ -1,6 +1,6 @@
 # Two-Spark qualification plan
 
-The active task uses **emu and kiwi only**, one GB10 each. All remaining work
+The active task uses **kiwi and dodo only**, one GB10 each. All remaining work
 runs sequentially on this pair. Four-Spark qualification is canceled. Retired
 hosts must not be accessed. Historical result receipts remain as provenance;
 they do not authorize new runs or establish current recommendations.
@@ -39,8 +39,9 @@ numerical checks and mutable CUDA-graph checks pass. The original checkpoint's
 four TP shard files remain necessary input data for TP2/EP2 repacking; they do
 not imply a four-machine deployment.
 
-On emu/kiwi, full-model target-only eager and graph serving pass basic thinking
-and tool-parser checks. Graph responses match eager on those three prompts.
+Earlier emu/kiwi runs passed basic thinking and tool-parser checks with
+target-only eager and graph serving. Graph responses matched eager on those
+three prompts. These are historical results, not qualification of kiwi/dodo.
 Retained-cache checks verify actual 6144-token reuse and recomputed base tails.
 
 Preliminary one-wave target-only decode screens and a one-replay weighted
