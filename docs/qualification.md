@@ -72,6 +72,14 @@ these orchid rates do not establish output quality. This block used TP2 graphs
 and an 8192-token context. Larger-context capacity and performance still require
 their own measurements.
 
+The MTP K2 cold-prefill block now records five replays at each of six sizes.
+All 25 samples at 8K through 128K pass with zero cached tokens; the 128K median
+is 1546.42 tokens/s, 1.0% below Mia's pinned E3 reference. All five 256K requests
+were rejected by the configured 165000-token context limit. The complete block
+retains a failed status and those diagnostics. This is a configured limit, not
+a measured hardware ceiling; larger-context tuning remains pending. The README
+reports the measured deltas and the differing MTP/batch/context settings.
+
 | Completed evidence | Receipt and interpretation |
 |---|---|
 | DFlash2 smoke checks | [Thinking, tool parsing, and draft proposals](../results/bringup/emu-kiwi-dflash2-7-resumed-responses/README.md) |
@@ -79,11 +87,12 @@ their own measurements.
 | Five-wave Mia-style decode | [All timings and output audit](../results/2x/dflash2-k7-mia-decode/README.md) |
 | MTP K2 smoke checks | [Thinking, tool parsing, and draft proposals](../results/bringup/emu-kiwi-mtp2-mapper-fixed-responses/README.md) |
 | MTP K2 five-replay weighted/orchid | [Weighted rates and orchid failures](../results/2x/mtp2-weighted/README.md) |
+| MTP K2 five-replay cold prefill | [25 supported samples and five configured-limit rejections](../results/2x/mtp2-mia-prefill/README.md) |
 | Historical target-only output audit | [Failures without speculation or graphs](../results/bringup/historical-target-only-output-audit/README.md) |
 | Eager NVFP4 control | [Concurrent](../results/bringup/emu-kiwi-dflash2-k7-eager-concurrency/README.md), [serial](../results/bringup/emu-kiwi-dflash2-k7-eager-serial-suffix/README.md) |
 | Eager FP8 control | [Concurrent](../results/bringup/emu-kiwi-dflash2-k7-eager-fp8kv-concurrency/README.md), [serial](../results/bringup/emu-kiwi-dflash2-k7-eager-fp8kv-serial-suffix/README.md) |
 
-Remaining speculation/TP2/EP2 tuning, cold prefill, DFlash2 five-replay
+Remaining speculation/TP2/EP2 and larger-context tuning, DFlash2 five-replay
 weighted/orchid, retained-context matrices, concurrency suite, tool evaluation,
 needle retrieval, startup measurements and final package qualification remain
 pending. No completed timing block substitutes for those remaining deliverables.
