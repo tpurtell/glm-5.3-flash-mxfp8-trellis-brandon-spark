@@ -1,0 +1,14 @@
+{
+  "status": "partial",
+  "transfer_exit_code": 0,
+  "verification_exit_code": 0,
+  "download_host": "emu",
+  "destinations": [
+    "kiwi",
+    "dodo",
+    "ostrich"
+  ],
+  "transfer_command": "scripts/sync-models.sh kiwi dodo ostrich",
+  "verification_command": "python3 scripts/verify-carrier.py /home/tj/models/glm53-trellismx/carrier --existing",
+  "scope": "Initial incremental transfer of completed files while pinned downloads continue. Source carrier scan verified 44 available files and reported 15 missing. Destination/full-target verification is pending; no complete checkpoint or serving claim."
+}
