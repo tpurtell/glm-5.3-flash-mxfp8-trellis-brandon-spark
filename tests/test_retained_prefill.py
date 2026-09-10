@@ -38,6 +38,19 @@ class RetainedTests(unittest.TestCase):
     def test_missing_metrics_rejected(self):
         with self.assertRaises(ValueError): bench.timing_totals('')
 
+    def test_explicit_mtp_drop_accounts_for_recomputation(self):
+        for base, cached in ((32768,24576),(65536,55296),(131072,122880)):
+            cell=bench.validate_cell(self.result(cached,base+1024),base,1024,2,6144,1)
+            self.assertEqual(cell['recomputed_base_tokens'],base-cached)
+            self.assertEqual(cell['computed_tokens'],base+1024-cached)
+        self.assertEqual(bench.expected_cached_tokens(0,6144,1),0)
+
+    def test_explicit_mtp_policy_still_rejects_wrong_cache(self):
+        for cached in (18432,30720):
+            with self.assertRaises(ValueError):
+                bench.validate_cell(self.result(cached),32768,1024,2,6144,1)
+        with self.assertRaises(ValueError): bench.expected_cached_tokens(32768,6144,2)
+
     def test_rejected_prime_preserves_remaining_cells(self):
         class Tokenizer:
             @staticmethod

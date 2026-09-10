@@ -31,12 +31,18 @@ def timing_totals(raw):
     return values
 
 
-def validate_cell(result, base, suffix, seconds, cache_block_size=256):
+def expected_cached_tokens(base, block_size, drop_blocks=0):
+    if base < 0 or block_size < 1 or drop_blocks not in (0, 1):
+        raise ValueError("Invalid cache policy")
+    return max(0, (base // block_size - drop_blocks) * block_size)
+
+
+def validate_cell(result, base, suffix, seconds, cache_block_size=256, cache_drop_blocks=0):
     if 'error' in result:
         raise ValueError(result['error'])
     usage = result['usage']
     cached = usage.get('prompt_tokens_details', {}).get('cached_tokens')
-    expected_cached = base // cache_block_size * cache_block_size
+    expected_cached = expected_cached_tokens(base, cache_block_size, cache_drop_blocks)
     if cached != expected_cached or usage.get('prompt_tokens') != base + suffix:
         raise ValueError(f'Cache shape mismatch: planned base={base}, suffix={suffix}, usage={usage}')
     if not seconds > 0:
@@ -77,6 +83,8 @@ def main():
     parser.add_argument('--runs', type=int, default=2)
     parser.add_argument('--cache-block-size', type=int, default=256,
                         help='Actual engine cache block size from startup logs; verify against usage')
+    parser.add_argument('--cache-drop-blocks', type=int, choices=[0, 1], default=0,
+                        help='Explicit cache policy: 1 for the verified MTP block drop, otherwise 0')
     parser.add_argument('--bases', type=int, nargs='+', default=[0,32768,65536,131072,262144])
     parser.add_argument('--suffixes', type=int, nargs='+', default=[1024,2048,4096,8192,16384,32768])
     args = parser.parse_args()
@@ -111,7 +119,7 @@ def main():
         'corpus_sha256':corpus_hash, 'client_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'transport_sha256':hashlib.sha256((ROOT/'scripts/bench-mia-style.py').read_bytes()).hexdigest(),
         'bases':args.bases, 'suffixes':args.suffixes,
-        'cache_block_size':args.cache_block_size, 'samples':[]}
+        'cache_block_size':args.cache_block_size, 'cache_drop_blocks':args.cache_drop_blocks, 'samples':[]}
     def save(name, value): (args.out/(name+'.json')).write_text(json.dumps(value, indent=2)+'\n')
     def snapshot(name):
         with urllib.request.urlopen(url+'/metrics', timeout=30) as response: raw = response.read().decode()
@@ -156,7 +164,7 @@ def main():
                     result, seconds = request(name, ids)
                     if prime_error:
                         raise ValueError(f'Base priming failed: {prime_error}')
-                    summary = dict(status='passed', **validate_cell(result, base, suffix, seconds, args.cache_block_size))
+                    summary = dict(status='passed', **validate_cell(result, base, suffix, seconds, args.cache_block_size, args.cache_drop_blocks))
                 except Exception as exc:
                     summary = {'status':'failed', 'error':repr(exc)}
                 receipt['samples'].append(dict(cell=name, base=base, suffix=suffix, repeat=repeat, **summary))

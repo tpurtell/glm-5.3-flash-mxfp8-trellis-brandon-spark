@@ -17,11 +17,11 @@ prefill = importlib.util.module_from_spec(spec); spec.loader.exec_module(prefill
 client = prefill.client
 
 
-def check_cache(result, base, total, cache_block_size=256):
+def check_cache(result, base, total, cache_block_size=256, cache_drop_blocks=0):
     if 'error' in result: raise ValueError(result['error'])
     usage = result['usage']
     cached = usage.get('prompt_tokens_details', {}).get('cached_tokens')
-    expected_cached = base // cache_block_size * cache_block_size
+    expected_cached = prefill.expected_cached_tokens(base, cache_block_size, cache_drop_blocks)
     if cached != expected_cached or usage.get('prompt_tokens') != total:
         raise ValueError(f'Expected cached={expected_cached}, total={total}; got {usage}')
     return cached
@@ -37,6 +37,8 @@ def main():
     parser.add_argument('--runs', type=int, default=2)
     parser.add_argument('--cache-block-size', type=int, default=256,
                         help='Actual engine cache block size from startup logs; verify against usage')
+    parser.add_argument('--cache-drop-blocks', type=int, choices=[0, 1], default=0,
+                        help='Explicit cache policy: 1 for the verified MTP block drop, otherwise 0')
     parser.add_argument('--bases', type=int, nargs='+', default=[0,32768,65536,131072,262144])
     args = parser.parse_args()
     if args.cache_block_size < 1 or args.runs < 1 or any(b < 0 or b % 256 for b in args.bases):
@@ -67,7 +69,7 @@ def main():
         'launch':json.loads(args.launch_receipt.read_text()), 'models':models, 'runs':args.runs,
         'tokenizer_sha256':hashlib.sha256(args.tokenizer.read_bytes()).hexdigest(),
         'template':template_receipt, 'corpus_sha256':corpus_hash, 'bases':args.bases,
-        'cache_block_size':args.cache_block_size,
+        'cache_block_size':args.cache_block_size, 'cache_drop_blocks':args.cache_drop_blocks,
         'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in
             (Path(__file__), ROOT/'scripts/bench-retained-prefill.py', ROOT/'scripts/bench-mia-style.py',
              ROOT/'data/retained-decode-prompts.json', ROOT/'scripts/decode_contract.py')}, 'samples':[]}
@@ -100,7 +102,7 @@ def main():
                 try:
                     if prime_error:
                         raise ValueError(f'Base priming failed: {prime_error}')
-                    cached = check_cache(result, base, len(ids), args.cache_block_size)
+                    cached = check_cache(result, base, len(ids), args.cache_block_size, args.cache_drop_blocks)
                     summary = {'status':'passed', 'cached_tokens':cached, 'prompt_tokens':len(ids),
                         'recomputed_base_tokens':base-cached,
                         'completion_tokens':result['usage']['completion_tokens'],

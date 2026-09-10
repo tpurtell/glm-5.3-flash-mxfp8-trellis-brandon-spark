@@ -10,7 +10,13 @@ The client uses the same pinned tokenizer, explicit thinking-off template,
 inert source corpus, exact token-ID transport, unique branch markers and cache
 checks as the retained-prefill client. Set `--cache-block-size` from the actual
 engine startup log. Every response must report exactly the nominal base rounded
-down to that block size as cached, and the planned total prompt length. The
+down to that block size as cached, and the planned total prompt length. For the
+verified MTP configuration, explicitly add `--cache-drop-blocks 1`: its runtime
+recomputes one additional matched block, so the expected cache is
+`max(0, floor(base / block_size) - 1) * block_size`. The default remains zero
+dropped blocks; do not select a policy merely to fit unexpected cache results.
+Both retained clients record the selected policy and still reject any mismatch.
+The
 receipt records actual cached tokens and the recomputed base tail separately;
 a nominal 32K base must not be described as fully cached when it is not.
 Source/tokenizer/template
@@ -39,6 +45,8 @@ python3 scripts/bench-retained-decode.py \
   --out results/2x/retained-decode
 ```
 
-A real-tokenizer/template smoke run against a mock server passed all 12 requests
-across two bases, three workloads and two repeats. Mock timings are excluded
-from results. Actual serving, cache validation and performance remain pending.
+The [full MTP measurement block](../results/2x/mtp2-retained-decode/README.md)
+retains its original strict-cache failures and separate source-backed policy
+audit. Its 24 supported outputs all hit the cap; six larger-context requests
+were rejected by the configured limit. Adding the explicit policy option does
+not rewrite those historical receipts or qualify their output correctness.
