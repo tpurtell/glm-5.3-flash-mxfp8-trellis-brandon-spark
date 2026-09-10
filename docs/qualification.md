@@ -50,4 +50,30 @@ baseline are in `results/screening/`. They are not final five-replay comparisons
 The graph counting C4 screen contains an early-terminated response and repeated
 numbers; the orchid baseline hit its cap and overlapped tiny transfer checks.
 Those limitations remain recorded and must not become qualified headline scores.
-Fresh speculation qualification and the full matrices above are still pending.
+DFlash2 K7 graph serving passed the three basic thinking/tool checks and
+produced observed draft acceptance. Its one-replay weighted screen measured
+19.65 tokens/s (8/8 content contracts passed), with a separate 52.74 tokens/s
+orchid probe that emitted exactly 100 repetitions. These remain screening
+results; the requested five-replay weighted/orchid block is still pending.
+
+The five-wave DFlash2 Mia-style decode block completed 45 waves / 105 responses.
+Its timing medians and deltas are now in the README. Nine counting/code outputs
+departed from the requested prefix. Eager NVFP4 and FP8 controls each produced
+seven failures out of 70 concurrent responses and one out of 15 serial suffix
+probes, in different responses. Historical target-only failures also exist.
+These controls do not identify a root cause, show that all symptoms share one,
+or qualify output correctness. Preserve failures when reporting performance.
+
+| Completed evidence | Receipt and interpretation |
+|---|---|
+| DFlash2 smoke checks | [Thinking, tool parsing, and draft proposals](../results/bringup/emu-kiwi-dflash2-7-resumed-responses/README.md) |
+| DFlash2 one-replay weighted/orchid | [Separate rates and limitations](../results/screening/emu-kiwi-dflash2-7-resumed-weighted/README.md) |
+| Five-wave Mia-style decode | [All timings and output audit](../results/2x/dflash2-k7-mia-decode/README.md) |
+| Historical target-only output audit | [Failures without speculation or graphs](../results/bringup/historical-target-only-output-audit/README.md) |
+| Eager NVFP4 control | [Concurrent](../results/bringup/emu-kiwi-dflash2-k7-eager-concurrency/README.md), [serial](../results/bringup/emu-kiwi-dflash2-k7-eager-serial-suffix/README.md) |
+| Eager FP8 control | [Concurrent](../results/bringup/emu-kiwi-dflash2-k7-eager-fp8kv-concurrency/README.md), [serial](../results/bringup/emu-kiwi-dflash2-k7-eager-fp8kv-serial-suffix/README.md) |
+
+MTP comparison, remaining speculation/TP2/EP2 tuning, cold prefill, five-replay
+weighted/orchid, retained-context matrices, concurrency suite, tool evaluation,
+needle retrieval, startup measurements and final package qualification remain
+pending. No completed timing block substitutes for those remaining deliverables.
