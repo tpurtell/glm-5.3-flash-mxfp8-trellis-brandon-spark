@@ -82,7 +82,7 @@ def main():
     parser.add_argument('--speculation', choices=['none', 'mtp', 'dflash2'], default='none')
     parser.add_argument('--draft-tokens', type=int, default=3)
     parser.add_argument('--draft-tp', type=int, choices=[1, 2, 4])
-    parser.add_argument('--ep', action='store_true', help='Experimental: upstream P8 adapter currently rejects EP')
+    parser.add_argument('--ep', action='store_true', help='Experimental EP2/EP4 routed experts; distributed serving qualification pending')
     parser.add_argument('--eager', action='store_true')
     parser.add_argument('--max-model-len', type=int, default=8192)
     parser.add_argument('--batch-tokens', type=int, default=1024)
