@@ -148,3 +148,11 @@ corrected image, without a runtime-file override; see
 `sha256:e6ac69446438288201f6821abc692427225db894215c8c91c602e9a666378ed3`
 as `glm53-trellismx-spark:dev`. The updated published bring-up image is
 `ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark@sha256:3fb7c3bb7870c58a897e1e16400db02f199439b82bf176b7d0c0d4caaa2cdf17`.
+
+The first TP2 GPU check passes for K4 layer 4, rank 1, joined without
+requantization from TP4 ranks 2/3. At 1/8/32/128 tokens all three runtimes
+pass exact graph replay. The joined result agrees with the summed original
+partitions at cosine ≥0.999997 and relative L2 0.00231–0.00236, within the
+0.02 gate for changed BF16 reduction boundaries. Receipt:
+`results/bringup/native-tp2-k4-layer4-rank1/`. K5 TP2 and full serving remain
+pending.
