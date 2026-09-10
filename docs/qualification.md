@@ -9,7 +9,7 @@ the second rail uses .5, .6, .7, .8.
 
 ## Runtime gates
 
-The pinned upstream vLLM adapter rejects anything except SM120, TP4, EP1,
+The original upstream vLLM adapter rejected anything except SM120, TP4, EP1,
 intermediate partition 512. GB10 is SM121. The native P8 kernel has TP2 hooks
 but references an unpublished `glm53_nvfp4.p8_tp2_repack` helper for parent-pair
 loading. These are porting requirements, not evidence that 2x or 4x works.
@@ -167,3 +167,26 @@ The queued K5 layer 3 TP2 rank-0 check completed on emu after its parent
 files arrived. Both TP2 ranks now pass against their respective TP4 parents
 at 1/8/32/128 tokens; rank-0 receipt:
 `results/bringup/native-tp2-k5-layer3-rank0/`.
+
+## EP port and grouped routing correction
+
+Runtime `58d3ef0` supports hash-bound lossless expert slices across all four TP4
+parents: EP2 owns 144 experts and EP4 owns 72, each with the full intermediate
+width 2048. K4 layer10 and K5 layer3 pass 15 cases per topology: owned, mixed
+and all-remote routes at 1/8/32/128/256 tokens. Nonzero cases meet cosine >=.999
+and relative L2 <=.02 against the sum of original TP4 partitions; remote-only
+cases are exactly zero. Eager/graph outputs match exactly, including after
+activation, route-order and weight mutation. These are single-GPU expert-slice
+checks, not distributed EP or model-quality qualification. Raw receipts are in
+`results/bringup/native-ep{2,4}-{k4-layer10,k5-layer3}/`.
+
+Mixed routes exposed uninitialized skipped output slots and aliased named
+barriers in grouped input packing. Both are corrected; the failures and
+diagnostics remain in `results/bringup/ep-debug/`. The original TP4/TP2 K4
+comparison and exact graph replay also pass after the barrier correction
+(`results/bringup/tp2-regression-58d3ef0/`).
+
+The adapter now accepts TP2/TP4 or EP2/EP4 with dense TP unchanged. It validates
+contiguous static placement and maps global routes to local slots, preserving
+negative padding. DP, PCP, SP, all-to-all dispatch and EPLB remain unsupported.
+Full-model output and distributed EP must pass before performance selection.

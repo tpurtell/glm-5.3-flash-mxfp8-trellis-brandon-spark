@@ -1,0 +1,8 @@
+{
+  "host": "dodo",
+  "runtime_revision": "58d3ef0099c40b776a0630b54e703ccb4b5da846",
+  "base_image": "sha256:e6ac69446438288201f6821abc692427225db894215c8c91c602e9a666378ed3",
+  "command": "docker run --rm --gpus all --name trellismx-tp-regression --entrypoint python3 -e PYTHONPATH=/runtime -e B12X_COMPILE_CACHE_DIR=/cache -v /tmp/trellismx-runtime-58d3ef0:/runtime:ro -v /tmp/trellismx-tp-cache:/cache -v /tmp/check-native-p8.py:/check.py:ro -v /home/tj/models/glm53-trellismx/target:/checkpoint:ro glm53-trellismx-spark:dev /check.py /checkpoint --layer 4 --tp2 --rank 2",
+  "exit_code": 0,
+  "scope": "TP4 ranks2/3 and TP2 rank1 numerical and graph regression after grouped routing barrier fix. Single layer K4; no performance claim."
+}

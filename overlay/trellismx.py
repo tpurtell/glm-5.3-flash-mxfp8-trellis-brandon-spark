@@ -56,9 +56,16 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
         self.use_a16 = False
         self.use_global_sf = False
         parallel = moe_config.moe_parallel_config
+        valid_parallel = (parallel.tp_size in (2, 4) and parallel.ep_size == 1) or (
+            parallel.tp_size == 1 and parallel.ep_size in (2, 4)
+        )
         if (
-            parallel.tp_size not in (2, 4)
-            or parallel.ep_size != 1
+            not valid_parallel
+            or parallel.dp_size != 1
+            or parallel.pcp_size != 1
+            or parallel.sp_size != 1
+            or parallel.enable_eplb
+            or parallel.use_all2all_kernels
             or moe_config.hidden_dim != 4096
             or moe_config.intermediate_size_per_partition != 2048 // parallel.tp_size
             or moe_config.num_experts != 288
@@ -70,11 +77,13 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
             or moe_config.swiglu_limit != 10.0
         ):
             raise ValueError(
-                "TrellisMX GLM adapter requires TP2/TP4, EP1 and GLM Flash shapes"
+                "TrellisMX GLM adapter requires TP2/TP4 or EP2/EP4, no DP/PCP/SP/EPLB, and GLM Flash shapes"
             )
         self.layer_index = layer_index
         self.rank = parallel.tp_rank
         self.world_size = parallel.tp_size
+        self.ep_size = parallel.ep_size
+        self.ep_rank = parallel.ep_rank
         self.overlay = load_overlay(directory)
         self.runtime = None
 
@@ -97,7 +106,21 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
         device = layer.w13_weight.device
         if device.type != "cuda" or torch.cuda.get_device_capability(device) not in ((12, 0), (12, 1)):
             raise ValueError("This TrellisMX runtime requires SM120 or SM121 CUDA")
-        if self.world_size == 4:
+        if self.ep_size > 1:
+            count = 288 // self.ep_size
+            expected_map = torch.full((288,), -1, device=device, dtype=torch.int32)
+            expected_map[self.ep_rank * count:(self.ep_rank + 1) * count] = torch.arange(
+                count, device=device, dtype=torch.int32
+            )
+            if layer.expert_map is None or not torch.equal(layer.expert_map, expected_map):
+                raise ValueError("TrellisMX EP requires contiguous, static expert placement")
+            ranks = range(4)
+            sidecar = tuple(self.overlay.sidecar(self.layer_index, rank, verify=False)
+                            for rank in ranks)
+            records = [self.overlay.records[self.layer_index, rank] for rank in ranks]
+            parent_hashes = tuple(record["sha256"] for record in records)
+            record = records[0]
+        elif self.world_size == 4:
             sidecar = self.overlay.sidecar(self.layer_index, self.rank)
             record = self.overlay.records[self.layer_index, self.rank]
             parent_hashes = None
@@ -113,6 +136,8 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
             device=device,
             tp_rank=self.rank,
             world_size=self.world_size,
+            ep_size=self.ep_size,
+            ep_rank=self.ep_rank,
             tp4_parent_sha256=parent_hashes,
             layer=self.layer_index,
             expected_design_sha256=record["source_design_sha256"],
@@ -154,10 +179,12 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
             )
         self.runtime = runtime
         logger.info(
-            "TrellisMX layer=%d rank=%d K%d E4M3/UE8M0-32 "
+            "TrellisMX layer=%d tp_rank=%d ep_rank=%d ep_size=%d K%d E4M3/UE8M0-32 "
             "coupled-h512-h128 released_carrier_bytes=%d",
             self.layer_index,
             self.rank,
+            self.ep_rank,
+            self.ep_size,
             record["bits"],
             released,
         )
@@ -169,6 +196,12 @@ class TrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
             raise RuntimeError("TrellisMX routed weights were not loaded")
         if x.shape[0] == 0:
             return torch.empty_like(x)
+        if self.ep_size > 1:
+            # vLLM supplies global routes. Its canonical expert map uses -1
+            # for remote experts; native EP dispatch leaves those slots zero.
+            topk_ids = torch.where(
+                topk_ids >= 0, layer.expert_map[topk_ids.clamp_min(0)], -1
+            )
         return self.runtime(x, topk_weights, topk_ids)
 
     def apply_monolithic(self, *args, **kwargs):

@@ -46,5 +46,8 @@ must be qualified for this target.
 
 Additional switches: `--eager`, `--max-model-len`, `--batch-tokens`, `--max-seqs`,
 `--memory-utilization`, `--kv-cache`, `--draft-tp`. `--ep` exists for explicit
-compatibility screening; the current adapter rejects EP, so it is not a supported
-launch recommendation. No inference profiler is enabled.
+qualification runs: dense TP stays at the node count while routed experts use
+EP2/EP4 with contiguous placement. Single-layer K4/K5 numerical and mutable
+graph checks pass; distributed serving and performance remain unqualified, so
+EP is not yet a launch recommendation. DP/PCP/SP and expert load balancing are
+rejected. No inference profiler is enabled.
