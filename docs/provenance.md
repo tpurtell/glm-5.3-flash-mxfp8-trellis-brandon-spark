@@ -23,3 +23,11 @@ The runtime branch applies both `runtime/b12x/b12x` and the selected September 9
 `runtime-reference-20260909/b12x/b12x` overlay, in that order. The reference
 source manifest is retained in that branch. Use `scripts/fetch-runtime.sh` to
 check out the exact revision named by this recipe.
+
+The container starts from the pinned released ARM64
+`tpurtell/single-spark-glm-5.3-flash` image, which already integrates Mia-derived
+GLM geometry and DFlash2 support. `overlay/trellismx.py` is adapted from Brandon's
+base vLLM adapter: it admits SM121 and omits the unavailable Jovian warmup-provider
+interface. `overlay/install.py` inserts narrow ModelOpt hooks rather than
+replacing ARM64 vLLM with the x86 reference's Python tree. These changes are
+experimental until real loading, output and graph tests pass.

@@ -11,8 +11,7 @@ PY
 )
 if [[ ! -d "$destination/.git" ]]; then
     git clone --no-checkout "${identity[0]}" "$destination"
-fi
-if [[ -n $(git -C "$destination" status --porcelain) ]]; then
+elif [[ -n $(git -C "$destination" status --porcelain) ]]; then
     echo "Refusing to replace modified runtime checkout: $destination" >&2
     exit 1
 fi
