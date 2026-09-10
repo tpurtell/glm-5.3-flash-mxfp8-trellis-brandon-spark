@@ -2,8 +2,8 @@
 
 A serving recipe for Brandon Music's
 [GLM-5.3-Flash-TrellisMX-MXFP8](https://huggingface.co/brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8)
-on two NVIDIA DGX Sparks: **kiwi and dodo**. Earlier bring-up
-produced preliminary target-only screens; fresh kiwi/dodo qualification and
+on two NVIDIA DGX Sparks: **emu and kiwi**. Earlier bring-up
+produced preliminary target-only screens; fresh emu/kiwi qualification and
 speculation tuning are in progress.
 
 ## Comparison with Mia's two-Spark recipe (thinking off)
@@ -41,7 +41,7 @@ Download on the head Spark, then distribute over RDMA:
 ./scripts/download.sh
 python3 scripts/verify-target.py "$(python3 scripts/model_paths.py target)"
 python3 scripts/verify-carrier.py "$(python3 scripts/model_paths.py carrier)"
-./scripts/sync-models.sh dodo
+./scripts/sync-models.sh kiwi
 ```
 
 Downloads default to the real Hugging Face cache: `$HF_HUB_CACHE`, or
@@ -52,7 +52,7 @@ into the HF cache. Set `MODEL_ROOT` (and `model_root` in the cluster config) onl
 for an explicit local layout. The default cluster config resolves each host's
 cache independently; Docker mounts include the blobs referenced by snapshots.
 The example starts on
-kiwi and transfers to dodo. The helper prefers `rdmasync` on
+emu and transfers to kiwi. The helper prefers `rdmasync` on
 both endpoints and falls back to rsync over SSH if RDMA is unavailable or fails.
 It preserves the same HF cache layout with either transport. Repeat the verification on
 each destination before qualification. Downloads use Hugging Face's default backend and concurrency. Optional
@@ -62,7 +62,7 @@ per-machine environment settings such as `HF_HUB_DISABLE_XET=1` or
 Transfer a built Docker image directly over RDMA, bootstrapping through SSH:
 
 ```bash
-./scripts/sync-image.sh glm53-trellismx-spark:dev dodo
+./scripts/sync-image.sh glm53-trellismx-spark:dev kiwi
 # Streams: docker save IMAGE | rdmapipe HOST -- docker load
 ```
 
@@ -76,7 +76,7 @@ The recipe pins Z.ai’s current official chat template, with an explicit
 adaptation that honors an explicit `enable_thinking: false` for comparison
 requests. Ordinary requests keep thinking enabled. See the [template audit](docs/chat-template.md).
 
-The [launch options](docs/launch.md) cover both node counts. The separate
+The [launch options](docs/launch.md) cover the two-node configuration. The separate
 [Mia comparison protocol](docs/mia-comparison-protocol.md) records matching
 prompts and timing definitions.
 

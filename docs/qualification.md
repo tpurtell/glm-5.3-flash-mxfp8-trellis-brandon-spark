@@ -1,8 +1,9 @@
 # Two-Spark qualification plan
 
-The active task uses **kiwi and dodo only**, one GB10 each. All remaining work
+The active task uses **emu and kiwi only**, one GB10 each. All remaining work
 runs sequentially on this pair. Four-Spark qualification is canceled. Retired
-hosts must not be accessed. Historical result receipts remain as provenance;
+hosts dodo and ostrich must not be accessed; they are reserved for DeepSeek
+Flash development. Historical result receipts remain as provenance;
 they do not authorize new runs or establish current recommendations.
 
 ## Remaining qualification
@@ -41,7 +42,7 @@ not imply a four-machine deployment.
 
 Earlier emu/kiwi runs passed basic thinking and tool-parser checks with
 target-only eager and graph serving. Graph responses matched eager on those
-three prompts. These are historical results, not qualification of kiwi/dodo.
+three prompts. These are preliminary results, not completed performance qualification.
 Retained-cache checks verify actual 6144-token reuse and recomputed base tails.
 
 Preliminary one-wave target-only decode screens and a one-replay weighted
