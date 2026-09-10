@@ -34,7 +34,7 @@ python3 scripts/bench-mia-style.py decode --launch-receipt .work/launches/RUN/la
 python3 scripts/bench-mia-style.py prefill --launch-receipt .work/launches/RUN/launch.json --out results/2x/mia-prefill
 ```
 
-Select the actual four-node receipt and distinct output directories for 4x.
+Use the actual emu/kiwi two-node launch receipt for every comparison.
 This client is implemented; no live-model measurements have completed yet.
 It complements the weighted seven-category and orchid suite.
 

@@ -60,8 +60,8 @@ class ModelOptTrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
         self.use_a16 = False
         self.use_global_sf = False
         parallel = moe_config.moe_parallel_config
-        valid_parallel = (parallel.tp_size in (2, 4) and parallel.ep_size == 1) or (
-            parallel.tp_size == 1 and parallel.ep_size in (2, 4)
+        valid_parallel = (parallel.tp_size == 2 and parallel.ep_size == 1) or (
+            parallel.tp_size == 1 and parallel.ep_size == 2
         )
         if (
             not valid_parallel
@@ -81,7 +81,7 @@ class ModelOptTrellisMXMoEMethod(ModelOptNvFp4FusedMoE):
             or moe_config.swiglu_limit != 10.0
         ):
             raise ValueError(
-                "TrellisMX GLM adapter requires TP2/TP4 or EP2/EP4, no DP/PCP/SP/EPLB, and GLM Flash shapes"
+                "TrellisMX GLM adapter requires TP2 or EP2, no DP/PCP/SP/EPLB, and GLM Flash shapes"
             )
         self.layer_index = layer_index
         self.rank = parallel.tp_rank

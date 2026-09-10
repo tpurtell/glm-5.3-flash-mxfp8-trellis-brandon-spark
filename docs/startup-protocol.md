@@ -31,5 +31,5 @@ python3 scripts/bench-startup.py --nodes 2 --out results/2x/startup -- \
 
 Use the final measured serving options in place of the example. `--plan-only`
 validates and records commands without starting containers or touching remote
-caches. Plans for both two and four nodes passed; actual startup timings remain
+caches. The two-node plan passed; actual startup timings remain
 pending full-model qualification.

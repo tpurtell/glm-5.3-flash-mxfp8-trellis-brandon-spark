@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Launch the same pinned TrellisMX image across two or four Spark hosts."""
+"""Launch the same pinned TrellisMX image across two Spark hosts."""
 import argparse
 import datetime
 import json
@@ -89,11 +89,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['plan', 'start', 'status', 'stop'])
     parser.add_argument('--config', type=Path, default=ROOT/'cluster.example.json')
-    parser.add_argument('--nodes', type=int, choices=[2, 4], required=True)
+    parser.add_argument('--nodes', type=int, choices=[2], default=2)
     parser.add_argument('--speculation', choices=['none', 'mtp', 'dflash2'], default='none')
     parser.add_argument('--draft-tokens', type=int, default=3)
-    parser.add_argument('--draft-tp', type=int, choices=[1, 2, 4])
-    parser.add_argument('--ep', action='store_true', help='Experimental EP2/EP4 routed experts; distributed serving qualification pending')
+    parser.add_argument('--draft-tp', type=int, choices=[1, 2])
+    parser.add_argument('--ep', action='store_true', help='Experimental EP2 routed experts; qualification pending')
     parser.add_argument('--eager', action='store_true')
     parser.add_argument('--max-model-len', type=int, default=8192)
     parser.add_argument('--batch-tokens', type=int, default=1024)

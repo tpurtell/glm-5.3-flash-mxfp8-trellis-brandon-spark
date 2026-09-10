@@ -30,7 +30,7 @@ print(json.dumps({'path':str(root),'files':len(files),'bytes':sum(p.stat().st_si
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config',type=Path,default=ROOT/'cluster.example.json')
-    parser.add_argument('--nodes',type=int,choices=[2,4],required=True)
+    parser.add_argument('--nodes',type=int,choices=[2],default=2)
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--plan-only',action='store_true')
     parser.add_argument('launch_args',nargs=argparse.REMAINDER)

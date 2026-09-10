@@ -1,12 +1,12 @@
-# Two- and four-Spark launch options (bring-up)
+# Two-Spark launch options (bring-up)
 
-These commands are implemented but **not yet hardware-qualified**. The current
-port supports TP2/TP4 with EP off; optimal settings remain to be measured.
+Basic TP2 eager and CUDA-graph serving pass. Optimal TP2/EP2 and speculation
+settings remain to be measured.
 Defaults use a short context and target-only decoding for initial correctness.
 
 Edit `cluster.example.json` for host names, CX7 addresses, local model paths and
-image. Rank zero is the first host; the two-node launch uses the first two entries.
-The supplied inventory uses emu/kiwi for two nodes and adds dodo/ostrich for four.
+image. Rank zero is the first host. The supplied inventory contains only emu
+and kiwi; all qualification now runs sequentially on this pair.
 Each node needs the identical image and local model files. A null `model_root`
 resolves pinned snapshots in that host's HF cache, including Mia's default cache
 location. Set it only to override with a target/carrier/draft directory layout.
@@ -17,20 +17,18 @@ Thinking is enabled by default; only comparison requests explicitly disable it.
 ./build.sh
 ./scripts/download.sh
 python3 scripts/verify-target.py "$(python3 scripts/model_paths.py target)"
-./scripts/sync-models.sh ostrich dodo kiwi
-./scripts/sync-image.sh glm53-trellismx-spark:dev ostrich dodo kiwi
+./scripts/sync-models.sh kiwi
+./scripts/sync-image.sh glm53-trellismx-spark:dev kiwi
 
 # Inspect without changing any host:
 python3 scripts/cluster.py plan --nodes 2
-python3 scripts/cluster.py plan --nodes 4
 
 # Initial target-only runs (choose one at a time):
 python3 scripts/cluster.py start --nodes 2
-python3 scripts/cluster.py start --nodes 4
 
 # Explicit speculation candidates, not recommendations:
 python3 scripts/cluster.py start --nodes 2 --speculation dflash2 --draft-tokens 7
-python3 scripts/cluster.py start --nodes 4 --speculation mtp --draft-tokens 3
+python3 scripts/cluster.py start --nodes 2 --speculation mtp --draft-tokens 3
 
 python3 scripts/cluster.py status --nodes 2
 python3 scripts/cluster.py stop --nodes 2
@@ -52,7 +50,7 @@ must be qualified for this target.
 Additional switches: `--eager`, `--max-model-len`, `--batch-tokens`, `--max-seqs`,
 `--memory-utilization`, `--kv-cache`, `--draft-tp`. `--ep` exists for explicit
 qualification runs: dense TP stays at the node count while routed experts use
-EP2/EP4 with contiguous placement. Single-layer K4/K5 numerical and mutable
+EP2 with contiguous placement. Single-layer K4/K5 numerical and mutable
 graph checks pass; distributed serving and performance remain unqualified, so
 EP is not yet a launch recommendation. DP/PCP/SP and expert load balancing are
 rejected. No inference profiler is enabled.
