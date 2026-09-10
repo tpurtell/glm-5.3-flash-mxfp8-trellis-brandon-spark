@@ -1,0 +1,14 @@
+{"gpu": "NVIDIA GB10", "layer": 3, "ep_size": 4, "ep_rank": 3, "parents": ["a02533aa3f021db664a807ab53794eb120e9f368fa0e973ba731d5ed44ecc26d", "e78d7cc8c7396dfb1d14fb8217cd212895f64bdb1ab4fa2007bbfb40c602641e", "6a2397e4ed0e70ec46e35923f1ca952a85e9aa82e0cd476568631fddf3017877", "8ecb2a0075961fd5470b0261360063656b1f9b9c6c2484817bde544e0705a0fa"]}
+{"tokens": 1, "routing": "mixed", "cosine": 0.9999973810661716, "relative_l2": 0.0022889086976647377, "graph_replay_exact": true}
+{"tokens": 8, "routing": "mixed", "cosine": 0.9999972422905845, "relative_l2": 0.0023485480342060328, "graph_replay_exact": true}
+Traceback (most recent call last):
+  File "/runtime/tests/check_trellismx_ep_native.py", line 55, in <module>
+    torch.cuda.synchronize();torch.testing.assert_close(captured,actual,rtol=0,atol=0)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/testing/_comparison.py", line 1631, in assert_close
+    raise error_metas[0].to_error(msg)
+AssertionError: Tensor-likes are not equal!
+
+Mismatched elements: 4096 / 131072 (3.1%)
+Greatest absolute difference: 2.866147865911225e+36 at index (0, 142)
+Greatest relative difference: 1.0 at index (0, 0)
