@@ -1,0 +1,185 @@
+{
+  "request": {
+    "model": "glm53-trellismx",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Count from 1 to 200. Output only the numbers, separated by spaces. No other text."
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "start": 614660.214532789,
+  "events": [
+    {
+      "time": 614661.008820838,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "role": "assistant",
+              "content": ""
+            },
+            "logprobs": null,
+            "finish_reason": null
+          }
+        ],
+        "prompt_token_ids": null,
+        "prompt_text": null
+      }
+    },
+    {
+      "time": 614661.008869606,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": "1"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 614661.162354734,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 2 3 4 5"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 614661.312220696,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 6 7 8 9"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 614661.468257904,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 10 11 12 13"
+            },
+            "logprobs": null,
+            "finish_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 614661.61709025,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [
+          {
+            "index": 0,
+            "delta": {
+              "content": " 14 15 16 "
+            },
+            "logprobs": null,
+            "finish_reason": "length",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ]
+      }
+    },
+    {
+      "time": 614661.617138346,
+      "data": {
+        "id": "chatcmpl-838e292f33b10e37",
+        "object": "chat.completion.chunk",
+        "created": 1789029952,
+        "model": "glm53-trellismx",
+        "choices": [],
+        "usage": {
+          "prompt_tokens": 34,
+          "total_tokens": 66,
+          "completion_tokens": 32,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0
+          }
+        },
+        "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-f9193a2c"
+      }
+    }
+  ],
+  "first": 614661.008869606,
+  "last": 614661.61709025,
+  "usage": {
+    "prompt_tokens": 34,
+    "total_tokens": 66,
+    "completion_tokens": 32,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0
+    }
+  },
+  "text": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ",
+  "reasoning": "",
+  "decode_tokens": 31,
+  "decode_tps": 50.96834562034422,
+  "ttft_seconds": 0.7943368169944733,
+  "prefill_tps": 42.80300153862383,
+  "end": 614661.617293818
+}
