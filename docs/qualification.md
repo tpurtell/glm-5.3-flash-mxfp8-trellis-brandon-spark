@@ -156,3 +156,9 @@ partitions at cosine ≥0.999997 and relative L2 0.00231–0.00236, within the
 0.02 gate for changed BF16 reduction boundaries. Receipt:
 `results/bringup/native-tp2-k4-layer4-rank1/`. K5 TP2 and full serving remain
 pending.
+
+K5 layer 3, TP2 rank 1, also passes the joined-parent comparison and exact
+graph replay at 1/8/32/128 tokens (relative L2 0.00233–0.00236). Receipt:
+`results/bringup/native-tp2-k5-layer3-rank1/`. Both stored bitrates now have
+TP2 partition-equivalence evidence; distributed full-model serving is still
+unqualified.
