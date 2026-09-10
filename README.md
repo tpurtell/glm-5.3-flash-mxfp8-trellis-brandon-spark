@@ -45,10 +45,12 @@ python3 scripts/verify-carrier.py "${MODEL_ROOT:-$HOME/models/glm53-trellismx}/c
 `MODEL_ROOT` defaults to `$HOME/models/glm53-trellismx`. The example starts on
 emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
 host; transfers fail if RDMA cannot be negotiated. Repeat the verification on
-each destination before qualification. Downloads use Xet high-performance mode
-with 64 concurrent range requests and eight file workers; the corresponding
-`HF_XET_HIGH_PERFORMANCE`, `HF_XET_NUM_CONCURRENT_RANGE_GETS`, and
-`HF_DOWNLOAD_WORKERS` environment variables can override these defaults.
+each destination before qualification. Downloads default to Xet high-performance mode with adaptive concurrency and
+eight file workers (`HF_XET_HIGH_PERFORMANCE`, `HF_DOWNLOAD_WORKERS`). An explicit
+`HF_XET_FIXED_DOWNLOAD_CONCURRENCY` selects fixed concurrency and disables the
+high-performance preset and adaptive controller to avoid conflicting settings.
+The older `HF_XET_NUM_CONCURRENT_RANGE_GETS` setting is not used by the installed
+Xet 1.5 client. See [Xet’s current controls](https://github.com/huggingface/hub-docs/blob/main/docs/hub/xet/using-xet-storage.md#environment-variables).
 
 The recipe pins Z.ai’s current official chat template, with an explicit
 thinking-off serving adaptation. See the [template audit](docs/chat-template.md).
