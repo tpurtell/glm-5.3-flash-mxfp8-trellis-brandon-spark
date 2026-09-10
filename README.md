@@ -1,0 +1,1 @@
+A recipe for faster GLM flash on sparks with BrandonMusics new quantization scheme https://huggingface.co/brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8 requires his runtime which is a pending addition to vllm/b12x which he provided layers for in some links from this image.  Derived from mia's glm 5.3 flash repo https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks
