@@ -21,6 +21,20 @@ def adopt(component, source, lock):
     files = [p for p in source.rglob('*') if p.is_file() and '.cache' not in p.relative_to(source).parts]
     for path in files:
         relative = path.relative_to(source)
+        target = destination/relative
+        if target.is_file():
+            # A cached asset may be LFS-backed regardless of its extension.
+            # Compare content before reusing it; do not guess its blob identity.
+            if target.stat().st_size != path.stat().st_size:
+                raise ValueError(f'Conflicting cached snapshot size: {target}')
+            if path.resolve() != target.resolve():
+                with path.open('rb') as left, target.open('rb') as right:
+                    while block := left.read(8*1024*1024):
+                        if block != right.read(len(block)):
+                            raise ValueError(f'Conflicting cached snapshot content: {target}')
+                path.unlink()
+                path.symlink_to(target)
+            continue
         digest = records.get(relative.as_posix())
         metadata = source/'.cache/huggingface/download'/f'{relative}.metadata'
         if not digest and metadata.exists():

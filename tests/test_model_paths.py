@@ -49,4 +49,18 @@ class CacheTests(unittest.TestCase):
         self.assertEqual(container, '/models/draft/snapshots/'+'a'*40)
         self.assertEqual(adopt.adopt('draft', source, self.lock), destination)
 
+    def test_reuses_existing_lfs_asset_regardless_of_extension(self):
+        source = self.home/'models/draft'
+        source.mkdir(parents=True)
+        (source/'figure.png').write_bytes(b'example LFS image')
+        destination = model_paths.snapshot('draft', self.lock)
+        destination.mkdir(parents=True)
+        blob = destination.parent.parent/'blobs'/('b'*64)
+        blob.parent.mkdir()
+        blob.write_bytes(b'example LFS image')
+        (destination/'figure.png').symlink_to('../../blobs/'+blob.name)
+        adopt.adopt('draft', source, self.lock)
+        self.assertEqual((source/'figure.png').read_bytes(), b'example LFS image')
+        self.assertEqual((destination/'figure.png').resolve(), blob)
+
 if __name__ == '__main__': unittest.main()
