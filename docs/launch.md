@@ -7,13 +7,16 @@ Defaults use a short context and target-only decoding for initial correctness.
 Edit `cluster.example.json` for host names, CX7 addresses, local model paths and
 image. Rank zero is the first host; the two-node launch uses the first two entries.
 The supplied inventory uses emu/kiwi for two nodes and adds dodo/ostrich for four.
-Each node needs the identical image and local model files.
+Each node needs the identical image and local model files. A null `model_root`
+resolves pinned snapshots in that host's HF cache, including Mia's default cache
+location. Set it only to override with a target/carrier/draft directory layout.
+Thinking is enabled by default; only comparison requests explicitly disable it.
 
 ```bash
 ./scripts/fetch-runtime.sh
 ./build.sh
 ./scripts/download.sh
-python3 scripts/verify-target.py ~/models/glm53-trellismx/target
+python3 scripts/verify-target.py "$(python3 scripts/model_paths.py target)"
 ./scripts/sync-models.sh ostrich dodo kiwi
 
 # Inspect without changing any host:
@@ -51,3 +54,12 @@ EP2/EP4 with contiguous placement. Single-layer K4/K5 numerical and mutable
 graph checks pass; distributed serving and performance remain unqualified, so
 EP is not yet a launch recommendation. DP/PCP/SP and expert load balancing are
 rejected. No inference profiler is enabled.
+
+To relocate an existing local layout after strict target/carrier verification:
+
+```bash
+python3 scripts/adopt-hf-cache.py --model-root ~/models/glm53-trellismx --verified
+```
+
+This moves model bytes into HF blobs and pinned snapshots, retaining legacy
+paths as symlinks. Stop writers to the local layout before migrating it.

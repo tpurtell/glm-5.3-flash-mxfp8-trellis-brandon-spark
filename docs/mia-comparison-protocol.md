@@ -37,3 +37,7 @@ python3 scripts/bench-mia-style.py prefill --launch-receipt .work/launches/RUN/l
 Select the actual four-node receipt and distinct output directories for 4x.
 This client is implemented; no live-model measurements have completed yet.
 It complements the weighted seven-category and orchid suite.
+
+The README comparison is explicitly thinking-off. This is a benchmark request
+setting, not the serving default: ordinary recipe requests retain thinking on.
+Do not pool these measurements with thinking-on weighted decode or orchid runs.

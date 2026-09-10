@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-model_root=${MODEL_ROOT:-$HOME/models/glm53-trellismx}
 # Xet 1.5 uses adaptive concurrency. Its high-performance preset can override
 # the fixed bounds, so an explicit fixed-concurrency request disables that preset.
 if [[ -n ${HF_XET_FIXED_DOWNLOAD_CONCURRENCY:-} ]]; then
@@ -18,5 +17,13 @@ print(item['repo_id'])
 print(item['revision'])
 PY
     )
-    hf download "${identity[0]}" --max-workers "${HF_DOWNLOAD_WORKERS:-8}" --revision "${identity[1]}" --local-dir "$model_root/$component"
+    location=$(python3 "$root/scripts/model_paths.py" "$component")
+    args=("${identity[0]}" --max-workers "${HF_DOWNLOAD_WORKERS:-8}" --revision "${identity[1]}")
+    if [[ -n ${MODEL_ROOT:-} || "$location" != */snapshots/"${identity[1]}" ]]; then
+        args+=(--local-dir "$location")
+    else
+        # Preserve a discovered Mia cache even if HF_HOME now points elsewhere.
+        args+=(--cache-dir "${location%/models--*/snapshots/*}")
+    fi
+    hf download "${args[@]}"
 done

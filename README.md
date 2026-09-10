@@ -5,11 +5,13 @@ A serving recipe for Brandon Music's
 on two and four NVIDIA DGX Sparks. **Port and qualification in progress; no
 Spark performance results or recommended TP/EP settings have been established.**
 
-## Comparison with Mia's two-Spark recipe
+## Comparison with Mia's two-Spark recipe (thinking off)
 
 Mia's published numbers below are the reference; TrellisMX measurements and
 percentage differences will be filled from fresh runs on this hardware.
-All rates are tokens/s. **Pending cells are unmeasured.**
+All rates are tokens/s. **Pending cells are unmeasured.** This comparison explicitly
+disables thinking to match Mia; the serving recipe defaults to **thinking on**.
+The weighted seven-category and orchid results remain separate.
 
 | Measurement | Mia 2× Spark | TrellisMX 2× | Δ vs Mia | TrellisMX 4× | Δ vs Mia |
 |---|---:|---:|---:|---:|---:|
@@ -37,12 +39,19 @@ Download on the head Spark, then distribute over RDMA:
 
 ```bash
 ./scripts/download.sh
-python3 scripts/verify-target.py "${MODEL_ROOT:-$HOME/models/glm53-trellismx}/target"
-python3 scripts/verify-carrier.py "${MODEL_ROOT:-$HOME/models/glm53-trellismx}/carrier"
+python3 scripts/verify-target.py "$(python3 scripts/model_paths.py target)"
+python3 scripts/verify-carrier.py "$(python3 scripts/model_paths.py carrier)"
 ./scripts/sync-models.sh ostrich dodo kiwi
 ```
 
-`MODEL_ROOT` defaults to `$HOME/models/glm53-trellismx`. The example starts on
+Downloads default to the real Hugging Face cache: `$HF_HUB_CACHE`, or
+`$HF_HOME/hub`, or `${XDG_CACHE_HOME:-$HOME/.cache}/huggingface/hub`.
+The recipe checks these and Mia's `~/.cache/huggingface/hub` for the exact pinned
+snapshots, then an existing `~/models/glm53-trellismx` layout. Missing models go
+into the HF cache. Set `MODEL_ROOT` (and `model_root` in the cluster config) only
+for an explicit local layout. The default cluster config resolves each host's
+cache independently; Docker mounts include the blobs referenced by snapshots.
+The example starts on
 emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
 host; transfers fail if RDMA cannot be negotiated. Repeat the verification on
 each destination before qualification. Downloads default to Xet high-performance mode with adaptive concurrency and
@@ -53,7 +62,8 @@ The older `HF_XET_NUM_CONCURRENT_RANGE_GETS` setting is not used by the installe
 Xet 1.5 client. See [Xet’s current controls](https://github.com/huggingface/hub-docs/blob/main/docs/hub/xet/using-xet-storage.md#environment-variables).
 
 The recipe pins Z.ai’s current official chat template, with an explicit
-thinking-off serving adaptation. See the [template audit](docs/chat-template.md).
+adaptation that honors an explicit `enable_thinking: false` for comparison
+requests. Ordinary requests keep thinking enabled. See the [template audit](docs/chat-template.md).
 
 The [launch options](docs/launch.md) cover both node counts. The separate
 [Mia comparison protocol](docs/mia-comparison-protocol.md) records matching
