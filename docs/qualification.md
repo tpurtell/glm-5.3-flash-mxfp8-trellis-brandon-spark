@@ -136,3 +136,8 @@ activation quantization and coupled transforms. Relative L2 error is
 0.00161–0.00259 against the 0.02 gate. Raw results and source identity are in
 `results/bringup/oracle-k4-layer4-rank2/`. This checks three isolated experts,
 not all routing combinations or full-model quality.
+
+The K5 shard (layer 3, TP4 rank 3) passes the same nine independent oracle
+cases, with relative L2 error 0.00164–0.00168. Results are retained separately
+in `results/bringup/oracle-k5-layer3-rank3/`. Both stored bitrates now have
+single-shard numerical evidence on GB10; TP2 and full-model checks remain.
