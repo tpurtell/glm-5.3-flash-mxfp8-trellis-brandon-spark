@@ -105,3 +105,9 @@ or qualification of the default emu + kiwi pair. Raw logs and command receipt:
 
 Bring-up image published (qualification pending):
 `ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark@sha256:bf64997c14affabe5dc5ece52bca5ac7000f4c268728d6c8f8467a34ea2c8c20`.
+
+The initial transport test retained its last graph while destroying the NCCL
+process group and hung at teardown. The corrected test releases that graph first.
+A fresh run reproduced all six exact checks and exited successfully on both
+ranks; complete receipts are in `results/bringup/roce-emu-dodo-clean/`. The original
+run and its teardown failure remain recorded separately.

@@ -32,4 +32,12 @@ for size in (1,4096,1048576):
         assert torch.equal(data,torch.full_like(data,expected))
     print(json.dumps({'host':socket.gethostname(),'rank':args.rank,'world_size':args.world_size,
                       'elements':size,'eager_exact':True,'graph_replay_exact':True}),flush=True)
+# NCCL retains communicators referenced by captured graphs. Release every
+# graph before process-group teardown, or destroy can wait indefinitely.
+del graph
+torch.cuda.synchronize()
+import gc
+gc.collect()
+dist.barrier()
 dist.destroy_process_group()
+print(json.dumps({'rank':args.rank,'status':'complete','teardown':'returned'}),flush=True)
