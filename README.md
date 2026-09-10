@@ -35,13 +35,6 @@ The checkpoint contains compressed K4/K5 routed experts that reconstruct FP8
 operands. It also requires the pinned NVFP4 carrier model. Both identities are
 recorded in [sources.lock.json](sources.lock.json).
 
-For multi-Spark setups, we recommend
-[rdmasync](https://github.com/tpurtell/rdmasync) and
-[rdmapipe](https://github.com/tpurtell/rdmapipe): two great tools for moving large
-assets across the RDMA fabric. Use `rdmasync` to synchronize model files and
-`rdmapipe` to stream data into remote commands, including `docker load`. Both
-bootstrap through SSH; the recipe uses them in the examples below.
-
 Download on the head Spark, then distribute over RDMA:
 
 ```bash
@@ -59,8 +52,9 @@ into the HF cache. Set `MODEL_ROOT` (and `model_root` in the cluster config) onl
 for an explicit local layout. The default cluster config resolves each host's
 cache independently; Docker mounts include the blobs referenced by snapshots.
 The example starts on
-emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
-host; transfers fail if RDMA cannot be negotiated. Repeat the verification on
+emu and transfers to ostrich, dodo, and kiwi. The helper prefers `rdmasync` on
+both endpoints and falls back to rsync over SSH if RDMA is unavailable or fails.
+It preserves the same HF cache layout with either transport. Repeat the verification on
 each destination before qualification. Downloads use Hugging Face's default backend and concurrency. Optional
 per-machine environment settings such as `HF_HUB_DISABLE_XET=1` or
 `HF_DOWNLOAD_WORKERS` are honored without imposing them on the recipe.
@@ -72,9 +66,11 @@ Transfer a built Docker image directly over RDMA, bootstrapping through SSH:
 # Streams: docker save IMAGE | rdmapipe HOST -- docker load
 ```
 
-The helper checks each destination for the source image ID. `rdmapipe` must be
-available on both hosts; set `RDMAPIPE_REMOTE_PATH` if it is outside the remote
-SSH command's PATH. Model files continue to use `rdmasync`.
+The helper prefers `rdmapipe`, falls back to `docker save` streamed over SSH,
+and checks each destination for the source image ID. Both transfer helpers
+discover tools in PATH, `~/.local/bin`, and `/home/linuxbrew/.linuxbrew/bin`
+on each endpoint. `RDMAPIPE_REMOTE_PATH` and `REMOTE_RDMASYNC` can override
+remote discovery. See the [RDMA tools installation guide below](#rdma-tools-for-dgx-spark-and-roce-pcs).
 
 The recipe pins Z.ai’s current official chat template, with an explicit
 adaptation that honors an explicit `enable_thinking: false` for comparison
@@ -87,3 +83,49 @@ prompts and timing definitions.
 See the [qualification plan](docs/qualification.md) for the measurement matrix
 and [provenance](docs/provenance.md) for source attribution. Results will be
 committed and pushed separately as each complete block finishes.
+
+## RDMA tools for DGX Spark and RoCE PCs
+
+Move model weights, checkpoints, datasets, and container images between your local AI machines with [Local AI Tap](https://github.com/tpurtell/local-ai-tap):
+
+- **`rdmasync`** — rsync-style file synchronization with RDMA bulk transfers.
+- **`rdmapipe`** — stream command output over RDMA into a remote command, using SSH for authentication and orchestration.
+
+Native **ARM64 and AMD64 binary bottles** are available for Linux, including DGX Spark. Homebrew installs the dependencies automatically.
+
+**Install on both endpoints**, with [Homebrew](https://brew.sh/) already installed:
+
+```bash
+brew tap tpurtell/local-ai https://github.com/tpurtell/local-ai-tap.git
+
+if brew commands | grep -qx trust; then
+  brew trust --tap tpurtell/local-ai
+fi
+
+brew install tpurtell/local-ai/rdmapipe tpurtell/local-ai/rdmasync
+```
+
+Replace `spark` below with your machine’s SSH hostname or alias.
+
+**Copy model files over RDMA:**
+
+```bash
+rdmasync -a --rdma=required \
+  --rsync-path=/home/linuxbrew/.linuxbrew/bin/rdmasync \
+  ./models/ spark:~/models/
+```
+
+**Stream an ARM64 container image directly into a Spark:**
+
+```bash
+docker image save --platform linux/arm64 my-ai-image:latest |
+  rdmapipe \
+    --remote-path=/home/linuxbrew/.linuxbrew/bin/rdmapipe \
+    spark -- docker image load
+```
+
+The Docker example requires an ARM64 image locally and Docker access on both machines.
+
+Use these tools on a trusted, configured RDMA/RoCE fabric with working Linux drivers and SSH access. Bulk RDMA traffic is not encrypted.
+
+[Installation guide and documentation →](https://github.com/tpurtell/local-ai-tap#readme)
