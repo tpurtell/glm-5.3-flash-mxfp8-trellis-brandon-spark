@@ -1,0 +1,55 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.47kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/tpurtell/single-spark-glm-5.3-flash@sha256:1e91406e6c9520bf0e102bd0ead3b43426740671f308ca81c948ad6010136009
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 201B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 1.02MB 0.0s done
+#4 DONE 0.0s
+
+#5 [1/8] FROM ghcr.io/tpurtell/single-spark-glm-5.3-flash@sha256:1e91406e6c9520bf0e102bd0ead3b43426740671f308ca81c948ad6010136009
+#5 CACHED
+
+#6 [2/8] COPY .work/sparkinfer/b12x /opt/b12x/b12x
+#6 DONE 0.6s
+
+#7 [3/8] COPY .work/sparkinfer/third_party/trellismx /opt/trellismx/licenses/runtime
+#7 DONE 0.1s
+
+#8 [4/8] COPY overlay /opt/trellismx/overlay
+#8 DONE 0.1s
+
+#9 [5/8] COPY licenses /opt/trellismx/licenses
+#9 DONE 0.1s
+
+#10 [6/8] COPY data /opt/trellismx/data
+#10 DONE 0.1s
+
+#11 [7/8] COPY container/entrypoint.sh /opt/trellismx/entrypoint.sh
+#11 DONE 0.1s
+
+#12 [8/8] RUN python3 /opt/trellismx/overlay/install.py     && python3 -c 'from b12x.moe._shared.trellismx.p8_native_kernel import P8NativeTPMoE; from vllm.model_executor.layers.quantization.trellismx import TrellisMXMoEMethod'
+#12 5.283 Installed TrellisMX ModelOpt hooks
+#12 15.76 INFO 09-10 03:48:34 [importing.py:53] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+#12 15.76 INFO 09-10 03:48:34 [importing.py:88] Triton not installed or not compatible; certain GPU-related functions will not be available.
+#12 15.85 WARNING 09-10 03:48:34 [interface.py:368] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+#12 16.05 W0910 03:48:34.635000 1 torch/utils/cpp_extension.py:178] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+#12 16.23 WARNING 09-10 03:48:34 [interface.py:368] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+#12 16.23 WARNING 09-10 03:48:34 [interface.py:368] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+#12 DONE 17.9s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 0.2s done
+#13 writing image sha256:8a89d7d0a0be1f899262787515ed634cfabd5a1000edcae91decb7dc845d46ce done
+#13 naming to docker.io/library/glm53-trellismx-spark:ep-58d3ef0 done
+#13 naming to ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark:bringup-c5362f2 done
+#13 DONE 0.3s

@@ -1,0 +1,21 @@
+{
+  "registry": "ghcr.io/tpurtell/glm-5.3-flash-trellismx-spark:bringup-c5362f2",
+  "manifest_digest": "sha256:f896cacd5a8aa5e498943a8001eb57448f3d4f1f69a8b2b50377760cd2a72ce6",
+  "image_id": "sha256:8a89d7d0a0be1f899262787515ed634cfabd5a1000edcae91decb7dc845d46ce",
+  "runtime_revision": "58d3ef0099c40b776a0630b54e703ccb4b5da846",
+  "recipe_revision": "c5362f2",
+  "verified_hosts": [
+    "emu",
+    "kiwi",
+    "dodo",
+    "ostrich"
+  ],
+  "local_tag": "glm53-trellismx-spark:dev",
+  "transport": {
+    "emu": "local build",
+    "kiwi": "RDMA zstd archive and docker load",
+    "dodo": "RDMA zstd archive and docker load; registry pull also completed",
+    "ostrich": "RDMA zstd archive and docker load"
+  },
+  "note": "Identical image IDs verified before retagging dev. Redundant pulls on kiwi/ostrich stopped after successful loads. Native EP qualification and GPU imports pass; full-model serving remains pending."
+}
