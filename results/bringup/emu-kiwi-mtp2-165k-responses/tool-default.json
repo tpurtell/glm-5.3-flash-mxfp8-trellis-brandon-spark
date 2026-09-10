@@ -1,0 +1,89 @@
+{
+  "created": "2026-09-10T09:58:24.625354+00:00",
+  "request": {
+    "model": "glm53-trellismx",
+    "temperature": 0,
+    "max_tokens": 512,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Get the current weather in Taipei using the provided tool."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_weather",
+          "description": "Fetch current weather for a city",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "city"
+            ]
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto"
+  },
+  "response": {
+    "id": "chatcmpl-bd7bea7a1583b07c",
+    "object": "chat.completion",
+    "created": 1789034304,
+    "model": "glm53-trellismx",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [
+            {
+              "id": "chatcmpl-tool-8d4a70291f10789d",
+              "type": "function",
+              "function": {
+                "name": "get_weather",
+                "arguments": "{\"city\": \"Taipei\"}"
+              }
+            }
+          ],
+          "reasoning": "The user wants the current weather in Taipei. I have a get_weather tool available. Let me call it with city \"Taipei\"."
+        },
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "stop_reason": 154829,
+        "token_ids": null,
+        "routed_experts": null
+      }
+    ],
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.1.dev20051+g487ecf187-tp2-aa69033a",
+    "usage": {
+      "prompt_tokens": 166,
+      "total_tokens": 206,
+      "completion_tokens": 40,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "created_cache_tokens": 0,
+        "multimodal_tokens": null
+      }
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null,
+    "ec_transfer_params": null,
+    "metrics": null
+  },
+  "elapsed_seconds": 2.3299174839630723
+}
