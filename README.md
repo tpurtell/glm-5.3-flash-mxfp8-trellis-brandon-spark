@@ -54,8 +54,9 @@ cache independently; Docker mounts include the blobs referenced by snapshots.
 The example starts on
 emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
 host; transfers fail if RDMA cannot be negotiated. Repeat the verification on
-each destination before qualification. Downloads use plain HTTP with Xet disabled (`HF_HUB_DISABLE_XET=1`) and
-eight file workers (`HF_DOWNLOAD_WORKERS`).
+each destination before qualification. Downloads use Hugging Face's default backend and concurrency. Optional
+per-machine environment settings such as `HF_HUB_DISABLE_XET=1` or
+`HF_DOWNLOAD_WORKERS` are honored without imposing them on the recipe.
 
 The recipe pins Z.ai’s current official chat template, with an explicit
 adaptation that honors an explicit `enable_thinking: false` for comparison
