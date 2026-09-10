@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-10",
+  "download_host": "emu",
+  "destinations": [
+    "kiwi",
+    "dodo",
+    "ostrich"
+  ],
+  "command": "./scripts/sync-models.sh kiwi dodo ostrich",
+  "exit_code": 0,
+  "scope": "Second incremental transfer of completed files; downloads still active. This is not a complete or fully verified model snapshot. Final delta and verification remain required.",
+  "transport": "rdmasync --rdma=required; two RoCE rails negotiated on each destination"
+}
