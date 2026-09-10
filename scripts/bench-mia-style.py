@@ -25,7 +25,7 @@ def stream(base, model, prompt, max_tokens, require_decode=True, response_format
     return stream_request(base, body, '/v1/chat/completions', require_decode)
 
 
-def stream_request(base, body, endpoint, require_decode=True):
+def stream_request(base, body, endpoint, require_decode=True, timeout=2700):
     result = {'request':body, 'start':time.perf_counter(), 'events':[]}
     first = last = None
     text = reasoning = ''
@@ -33,7 +33,7 @@ def stream_request(base, body, endpoint, require_decode=True):
     try:
         request = urllib.request.Request(base+endpoint,
             data=json.dumps(body).encode(), headers={'Content-Type':'application/json'})
-        with urllib.request.urlopen(request, timeout=2700) as response:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
             for line in response:
                 if not line.startswith(b'data:'):
                     continue
