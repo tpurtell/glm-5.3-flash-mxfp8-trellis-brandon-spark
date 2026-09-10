@@ -8,11 +8,12 @@ if (($# == 0)); then
     echo 'Usage: scripts/sync-models.sh user@rdma-host [user@rdma-host ...]' >&2
     exit 2
 fi
-for component in target carrier; do
-    test -f "$model_root/$component/config.json" || {
-        echo "Missing downloaded $component/config.json" >&2; exit 1;
-    }
-done
+test -f "$model_root/target/trellismx-manifest.json" || {
+    echo 'Missing target/trellismx-manifest.json' >&2; exit 1;
+}
+test -f "$model_root/carrier/config.json" || {
+    echo 'Missing carrier/config.json' >&2; exit 1;
+}
 for host in "$@"; do
     rdmasync -a --partial --mkpath --rdma=required --rdma-rails=auto \
         --rdma-show-config --stats --rsync-path="$remote_rdmasync" \

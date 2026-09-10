@@ -13,7 +13,7 @@ Download on the head Spark, then distribute over RDMA:
 
 ```bash
 ./scripts/download.sh
-./scripts/sync-models.sh tj@10.55.0.1 tj@10.55.0.2 tj@10.55.0.4
+./scripts/sync-models.sh ostrich dodo kiwi
 ```
 
 `MODEL_ROOT` defaults to `$HOME/models/glm53-trellismx`. The example starts on

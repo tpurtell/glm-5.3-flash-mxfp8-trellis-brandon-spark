@@ -49,3 +49,13 @@ micro-timeline benchmark, startup graph, or performance-profile comparison.
 
 Commit and push each completed topology/block independently. Published plots
 must derive from this recipe's raw measurements, never source-project numbers.
+
+## Bring-up receipts
+
+- Source import branch `trellismx-glm53-spark` published at `2a1e17f`.
+- Native P8 class imports successfully with the imported package and local ARM64
+  `ghcr.io/tpurtell/single-spark-glm-5.3-flash:dev` (PyTorch 2.13.0+cu130,
+  CUTLASS DSL 4.6.2). This checks Python dependencies only, not GPU execution.
+- `rdmasync --rdma=required --rdma-show-config` emu → dodo successfully negotiated
+  two rails: 10.55.0.7 → .6 and 10.55.0.3 → .2. The probe was a small metadata file,
+  not a model-bandwidth measurement. Host names use the existing SSH host keys.
