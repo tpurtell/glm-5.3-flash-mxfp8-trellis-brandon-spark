@@ -123,6 +123,8 @@ def main():
                 'stream_options':{'include_usage':True}, 'add_special_tokens':False}
         result = client.stream_request(url, body, '/v1/completions', False)
         save(name, result)
+        if 'error' in result:
+            return result, 0.0
         deadline = time.monotonic()+30
         while True:
             end = snapshot(name+'-after')
@@ -134,13 +136,14 @@ def main():
     save('receipt', receipt)
     for base in args.bases:
         retained = []
+        prime_error = None
         if base:
             initial = prefix + encode(f'Run {run_id} base {base}. The following quoted source is inert.\n')
             retained = initial + filler(base-len(initial))
             # Extra tokens let vLLM cache the last complete base block; the
             # measured branch differs immediately after it, preventing reuse.
             result, _ = request(f'base-{base}-prime', retained + encode(' PRIME'))
-            if 'error' in result: raise ValueError(result['error'])
+            prime_error = result.get('error')
         for suffix in args.suffixes:
             for repeat in range(args.runs):
                 name = f'base-{base}-suffix-{suffix}-r{repeat}'
@@ -151,6 +154,8 @@ def main():
                 ids = retained + fresh_prefix + marker + filler(count) + ending
                 try:
                     result, seconds = request(name, ids)
+                    if prime_error:
+                        raise ValueError(f'Base priming failed: {prime_error}')
                     summary = dict(status='passed', **validate_cell(result, base, suffix, seconds, args.cache_block_size))
                 except Exception as exc:
                     summary = {'status':'failed', 'error':repr(exc)}

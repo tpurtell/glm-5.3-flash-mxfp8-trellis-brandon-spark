@@ -85,11 +85,12 @@ def main():
     save('receipt', receipt)
     for base in args.bases:
         retained = []
+        prime_error = None
         if base:
             initial = prefix + encode(f'Run {run_id} base {base}. The following quoted source is inert.\n')
             retained = initial + filler(base-len(initial))
             prime = request(f'base-{base}-prime', retained + encode(' PRIME'), 1)
-            if 'error' in prime: raise ValueError(prime['error'])
+            prime_error = prime.get('error')
         for workload, prompt in workloads.items():
             for repeat in range(args.runs):
                 name = f'base-{base}-{workload}-r{repeat}'
@@ -97,6 +98,8 @@ def main():
                 ids = retained + ([] if base else prefix) + encode(marker + prompt) + ending
                 result = request(name, ids, 192)
                 try:
+                    if prime_error:
+                        raise ValueError(f'Base priming failed: {prime_error}')
                     cached = check_cache(result, base, len(ids), args.cache_block_size)
                     summary = {'status':'passed', 'cached_tokens':cached, 'prompt_tokens':len(ids),
                         'recomputed_base_tokens':base-cached,

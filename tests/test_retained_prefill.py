@@ -1,6 +1,12 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import io
+import json
+import sys
+import tempfile
+import types
 
 spec=importlib.util.spec_from_file_location('bench',Path(__file__).resolve().parents[1]/'scripts/bench-retained-prefill.py')
 bench=importlib.util.module_from_spec(spec);spec.loader.exec_module(bench)
@@ -31,5 +37,51 @@ class RetainedTests(unittest.TestCase):
         self.assertEqual(bench.timing_totals(raw)[bench.PREFILL+'_sum'],3.5)
     def test_missing_metrics_rejected(self):
         with self.assertRaises(ValueError): bench.timing_totals('')
+
+    def test_rejected_prime_preserves_remaining_cells(self):
+        class Tokenizer:
+            @staticmethod
+            def from_file(path): return Tokenizer()
+            def encode(self, text, **kwargs): return types.SimpleNamespace(ids=list(text.encode()))
+        class Template:
+            def render(self, **kwargs): return 'UNIQUE_BENCH_CORPUS_SENTINEL'
+        modules = {
+            'tokenizers': types.SimpleNamespace(Tokenizer=Tokenizer),
+            'transformers.utils.chat_template_utils': types.SimpleNamespace(
+                _compile_jinja_template=lambda source: Template()),
+        }
+        count = 0
+        def stream(url, body, *args):
+            nonlocal count
+            if len(body['prompt']) > 256:
+                return {'error': 'HTTP Error 400', 'http_status': 400,
+                        'http_error_body': 'maximum context length exceeded'}
+            count += 1
+            return self.result(cached=0, total=256)
+        def open_url(url, **kwargs):
+            data = (json.dumps({'data':[{'id':'test'}]}) if url.endswith('/v1/models') else
+                    f'vllm:request_prefill_time_seconds_sum {count}\n'
+                    f'vllm:request_prefill_time_seconds_count {count}\n')
+            return io.BytesIO(data.encode())
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root/'tokenizer.json').write_text('{}')
+            (root/'launch.json').write_text('{}')
+            argv = ['bench', '--tokenizer', str(root/'tokenizer.json'),
+                    '--launch-receipt', str(root/'launch.json'), '--corpus-root', tmp,
+                    '--out', str(root/'out'), '--bases', '0', '256',
+                    '--suffixes', '256', '--runs', '1']
+            with patch.dict(sys.modules, modules), patch.object(sys, 'argv', argv), \
+                 patch.object(bench, 'corpus_tokens', return_value=([1], 'test')), \
+                 patch.object(bench.client, 'stream_request', side_effect=stream), \
+                 patch.object(bench.urllib.request, 'urlopen', side_effect=open_url), \
+                 patch('builtins.print'):
+                with self.assertRaises(SystemExit): bench.main()
+            receipt = json.loads((root/'out/receipt.json').read_text())
+            self.assertEqual([s['status'] for s in receipt['samples']], ['passed', 'failed'])
+            self.assertEqual(receipt['status'], 'failed')
+            rejected = json.loads((root/'out/base-256-suffix-256-r0.json').read_text())
+            self.assertEqual(rejected['http_status'], 400)
+            self.assertIn('Base priming failed', receipt['samples'][1]['error'])
 
 if __name__=='__main__':unittest.main()
