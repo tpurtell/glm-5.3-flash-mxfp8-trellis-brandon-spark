@@ -21,7 +21,7 @@ blocks. See the [measured policy and source evidence](../results/2x/mtp2-retaine
 
 Set `--cache-block-size` to the actual engine block size in its startup log
 (the current NVFP4 bring-up reports 6144). Every measured request must report
-**exactly** `floor(base / block_size) * block_size` cached tokens and
+**exactly** `max(0, floor(base / block_size) - cache_drop_blocks) * block_size` cached tokens and
 `base + suffix` prompt tokens. The launcher enables
 `--enable-prompt-tokens-details`. Missing details, cache eviction, excess suffix
 reuse, or token-count disagreement invalidate the cell. Failed repeats cannot
@@ -54,5 +54,7 @@ python3 scripts/bench-retained-prefill.py \
 
 Eleven local transport/accounting tests pass. A mock-server smoke run using the
 real pinned tokenizer and template also verified two bases, two suffixes and two
-repeats. Those mock timings are excluded from results. Real server cache/timing
-validation and the full performance matrices remain pending model bring-up.
+repeats. Those mock timings are excluded from results. The published
+[60-cell MTP matrix](../results/2x/mtp2-retained-prefill/README.md) records
+48 measured requests and 12 configured-context-limit rejections. Its original
+strict-cache failures remain intact alongside the separate cache-policy audit.
