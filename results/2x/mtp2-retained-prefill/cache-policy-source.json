@@ -1,0 +1,37 @@
+{
+  "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+  "files": [
+    {
+      "installed_path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/core/kv_cache_coordinator.py",
+      "sha256": "6a5a27008cc6b5dd194cb91d9ba69a0a34cff1e2b6e2f25f23c8d4a1163470fd",
+      "excerpts": [
+        {
+          "first_line": 102,
+          "last_line": 128,
+          "source": "\n        # KV cache group indices that get the EAGLE last-block drop.\n        self.eagle_group_ids: set[int] = {\n            i for i, g in enumerate(kv_cache_config.kv_cache_groups) if g.is_eagle_group\n        }\n        # GLM's wrapped target layers and unwrapped MTP layer share the MLA\n        # group. Mark only that group as EAGLE; target-only KDA groups must\n        # retain their exact aligned prefix checkpoints. Other model layouts\n        # keep vLLM's conservative all-group fallback.\n        if use_eagle and not self.eagle_group_ids:\n            is_wrapped_glm = any(\n                name.startswith(\"language_model.model.layers.\")\n                for group in kv_cache_config.kv_cache_groups\n                for name in group.layer_names\n            )\n            if is_wrapped_glm:\n                self.eagle_group_ids = {\n                    i\n                    for i, group in enumerate(kv_cache_config.kv_cache_groups)\n                    if group.kv_cache_spec.participates_in_prefix_caching\n                    and any(\n                        name.startswith(\"model.layers.\")\n                        for name in group.layer_names\n                    )\n                }\n            if not self.eagle_group_ids:\n                self.eagle_group_ids = set("
+        },
+        {
+          "first_line": 738,
+          "last_line": 751,
+          "source": "            self.single_type_managers, self.kv_cache_config.kv_cache_groups\n        ):\n            if not group.kv_cache_spec.participates_in_prefix_caching:\n                continue\n            num_tokens_to_cache = aligned_num_computed_tokens\n            # EAGLE groups match one block past each aligned boundary and drop\n            # it, so make that lookahead block eligible to be cached.\n            if manager.use_eagle and aligned_num_computed_tokens > 0:\n                num_tokens_to_cache = min(\n                    num_computed_tokens,\n                    aligned_num_computed_tokens + manager.block_size,\n                )\n            # The manager already knows the fine hit granularity\n            # (``scheduler_block_size``); retention is passed separately so it"
+        },
+        {
+          "first_line": 820,
+          "last_line": 849,
+          "source": "                    continue\n\n                drop_eagle_block = use_eagle and idx not in eagle_verified\n\n                _max_length = curr_hit_length\n                # Eagle matches one extra drop unit (one hash unit for\n                # fine-grained managers, else one cache block) and then drops\n                # it, landing back at the candidate length. No margin for\n                # mamba: its finder never drops (draft models have no mamba\n                # layers), so the hit would grow past the candidate.\n                if drop_eagle_block and not isinstance(spec, MambaSpec):\n                    eagle_margin = (\n                        self.hash_block_size\n                        if self.enable_partial_hash_hits\n                        and manager_cls.supports_fine_grained_hash_lookup\n                        and group_block_size > self.hash_block_size\n                        else group_block_size\n                    )\n                    _max_length = min(\n                        curr_hit_length + eagle_margin, max_cache_hit_length\n                    )\n                hit_blocks, _new_hit_length = manager_cls.find_longest_cache_hit(\n                    block_hashes=block_hashes,\n                    max_length=_max_length,\n                    kv_cache_group_ids=group_ids,\n                    block_pool=self.block_pool,\n                    kv_cache_spec=spec,\n                    drop_eagle_block=drop_eagle_block,\n                    alignment_tokens=self._cache_hit_alignment_tokens,\n                    dcp_world_size=("
+        }
+      ]
+    },
+    {
+      "installed_path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/core/single_type_kv_cache_manager.py",
+      "sha256": "4d2a153eb8c1f3b4ff2c1cd2280fbe5006d4097ee3d0e9a57075d83cf2fce1b8",
+      "excerpts": [
+        {
+          "first_line": 763,
+          "last_line": 780,
+          "source": "                hit_length = (fine_idx + 1) * alignment_tokens\n                break\n\n        # Eagle needs the tokens right before the generation point recomputed:\n        # drop one hash unit when fine-grained (the tail block's KV is\n        # append-only, so it still covers the reduced length), else one cache\n        # block.\n        if drop_eagle_block and hit_length > 0:\n            hit_length -= min(alignment_tokens, block_size)\n        # Round down to the alignment; a no-op when fine-grained (hits land on\n        # hash boundaries by construction) and when alignment_tokens ==\n        # block_size. Then trim blocks past the new tail.\n        hit_length -= hit_length % alignment_tokens\n        num_blocks = cdiv(hit_length, block_size)\n        for computed in computed_blocks:\n            del computed[num_blocks:]\n        return computed_blocks, hit_length\n"
+        }
+      ]
+    }
+  ]
+}

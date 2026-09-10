@@ -1,0 +1,1170 @@
+{
+  "created": "2026-09-10T10:12:27.358535+00:00",
+  "run_id": "2806378e1b254bffa6814da7b6f2e9b7",
+  "launch": {
+    "created": "2026-09-10T09:41:13.630293+00:00",
+    "source_commit": "733874305ace91bdd6acd76e9397f93516f28fbb",
+    "sources": {
+      "target": {
+        "repo_id": "brandonmusic/GLM-5.3-Flash-TrellisMX-MXFP8",
+        "revision": "db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+      },
+      "carrier": {
+        "repo_id": "local-inference-lab/GLM-5.3-Flash-NVFP4",
+        "revision": "520de24eabf507659eaef7c70f14fd584527facc"
+      },
+      "mia": {
+        "repository": "https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks",
+        "revision": "94bddea5db64137db41e4ef4c6c120e6e69e32d7"
+      },
+      "measurement_reference": {
+        "repository": "https://github.com/tpurtell/glmrt-5.3-1rtx-4spark",
+        "revision": "dc6d9b8e1600e001cb1d4228bd911f4df8091f99"
+      },
+      "sparkinfer": {
+        "repository": "https://github.com/tpurtell/sparkinfer-glmrt",
+        "branch": "trellismx-glm53-spark",
+        "revision": "3ac1597674bff576241b7c72929bc3a3d18d7616"
+      },
+      "chat_template": {
+        "repo_id": "zai-org/GLM-5.3-Flash",
+        "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+        "file": "chat_template.jinja",
+        "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+        "checked_date": "2026-09-10"
+      },
+      "draft": {
+        "repo_id": "incoai/GLM-5.3-Flash-DFlash2",
+        "revision": "bf582e4eacc1810f76656d1811693ff6c6737d2a"
+      },
+      "tool_eval": {
+        "repository": "https://github.com/SeraphimSerapis/tool-eval-bench.git",
+        "revision": "cf54b4bfe705f12f71e8866f10730572497c8105",
+        "version": "2.6.1.dev45+gcf54b4bfe",
+        "reference_date": "2026-09-08"
+      }
+    },
+    "plan": [
+      {
+        "host": "emu",
+        "name": "glm53-trellis-2x-r0",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r0",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.3",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r0:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "0",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "165000",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.895",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--speculative-config",
+          "{\"method\": \"mtp\", \"num_speculative_tokens\": 2}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+        "container_id": "f3628a6449a04c152a07bffc6bab493f103a3688faebd3f21ddd8a57da955eed"
+      },
+      {
+        "host": "kiwi",
+        "name": "glm53-trellis-2x-r1",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "glm53-trellis-2x-r1",
+          "--gpus",
+          "all",
+          "--network",
+          "host",
+          "--ipc",
+          "host",
+          "--device",
+          "/dev/infiniband",
+          "--cap-add",
+          "IPC_LOCK",
+          "--ulimit",
+          "memlock=-1",
+          "--ulimit",
+          "stack=67108864",
+          "-e",
+          "VLLM_TRELLISMX_CHECKPOINT=/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+          "-e",
+          "VLLM_HOST_IP=10.55.0.4",
+          "-e",
+          "NCCL_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "GLOO_SOCKET_IFNAME=enp1s0f0np0",
+          "-e",
+          "NCCL_IB_HCA=rocep1s0f0,roceP2p1s0f0",
+          "-e",
+          "NCCL_IB_GID_INDEX=3",
+          "-e",
+          "NCCL_NET=IB",
+          "-e",
+          "NCCL_IB_DISABLE=0",
+          "-e",
+          "NCCL_IB_ROCE_VERSION_NUM=2",
+          "-e",
+          "NCCL_NET_PLUGIN=none",
+          "-e",
+          "NCCL_NVLS_ENABLE=0",
+          "-e",
+          "NCCL_CUMEM_ENABLE=0",
+          "-e",
+          "NCCL_IB_MERGE_NICS=0",
+          "-e",
+          "NCCL_CROSS_NIC=1",
+          "-e",
+          "NCCL_DEBUG=WARN",
+          "-e",
+          "HF_HUB_OFFLINE=1",
+          "-e",
+          "TRANSFORMERS_OFFLINE=1",
+          "-e",
+          "VLLM_CACHE_ROOT=/cache/vllm",
+          "-e",
+          "TRITON_CACHE_DIR=/cache/triton",
+          "-e",
+          "B12X_COMPILE_CACHE_DIR=/cache/b12x",
+          "-e",
+          "TRELLISMX_COMPILE_CACHE_DIR=/cache/trellismx",
+          "-e",
+          "VLLM_ENGINE_READY_TIMEOUT_S=3600",
+          "-e",
+          "VLLM_USE_B12X_SPARSE_INDEXER=1",
+          "-e",
+          "VLLM_USE_B12X_KPOOL_INDEXER=1",
+          "-e",
+          "KV_FP8_ROPE=1",
+          "-e",
+          "VLLM_NVFP4_MLA_DYNAMIC_SCALE=1",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8:/models/target:ro",
+          "-v",
+          "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4:/models/carrier:ro",
+          "-v",
+          "/home/tj/.cache/glm53-trellismx/2x-r1:/cache",
+          "glm53-trellismx-spark:dev",
+          "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+          "--served-model-name",
+          "glm53-trellismx",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+          "--tensor-parallel-size",
+          "2",
+          "--nnodes",
+          "2",
+          "--node-rank",
+          "1",
+          "--master-addr",
+          "10.55.0.3",
+          "--master-port",
+          "29553",
+          "--distributed-executor-backend",
+          "mp",
+          "--disable-custom-all-reduce",
+          "--attention-backend",
+          "B12X_MLA_SPARSE",
+          "--kv-cache-dtype",
+          "nvfp4_ds_mla",
+          "--block-size",
+          "256",
+          "--max-model-len",
+          "165000",
+          "--max-num-batched-tokens",
+          "1024",
+          "--max-num-seqs",
+          "4",
+          "--gpu-memory-utilization",
+          "0.895",
+          "--no-enable-flashinfer-autotune",
+          "--language-model-only",
+          "--enable-prefix-caching",
+          "--enable-prompt-tokens-details",
+          "--enable-auto-tool-choice",
+          "--tool-call-parser",
+          "glm47",
+          "--reasoning-parser",
+          "glm45",
+          "--headless",
+          "--speculative-config",
+          "{\"method\": \"mtp\", \"num_speculative_tokens\": 2}"
+        ],
+        "model_locations": {
+          "target": {
+            "path": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe",
+            "mount": "/home/tj/.cache/huggingface/hub/models--brandonmusic--GLM-5.3-Flash-TrellisMX-MXFP8",
+            "container": "/models/target/snapshots/db46a5d3b5a8ed0eb0147fcbbd44c690f3918ffe"
+          },
+          "carrier": {
+            "path": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+            "mount": "/home/tj/.cache/huggingface/hub/models--local-inference-lab--GLM-5.3-Flash-NVFP4",
+            "container": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc"
+          },
+          "draft": {
+            "path": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a",
+            "mount": "/home/tj/.cache/huggingface/hub/models--incoai--GLM-5.3-Flash-DFlash2",
+            "container": "/models/draft/snapshots/bf582e4eacc1810f76656d1811693ff6c6737d2a"
+          }
+        },
+        "image_id": "sha256:dcc6559be3f1f6f23a30042e46ee529aa08cdcaaf4f20161f29ca99840dfd3d0",
+        "container_id": "8dc7c5d5876abd2414b4c533104e191d02946f0b9b6238ea8efcaeb5095c6aba"
+      }
+    ],
+    "ready_seconds": 1023.435947486083
+  },
+  "models": {
+    "object": "list",
+    "data": [
+      {
+        "id": "glm53-trellismx",
+        "object": "model",
+        "created": 1789035147,
+        "owned_by": "vllm",
+        "root": "/models/carrier/snapshots/520de24eabf507659eaef7c70f14fd584527facc",
+        "parent": null,
+        "max_model_len": 165000,
+        "permission": [
+          {
+            "id": "modelperm-aa30cad8c1826d49",
+            "object": "model_permission",
+            "created": 1789035147,
+            "allow_create_engine": false,
+            "allow_sampling": true,
+            "allow_logprobs": true,
+            "allow_search_indices": false,
+            "allow_view": true,
+            "allow_fine_tuning": false,
+            "organization": "*",
+            "group": null,
+            "is_blocking": false
+          }
+        ]
+      }
+    ]
+  },
+  "runs": 2,
+  "tokenizer_sha256": "19e773648cb4e65de8660ea6365e10acca112d42a854923df93db4a6f333a82d",
+  "template_sha256": "74ec8ee7258eec437936bfc4669a7227c02e5f9a6f349d88d01770360bea1564",
+  "template": {
+    "repo_id": "zai-org/GLM-5.3-Flash",
+    "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+    "file": "chat_template.jinja",
+    "sha256": "0c4099f3382d6c92700dfb99725025360966fd73032f0ecf32377c0d9e6309c5",
+    "checked_date": "2026-09-10",
+    "serving_sha256": "74ec8ee7258eec437936bfc4669a7227c02e5f9a6f349d88d01770360bea1564",
+    "adaptation": "explicit enable_thinking=false closes initial think span"
+  },
+  "corpus_sha256": "e1e097453bf16112e5d4f73b7ce0646fc64693dc0088b139cfa3d2d46cccc7c6",
+  "client_sha256": "8f3c09372925849fb46cde9aaa9aaba7de45244205ab501aa667dc0a92c882ce",
+  "transport_sha256": "8ba2cbf2e469291cdea6c5c0dd9b997dcd6507411acb7b96a3df508e60a78e46",
+  "bases": [
+    0,
+    32768,
+    65536,
+    131072,
+    262144
+  ],
+  "suffixes": [
+    1024,
+    2048,
+    4096,
+    8192,
+    16384,
+    32768
+  ],
+  "cache_block_size": 6144,
+  "samples": [
+    {
+      "cell": "base-0-suffix-1024-r0",
+      "base": 0,
+      "suffix": 1024,
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 1024,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 1024,
+      "computed_tokens_per_second": 1167.9354024660338,
+      "server_prefill_seconds": 0.8767608189955354,
+      "new_tokens_per_second": 1167.9354024660338,
+      "client_ttft_seconds": 0.9178122599842027,
+      "new_tokens_per_client_ttft_second": 1115.6965804941688
+    },
+    {
+      "cell": "base-0-suffix-1024-r1",
+      "base": 0,
+      "suffix": 1024,
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 1024,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 1024,
+      "computed_tokens_per_second": 1216.969968754535,
+      "server_prefill_seconds": 0.8414340750314295,
+      "new_tokens_per_second": 1216.969968754535,
+      "client_ttft_seconds": 0.8469110069563612,
+      "new_tokens_per_client_ttft_second": 1209.0998836820686
+    },
+    {
+      "cell": "base-0-suffix-2048-r0",
+      "base": 0,
+      "suffix": 2048,
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 2048,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 2048,
+      "computed_tokens_per_second": 1176.1228833995194,
+      "server_prefill_seconds": 1.7413146439939737,
+      "new_tokens_per_second": 1176.1228833995194,
+      "client_ttft_seconds": 1.7692749550333247,
+      "new_tokens_per_client_ttft_second": 1157.5363084034757
+    },
+    {
+      "cell": "base-0-suffix-2048-r1",
+      "base": 0,
+      "suffix": 2048,
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 2048,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 2048,
+      "computed_tokens_per_second": 1183.0452972759022,
+      "server_prefill_seconds": 1.7311255999375135,
+      "new_tokens_per_second": 1183.0452972759022,
+      "client_ttft_seconds": 1.736045010969974,
+      "new_tokens_per_client_ttft_second": 1179.692915252081
+    },
+    {
+      "cell": "base-0-suffix-4096-r0",
+      "base": 0,
+      "suffix": 4096,
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 4096,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 4096,
+      "computed_tokens_per_second": 1094.807145641341,
+      "server_prefill_seconds": 3.7412981969537213,
+      "new_tokens_per_second": 1094.807145641341,
+      "client_ttft_seconds": 3.78465351392515,
+      "new_tokens_per_client_ttft_second": 1082.265519136505
+    },
+    {
+      "cell": "base-0-suffix-4096-r1",
+      "base": 0,
+      "suffix": 4096,
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 4096,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 4096,
+      "computed_tokens_per_second": 1151.178841881529,
+      "server_prefill_seconds": 3.558091802056879,
+      "new_tokens_per_second": 1151.178841881529,
+      "client_ttft_seconds": 3.5647201919928193,
+      "new_tokens_per_client_ttft_second": 1149.0382917572485
+    },
+    {
+      "cell": "base-0-suffix-8192-r0",
+      "base": 0,
+      "suffix": 8192,
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 8192,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 8192,
+      "computed_tokens_per_second": 1132.832163591443,
+      "server_prefill_seconds": 7.231433095992543,
+      "new_tokens_per_second": 1132.832163591443,
+      "client_ttft_seconds": 7.269154426991008,
+      "new_tokens_per_client_ttft_second": 1126.9536343295151
+    },
+    {
+      "cell": "base-0-suffix-8192-r1",
+      "base": 0,
+      "suffix": 8192,
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 8192,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 8192,
+      "computed_tokens_per_second": 1132.6554357530101,
+      "server_prefill_seconds": 7.232561414013617,
+      "new_tokens_per_second": 1132.6554357530101,
+      "client_ttft_seconds": 7.24190044705756,
+      "new_tokens_per_client_ttft_second": 1131.1947823486682
+    },
+    {
+      "cell": "base-0-suffix-16384-r0",
+      "base": 0,
+      "suffix": 16384,
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 16384,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 16384,
+      "computed_tokens_per_second": 1110.9633473124309,
+      "server_prefill_seconds": 14.747561240103096,
+      "new_tokens_per_second": 1110.9633473124309,
+      "client_ttft_seconds": 14.78826286608819,
+      "new_tokens_per_client_ttft_second": 1107.9056511479173
+    },
+    {
+      "cell": "base-0-suffix-16384-r1",
+      "base": 0,
+      "suffix": 16384,
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 16384,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 16384,
+      "computed_tokens_per_second": 1120.496274021085,
+      "server_prefill_seconds": 14.622092353063636,
+      "new_tokens_per_second": 1120.496274021085,
+      "client_ttft_seconds": 14.636652274057269,
+      "new_tokens_per_client_ttft_second": 1119.3816518439683
+    },
+    {
+      "cell": "base-0-suffix-32768-r0",
+      "base": 0,
+      "suffix": 32768,
+      "repeat": 0,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 32768,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 32768,
+      "computed_tokens_per_second": 1113.0758435878295,
+      "server_prefill_seconds": 29.439143961993977,
+      "new_tokens_per_second": 1113.0758435878295,
+      "client_ttft_seconds": 29.491724157938734,
+      "new_tokens_per_client_ttft_second": 1111.0913632758682
+    },
+    {
+      "cell": "base-0-suffix-32768-r1",
+      "base": 0,
+      "suffix": 32768,
+      "repeat": 1,
+      "status": "passed",
+      "cached_tokens": 0,
+      "new_tokens": 32768,
+      "recomputed_base_tokens": 0,
+      "computed_tokens": 32768,
+      "computed_tokens_per_second": 1113.4201449287698,
+      "server_prefill_seconds": 29.430040537030436,
+      "new_tokens_per_second": 1113.4201449287698,
+      "client_ttft_seconds": 29.46975502499845,
+      "new_tokens_per_client_ttft_second": 1111.9196604180704
+    },
+    {
+      "cell": "base-32768-suffix-1024-r0",
+      "base": 32768,
+      "suffix": 1024,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=1024, usage={'prompt_tokens': 33792, 'total_tokens': 33793, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-1024-r1",
+      "base": 32768,
+      "suffix": 1024,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=1024, usage={'prompt_tokens': 33792, 'total_tokens': 33793, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-2048-r0",
+      "base": 32768,
+      "suffix": 2048,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=2048, usage={'prompt_tokens': 34816, 'total_tokens': 34817, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-2048-r1",
+      "base": 32768,
+      "suffix": 2048,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=2048, usage={'prompt_tokens': 34816, 'total_tokens': 34817, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-4096-r0",
+      "base": 32768,
+      "suffix": 4096,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=4096, usage={'prompt_tokens': 36864, 'total_tokens': 36865, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-4096-r1",
+      "base": 32768,
+      "suffix": 4096,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=4096, usage={'prompt_tokens': 36864, 'total_tokens': 36865, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-8192-r0",
+      "base": 32768,
+      "suffix": 8192,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=8192, usage={'prompt_tokens': 40960, 'total_tokens': 40961, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-8192-r1",
+      "base": 32768,
+      "suffix": 8192,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=8192, usage={'prompt_tokens': 40960, 'total_tokens': 40961, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-16384-r0",
+      "base": 32768,
+      "suffix": 16384,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=16384, usage={'prompt_tokens': 49152, 'total_tokens': 49153, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-16384-r1",
+      "base": 32768,
+      "suffix": 16384,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=16384, usage={'prompt_tokens': 49152, 'total_tokens': 49153, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-32768-r0",
+      "base": 32768,
+      "suffix": 32768,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=32768, usage={'prompt_tokens': 65536, 'total_tokens': 65537, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-32768-suffix-32768-r1",
+      "base": 32768,
+      "suffix": 32768,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=32768, suffix=32768, usage={'prompt_tokens': 65536, 'total_tokens': 65537, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 24576}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-1024-r0",
+      "base": 65536,
+      "suffix": 1024,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=1024, usage={'prompt_tokens': 66560, 'total_tokens': 66561, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-1024-r1",
+      "base": 65536,
+      "suffix": 1024,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=1024, usage={'prompt_tokens': 66560, 'total_tokens': 66561, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-2048-r0",
+      "base": 65536,
+      "suffix": 2048,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=2048, usage={'prompt_tokens': 67584, 'total_tokens': 67585, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-2048-r1",
+      "base": 65536,
+      "suffix": 2048,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=2048, usage={'prompt_tokens': 67584, 'total_tokens': 67585, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-4096-r0",
+      "base": 65536,
+      "suffix": 4096,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=4096, usage={'prompt_tokens': 69632, 'total_tokens': 69633, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-4096-r1",
+      "base": 65536,
+      "suffix": 4096,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=4096, usage={'prompt_tokens': 69632, 'total_tokens': 69633, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-8192-r0",
+      "base": 65536,
+      "suffix": 8192,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=8192, usage={'prompt_tokens': 73728, 'total_tokens': 73729, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-8192-r1",
+      "base": 65536,
+      "suffix": 8192,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=8192, usage={'prompt_tokens': 73728, 'total_tokens': 73729, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-16384-r0",
+      "base": 65536,
+      "suffix": 16384,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=16384, usage={'prompt_tokens': 81920, 'total_tokens': 81921, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-16384-r1",
+      "base": 65536,
+      "suffix": 16384,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=16384, usage={'prompt_tokens': 81920, 'total_tokens': 81921, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-32768-r0",
+      "base": 65536,
+      "suffix": 32768,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=32768, usage={'prompt_tokens': 98304, 'total_tokens': 98305, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-65536-suffix-32768-r1",
+      "base": 65536,
+      "suffix": 32768,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=65536, suffix=32768, usage={'prompt_tokens': 98304, 'total_tokens': 98305, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 55296}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-1024-r0",
+      "base": 131072,
+      "suffix": 1024,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=1024, usage={'prompt_tokens': 132096, 'total_tokens': 132097, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-1024-r1",
+      "base": 131072,
+      "suffix": 1024,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=1024, usage={'prompt_tokens': 132096, 'total_tokens': 132097, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-2048-r0",
+      "base": 131072,
+      "suffix": 2048,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=2048, usage={'prompt_tokens': 133120, 'total_tokens': 133121, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-2048-r1",
+      "base": 131072,
+      "suffix": 2048,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=2048, usage={'prompt_tokens': 133120, 'total_tokens': 133121, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-4096-r0",
+      "base": 131072,
+      "suffix": 4096,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=4096, usage={'prompt_tokens': 135168, 'total_tokens': 135169, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-4096-r1",
+      "base": 131072,
+      "suffix": 4096,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=4096, usage={'prompt_tokens': 135168, 'total_tokens': 135169, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-8192-r0",
+      "base": 131072,
+      "suffix": 8192,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=8192, usage={'prompt_tokens': 139264, 'total_tokens': 139265, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-8192-r1",
+      "base": 131072,
+      "suffix": 8192,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=8192, usage={'prompt_tokens': 139264, 'total_tokens': 139265, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-16384-r0",
+      "base": 131072,
+      "suffix": 16384,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=16384, usage={'prompt_tokens': 147456, 'total_tokens': 147457, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-16384-r1",
+      "base": 131072,
+      "suffix": 16384,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=16384, usage={'prompt_tokens': 147456, 'total_tokens': 147457, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-32768-r0",
+      "base": 131072,
+      "suffix": 32768,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=32768, usage={'prompt_tokens': 163840, 'total_tokens': 163841, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-131072-suffix-32768-r1",
+      "base": 131072,
+      "suffix": 32768,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Cache shape mismatch: planned base=131072, suffix=32768, usage={'prompt_tokens': 163840, 'total_tokens': 163841, 'completion_tokens': 1, 'prompt_tokens_details': {'cached_tokens': 122880}}\")"
+    },
+    {
+      "cell": "base-262144-suffix-1024-r0",
+      "base": 262144,
+      "suffix": 1024,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-1024-r1",
+      "base": 262144,
+      "suffix": 1024,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-2048-r0",
+      "base": 262144,
+      "suffix": 2048,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-2048-r1",
+      "base": 262144,
+      "suffix": 2048,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-4096-r0",
+      "base": 262144,
+      "suffix": 4096,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-4096-r1",
+      "base": 262144,
+      "suffix": 4096,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-8192-r0",
+      "base": 262144,
+      "suffix": 8192,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-8192-r1",
+      "base": 262144,
+      "suffix": 8192,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-16384-r0",
+      "base": 262144,
+      "suffix": 16384,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-16384-r1",
+      "base": 262144,
+      "suffix": 16384,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-32768-r0",
+      "base": 262144,
+      "suffix": 32768,
+      "repeat": 0,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    },
+    {
+      "cell": "base-262144-suffix-32768-r1",
+      "base": 262144,
+      "suffix": 32768,
+      "repeat": 1,
+      "status": "failed",
+      "error": "ValueError(\"Base priming failed: <HTTPError 400: 'Bad Request'>\")"
+    }
+  ],
+  "medians": [
+    {
+      "base": 0,
+      "suffix": 1024,
+      "status": "passed",
+      "new_tokens_per_second": 1192.4526856102843
+    },
+    {
+      "base": 0,
+      "suffix": 2048,
+      "status": "passed",
+      "new_tokens_per_second": 1179.5840903377107
+    },
+    {
+      "base": 0,
+      "suffix": 4096,
+      "status": "passed",
+      "new_tokens_per_second": 1122.9929937614352
+    },
+    {
+      "base": 0,
+      "suffix": 8192,
+      "status": "passed",
+      "new_tokens_per_second": 1132.7437996722265
+    },
+    {
+      "base": 0,
+      "suffix": 16384,
+      "status": "passed",
+      "new_tokens_per_second": 1115.7298106667579
+    },
+    {
+      "base": 0,
+      "suffix": 32768,
+      "status": "passed",
+      "new_tokens_per_second": 1113.2479942582995
+    },
+    {
+      "base": 32768,
+      "suffix": 1024,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 32768,
+      "suffix": 2048,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 32768,
+      "suffix": 4096,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 32768,
+      "suffix": 8192,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 32768,
+      "suffix": 16384,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 32768,
+      "suffix": 32768,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 65536,
+      "suffix": 1024,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 65536,
+      "suffix": 2048,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 65536,
+      "suffix": 4096,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 65536,
+      "suffix": 8192,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 65536,
+      "suffix": 16384,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 65536,
+      "suffix": 32768,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 131072,
+      "suffix": 1024,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 131072,
+      "suffix": 2048,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 131072,
+      "suffix": 4096,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 131072,
+      "suffix": 8192,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 131072,
+      "suffix": 16384,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 131072,
+      "suffix": 32768,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 262144,
+      "suffix": 1024,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 262144,
+      "suffix": 2048,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 262144,
+      "suffix": 4096,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 262144,
+      "suffix": 8192,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 262144,
+      "suffix": 16384,
+      "status": "failed",
+      "new_tokens_per_second": null
+    },
+    {
+      "base": 262144,
+      "suffix": 32768,
+      "status": "failed",
+      "new_tokens_per_second": null
+    }
+  ],
+  "status": "failed"
+}
