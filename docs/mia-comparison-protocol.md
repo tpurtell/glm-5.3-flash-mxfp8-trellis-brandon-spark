@@ -8,8 +8,8 @@ are extracted from that revision. Its MIT license is in `licenses/`.
 The README's Mia values come from the pinned Mia recipe README, not a rerun here.
 Its historical dashboard revision is not identified, so this reproduces the
 published workload style using inspected current sparkDash source. Do not call
-it a controlled quantization-only A/B. Hardware count, software and launch
-settings differ; the receipts must make those differences visible.
+it a controlled quantization-only A/B. Both recipes use two Sparks, but software and launch settings differ; the
+receipts must make those differences visible.
 
 Decode uses the exact counting, clamp_00–49 and hash-map prompts, 32-token warmup,
 T0/top_p1, thinking off, 400-token cap, C1/C2/C4, five waves per cell. Concurrent
@@ -35,7 +35,8 @@ python3 scripts/bench-mia-style.py prefill --launch-receipt .work/launches/RUN/l
 ```
 
 Use the actual emu/kiwi two-node launch receipt for every comparison.
-This client is implemented; no live-model measurements have completed yet.
+Preliminary one-wave target-only decode screens are recorded in
+`results/screening/`. Full five-wave comparisons and cold prefill remain pending.
 It complements the weighted seven-category and orchid suite.
 
 The README comparison is explicitly thinking-off. This is a benchmark request
