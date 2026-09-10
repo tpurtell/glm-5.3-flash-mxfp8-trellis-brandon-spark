@@ -116,3 +116,15 @@ The default **emu + kiwi** pair and **emu + kiwi + dodo + ostrich** group now pa
 the same three sizes in eager execution and exact graph replay. Every rank exits
 cleanly. Their independent receipts are in `results/bringup/roce-default-2x/`
 and `results/bringup/roce-4x/`. These checks qualify transport only.
+
+## First native GB10 shard
+
+Layer 4, TP4 rank 2 (K4) passes finite/nonzero output and exact CUDA graph
+replay at 1/8/32/128 tokens on dodo. The original runtime failed at eight
+tokens with `CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE`: its inherited grid
+policy targets a 188-SM GPU. Runtime branch commit `669cc12` caps the GB10
+cooperative routing grid at one CTA per SM. This is a conservative correctness
+bound, not a performance optimum. Both failure and successful rerun, including
+the exact runtime override identity, are in `results/bringup/native-layer4-rank2/`.
+K5, TP2 partition equivalence, independent numerical accuracy and full serving
+remain unqualified.

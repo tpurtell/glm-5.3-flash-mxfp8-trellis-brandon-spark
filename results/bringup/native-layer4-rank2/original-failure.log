@@ -1,0 +1,32 @@
+{"gpu": "NVIDIA GB10", "capability": [12, 1], "torch": "2.13.0+cu130", "layer": 4, "parents": ["4cb79386991917acaa1a3cb823c7976d6aacae2a017d9a8b29f38ef252d49d0f"]}
+{"tokens": 1, "tp": 4, "rank": 2, "finite_nonzero": true, "graph_replay_exact": true}
+Traceback (most recent call last):
+  File "/check.py", line 56, in <module>
+    reference = runtime(x, weights, ids).clone()
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/b12x/b12x/moe/_shared/trellismx/p8_native_kernel.py", line 766, in __call__
+    arm.compiled(
+  File "/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/jit_executor.py", line 1077, in run_compiled_program
+    raise cuda_helpers.create_cuda_runtime_error(error_code)
+cutlass.base_dsl.common.DSLCudaRuntimeError: 
+[91m[1merror:[0m CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE (error code: 720) 
+ 
+
+[0m
+  [94m= note:[0m error code 720
+  [94m= note:[0m 
+- [1mError name: CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE
+- Error code: 720
+- CUDA_TOOLKIT_PATH: not set
+- Target SM ARCH: unknown (unspecified)[0m
+
+[94m📊 GPU Information:[0m
+[1m- CUDA devices available: 1 (current: <CUdevice 0>)
+- Architecture: [94mBlackwell[0m ([92msm_121a[0m)
+- Compatible SM archs: [92msm_121a[0m
+- Total Memory: [94m121.63 GB[0m
+
+

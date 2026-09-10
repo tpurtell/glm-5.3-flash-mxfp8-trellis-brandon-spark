@@ -11,11 +11,16 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('checkpoint', type=Path)
 parser.add_argument('--layer', type=int, default=3)
 parser.add_argument('--tp2', action='store_true')
+parser.add_argument('--rank', type=int, choices=range(4), default=0,
+                    help='TP4 rank, or first parent rank (0/2) with --tp2')
 args = parser.parse_args()
+if args.tp2 and args.rank not in (0, 2):
+    parser.error('--tp2 requires --rank 0 or 2')
+parent_ranks = list(range(args.rank, args.rank + (2 if args.tp2 else 1)))
 manifest = json.loads((args.checkpoint / 'trellismx-manifest.json').read_text())
 records = {r['rank']: r for r in manifest['files'] if r['layer'] == args.layer}
 paths = []
-for rank in range(2 if args.tp2 else 1):
+for rank in parent_ranks:
     record = records[rank]
     path = args.checkpoint / record['path']
     with path.open('rb') as stream:
@@ -26,13 +31,14 @@ transform_hash = hashlib.sha256((args.checkpoint / 'design/transform.json').read
 torch.manual_seed(20260910)
 print(json.dumps({'gpu': torch.cuda.get_device_name(), 'capability': torch.cuda.get_device_capability(),
                   'torch': torch.__version__, 'layer': args.layer,
-                  'parents': [records[r]['sha256'] for r in range(len(paths))]}), flush=True)
+                  'parents': [records[r]['sha256'] for r in parent_ranks]}), flush=True)
 
-def make(rank, tp):
-    return P8NativeTPMoE(tuple(paths) if tp == 2 else paths[rank],
+def make(index, tp):
+    rank = args.rank // 2 if tp == 2 else parent_ranks[index]
+    return P8NativeTPMoE(tuple(paths) if tp == 2 else paths[index],
         device=torch.device('cuda'), tp_rank=rank, world_size=tp, layer=args.layer,
-        tp4_parent_sha256=tuple(records[r]['sha256'] for r in range(2)) if tp == 2 else None,
-        expected_design_sha256=records[rank]['source_design_sha256'],
+        tp4_parent_sha256=tuple(records[r]['sha256'] for r in parent_ranks) if tp == 2 else None,
+        expected_design_sha256=records[parent_ranks[index]]['source_design_sha256'],
         expected_transform_sha256=transform_hash,
         intermediate=2048//tp, small_m_scheduler=True, fc1_tile_n=128,
         fuse_scratch_zero=True, grid_policy=True, fc1_warp_quant=False, fc1_broadcast_a=True)
