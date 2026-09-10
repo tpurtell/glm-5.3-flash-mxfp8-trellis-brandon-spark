@@ -15,11 +15,13 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def stream(base, model, prompt, max_tokens, require_decode=True):
+def stream(base, model, prompt, max_tokens, require_decode=True, response_format=None):
     body = dict(model=model, messages=[{'role':'user','content':prompt}],
                 temperature=0, top_p=1, max_tokens=max_tokens, stream=True,
                 stream_options={'include_usage':True},
                 chat_template_kwargs={'enable_thinking':False})
+    if response_format is not None:
+        body['response_format'] = response_format
     result = {'request':body, 'start':time.perf_counter(), 'events':[]}
     first = last = None
     text = reasoning = ''
