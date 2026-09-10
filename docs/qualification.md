@@ -62,8 +62,8 @@ must derive from this recipe's raw measurements, never source-project numbers.
 - The development ARM64 container builds successfully with the P8 kernel package
   and a narrow ModelOpt adapter hook. The hook allows SM121 while retaining TP4
   and EP1 guards. Build-time imports pass; no full-model execution is implied.
-  The local build used the existing `:dev` base; the Dockerfile now pins the
-  published September 5 base for reproducibility and needs a rebuild on that pin.
+  The rebuild on the pinned published September 5 base also passed, producing
+  local image `sha256:fbc16727629d6251137975ec739a06fb3a0d81cbe914f5d18457d6f6c243424d`.
 - This vLLM base lacks the Jovian `B12xWarmupUnit` extension. The adapter currently
   relies on vLLM's normal eager warmup before graph capture. Actual graph replay
   must pass before this can be treated as a serving recipe.
