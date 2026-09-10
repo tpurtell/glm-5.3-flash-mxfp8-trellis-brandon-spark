@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/usr/local/bin/vllm", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/main.py", line 92, in main
+    args = parser.parse_args()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/utils/argparse_utils.py", line 293, in parse_args
+    raise ValueError(
+ValueError: `model` should be provided as the first positional argument when using `vllm serve`. i.e. `vllm serve <model> --<arg> <value>`.
