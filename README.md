@@ -37,12 +37,18 @@ Download on the head Spark, then distribute over RDMA:
 
 ```bash
 ./scripts/download.sh
+python3 scripts/verify-target.py "${MODEL_ROOT:-$HOME/models/glm53-trellismx}/target"
+python3 scripts/verify-carrier.py "${MODEL_ROOT:-$HOME/models/glm53-trellismx}/carrier"
 ./scripts/sync-models.sh ostrich dodo kiwi
 ```
 
 `MODEL_ROOT` defaults to `$HOME/models/glm53-trellismx`. The example starts on
 emu and transfers to ostrich, dodo, and kiwi. `rdmasync` is required on each
-host; transfers fail if RDMA cannot be negotiated.
+host; transfers fail if RDMA cannot be negotiated. Repeat the verification on
+each destination before qualification. Downloads use Xet high-performance mode
+with 64 concurrent range requests and eight file workers; the corresponding
+`HF_XET_HIGH_PERFORMANCE`, `HF_XET_NUM_CONCURRENT_RANGE_GETS`, and
+`HF_DOWNLOAD_WORKERS` environment variables can override these defaults.
 
 The recipe pins Z.ai’s current official chat template, with an explicit
 thinking-off serving adaptation. See the [template audit](docs/chat-template.md).
